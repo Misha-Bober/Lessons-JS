@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Урок JS 1</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №3</h1>
+                <div>
+                    <h2>Задача 4</h2>
+                    <p>
+                        З клавіатури вводиться вік людини. Вивести на екран ким він є (дитиною у садочку,
+                        школярем, студентом, працівником, пенсіонером).
+                    </p>
+                </div>
+            </div>
+            <script>
+
+                let age = parseInt(prompt("Введіть свій вік:"));
+
+                if (age < 6) {
+                    result = "Ви є дитиною у садочку.";
+                }
+                else if (age >= 6 && age <= 17) {
+                    result = "Ви є школярем.";
+                }
+                else if (age >= 18 && age <= 25) {
+                    result = "Ви є студентом.";
+                }
+                else if (age >= 26 && age <= 60) {
+                    result = "Ви є працівником.";
+                }
+                else if (age >= 60) {
+                    result = "Ви є пенсіонером.";
+                }
+
+                console.log(result);
+                document.write(result);
+            </script>
+
+        </main>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

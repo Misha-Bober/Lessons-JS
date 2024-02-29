@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Урок JS 1</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №3</h1>
+                <div>
+                    <h2>Задача 1</h2>
+                    <p>
+                        З клавіатури вводяться імена двох дітей та кількість у них цукерок.
+                        Вивести не екран ім’я тієї дитини, у якої кількість цукерок є
+                        більшою, або вивести, що кількість однакова.
+                    </p>
+                </div>
+            </div>
+            <script>
+                const nameOfTheFirstChild = prompt("Введіть ім'я першої дитини");
+                const candyOfTheFirstChild = parseInt(prompt("Введіть кількість цукерок у першої дитини (шт)", "0"));
+                const nameOfTheSecondChild = prompt("Введіть ім'я першої дитини");
+                const candyOfTheSecondChild = parseInt(prompt("Введіть кількість цукерок у першої дитини (шт)", "0"));
+                let result;
+                if (candyOfTheFirstChild === candyOfTheSecondChild) result = "Одинакова кількість цукерок"
+                else if (candyOfTheFirstChild > candyOfTheSecondChild);
+                else result = nameOfTheSecondChild;
+                document.write(result);
+                console.log(result);
+            </script>
+        </main>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

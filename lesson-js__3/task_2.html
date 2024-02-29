@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Урок JS 1</title>
+
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+    </header>
+    <main>
+      <div>
+        <h1>Дз №3</h1>
+        <div>
+          <h2>Задача 2</h2>
+          <p>
+            З клавіатури вводиться ціна товару і кількість грошей.
+            Якщо грошей не вистачає то відмовляємо у покупці, інакше,
+            якщо ще залишаються гроші, то пропонуємо купити лотерею за 4 грн.
+          </p>
+        </div>
+      </div>
+      <script>
+        const price = parseFloat(prompt("Введіть ціну товару", "0"));
+        const amountOfMoney = parseFloat(prompt("Введіть кількість грошей", "0"));
+
+        const lotteryTicket = 4;
+        let result;
+
+        if (price > amountOfMoney)
+          result = "Недостатньо коштів";
+
+        else {
+          result = "Покупка успішна";
+          if (amountOfMoney - price >= lotteryTicket) result += "<br> Купіть лотерею за 4 грн !"
+        }
+
+        console.log(result);
+        document.write(result);
+      </script>
+    </main>
+  </div>
+  <script src="js/script.js"></script>
+</body>
+
+</html>

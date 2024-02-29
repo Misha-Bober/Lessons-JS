@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Урок JS 1</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №3</h1>
+                <div>
+                    <h2>Задача 3</h2>
+                    <p>
+                        Випадковим чином генерується число від 1 до 5. Спробуйте вгадати число за 2 спроби.
+                    </p>
+                </div>
+            </div>
+            <script>
+                const minNumber = Math.ceil(1);
+                const maxNumber = Math.floor(5);
+
+                const randomNumber = Math.floor(Math.random() * (maxNumber - minNumber + 1) + minNumber);
+                let result;
+                let userNumber = parseInt(prompt("Будь-ласка введіть число від 1 до 5", "0"));
+                if (userNumber < 1 || userNumber > 5)
+                    result = "Введіть коректне число";
+
+                else if (userNumber === randomNumber)
+                    result = "Вітаю ви вгадали число";
+
+                else {
+                    userNumber = parseInt(prompt("Ви не вгадали - спробуйте ще раз ввести число від 0 до 5", "0"));
+                }
+
+                if (userNumber < 1 || userNumber > 5)
+                    result = "Введіть коректне число";
+
+                else if (userNumber === randomNumber)
+                    result = "Вітаю ви вгадали число";
+
+                else result = "Ви не вгадали число повезе іншим разом"
+
+                console.log(result);
+                document.write(result);
+            </script>
+        </main>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
