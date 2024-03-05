@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 5</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №3</h1>
+                <div>
+                    <h2>Задача 9</h2>
+                    <p>
+                        Вивести таблицю з 3 рядків і 7 стовпців
+                    </p>
+                </div>
+            </div>
+            <script>
+                let valueColumn = 0
+                document.write(`<table>`)
+                for (let row = 0; row < 3; row++) {
+                    document.write(`<tr>`)
+                    for (let column = 0; column < 7; column++) {
+                        document.write(`<td>${++valueColumn}</td>`)
+                    }
+                    document.write(`</tr>`)
+                }
+                document.write(`</table>`)  
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

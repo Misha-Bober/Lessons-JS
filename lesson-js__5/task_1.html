@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 5</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №5</h1>
+                <div>
+                    <h2>Задача 1</h2>
+                    <p>
+                        Поступово генерувати 100 випадкових чисел від 1 до 1000.
+                        Підрахувати яких чисел більше: парних чи непарних.
+                    </p>
+                </div>
+            </div>
+            <script>
+                const minNumber = 1;
+                const maxNumber = 1000;
+                let randomNumber;
+                let evenNumber = 0;
+                let oddNumber = 0;
+                let result;
+                for (let i = 0; i < 100; i++) {
+                    randomNumber = minNumber + Math.floor(Math.random() * maxNumber);
+                    console.log(randomNumber);
+                    if (randomNumber % 2 === 0)
+                        evenNumber++;
+                    else
+                        oddNumber++;
+                }
+                if (evenNumber > oddNumber)
+                    result = 'Більше парних чисел';
+                else if (oddNumber > evenNumber)
+                    result = 'Більше непарних чисел';
+                else
+                    result = 'Парних і непарних порівну';
+
+                document.write(`Парних чисел - ${evenNumber}, непарних чисел - ${oddNumber}. ${result}.`);
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>
