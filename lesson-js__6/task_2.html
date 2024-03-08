@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>ДЗ JS 5</title>
+
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+    </header>
+    <main>
+      <div>
+        <h1>Дз №5</h1>
+        <div>
+          <h2>Задача 2</h2>
+          <p>
+            Вивести на екран <br>
+            A B C D E <br>
+            B C D E F <br>
+            C D E F G <br>
+            D E F G H <br>
+            E F G H I <br>
+          </p>
+        </div>
+      </div>
+      <script>
+        let startAlphabet = "A".charCodeAt()
+        document.write('<table>')
+        for (let row = 0; row < 5; row++) {
+          document.write(`<tr>`)
+          for (let alphabet = 0; alphabet < 5; alphabet++) {
+            document.write(`<td>${String.fromCharCode(startAlphabet + alphabet)}</td>`)
+          }
+          startAlphabet++
+          document.write('<tr>')
+        }
+        document.write('</table>')
+      </script>
+    </main>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 5</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №5</h1>
+                <div>
+                    <h2>Задача 1</h2>
+                    <p>
+                        Дано натуральні числа від 35 до 87. Надрукувати ті з них, які при діленні на 7 дають остачу 1, 2
+                        або 5.
+                    </p>
+                </div>
+            </div>
+            <script>
+                for (let i = 35; i <= 87; i++) {
+                    if (i % 7 === 1 || i % 7 === 2 || i % 7 === 5) {
+                        document.write(i + `<br>`);
+                    }
+                }
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

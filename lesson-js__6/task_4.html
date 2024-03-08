@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 5</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №5</h1>
+                <div>
+                    <h2>Задача 4</h2>
+                    <p>
+                        Інвестор вклав S тис. грн на 20 років під 20% річних.<br>
+                        Визначити за допомогою циклів суму, яку він одержить (без оподаткування).<br>
+                    </p>
+                    <p>
+                        Інвестор вклав S тис. грн на 20 років під 20% річних,<br>
+                        податок складає 5% від суми прибутку. Визначити за<br>
+                        допомогою циклів суму, яку він одержить.
+                    </p>
+                    <p>
+                        Інвестор вклав S тис. грн на 20 років під 20% річних,<br>
+                        а потім на 17 років під 27% річних. Визначити за допомогою циклів суму,<br>
+                        яку він одержить.
+                    </p>
+                </div>
+            </div>
+            <script>
+                let S = parseFloat(prompt("Введіть суму інвестицій (у тис. грн):"));
+
+                let rate1 = 20;
+                let years1 = 20;
+                let total1 = S;
+                for (let i = 0; i < years1; i++) {
+                    total1 *= (1 + rate1 / 100);
+                }
+                document.write("Варіант 1: Інвестор отримає " + total1.toFixed(2) + " тис. грн  <br>");
+
+                let rate2 = 20;
+                let years2 = 20;
+                let taxRate = 5;
+                let total2 = S;
+                for (let i = 0; i < years2; i++) {
+                    total2 *= (1 + rate2 / 100);
+                }
+                let totalAfterTax = total2 - (total2 - S) * taxRate / 100;
+                document.write("Варіант 2: Інвестор отримає " + totalAfterTax.toFixed(2) + " тис. грн <br>");
+
+                let rate3_1 = 20;
+                let years3_1 = 20;
+                let rate3_2 = 27;
+                let years3_2 = 17;
+                let total3_1 = S;
+                for (let i = 0; i < years3_1; i++) {
+                    total3_1 *= (1 + rate3_1 / 100);
+                }
+                let total3_2 = total3_1;
+                for (let i = 0; i < years3_2; i++) {
+                    total3_2 *= (1 + rate3_2 / 100);
+                }
+                document.write("Варіант 3: Інвестор отримає " + total3_2.toFixed(2) + " тис. грн <br>");
+
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>
