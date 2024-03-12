@@ -134,6 +134,7 @@ tr:not(:last-child) {
 td {
   padding: 5px 5 5px 5px;
   text-align: center;
+  border: #090e07 1px solid;
 }
 
 button {
