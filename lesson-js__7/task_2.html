@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>ДЗ JS 5</title>
+
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+    </header>
+    <main>
+      <div>
+        <h1>Дз №7</h1>
+        <div>
+          <h2>Задача 2</h2>
+          <p>
+            Створити функцію, яка за номером місяця повертає його назву.
+          </p>
+        </div>
+      </div>
+      <script>
+        function monthName(month_number) {
+          const months = ["Січень", "Лютий", "Березень", "Квітень", "Травень", "Червень", "Липень", "Серпень", "Вересень", "Жовтень", "Листопад", "Грудень"];
+          if (month_number < 1 || month_number > 12 || isNaN(month_number)) {
+            return "Невірний номер місяця!";
+          }
+          return months[month_number - 1];
+        }
+        let user_month = parseInt(prompt("Введіть номер місяця (1-12):"));
+        document.write(monthName(user_month));
+      </script>
+    </main>
+  </div>
+</body>
+
+</html>

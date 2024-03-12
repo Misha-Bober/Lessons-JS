@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 5</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №7</h1>
+                <div>
+                    <h2>Задача 10</h2>
+                    <p>
+                        Дано покази температур (довільна кількість). Розробити функцію,
+                        яка дозволить знайти середнє значення для додатних показів температури.
+                    </p>
+                </div>
+            </div>
+            <script>
+                function findAveragePositiveTemperature() {
+                    let temperatures = [];
+                    let input;
+
+                    while (true) {
+                        input = prompt("Введіть температуру або 'stop' для завершення:");
+
+                        if (input.toLowerCase() === "stop") {
+                            break;
+                        }
+
+                        let temperature = parseFloat(input);
+                        if (!isNaN(temperature)) {
+                            temperatures.push(temperature);
+                        } else {
+                            alert("Неправильний формат. Будь ласка, введіть числове значення.");
+                        }
+                    }
+
+                    let positiveTemperatures = temperatures.filter(temp => temp > 0);
+                    let sum = positiveTemperatures.reduce((acc, val) => acc + val, 0);
+                    let average = sum / positiveTemperatures.length;
+
+                    return average;
+                }
+
+                const averagePositiveTemperature = findAveragePositiveTemperature();
+                document.write("Середнє значення для додатних показів температури:", averagePositiveTemperature);
+
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

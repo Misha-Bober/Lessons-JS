@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 5</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №7</h1>
+                <div>
+                    <h2>Задача 1</h2>
+                    <p>
+                        Створити функцію, яка за номером місяця повертає пору року, до якої відноситься цей місяць.
+                    </p>
+                </div>
+            </div>
+            <script>
+                function season(month_number) {
+                    if (month_number < 1 || month_number > 12 || isNaN(month_number)) {
+                        return "Невірний номер місяця!";
+                    }
+                    if (month_number >= 3 && month_number <= 5) {
+                        return "Весна";
+                    } else if (month_number >= 6 && month_number <= 8) {
+                        return "Літо";
+                    } else if (month_number >= 9 && month_number <= 11) {
+                        return "Осінь";
+                    } else {
+                        return "Зима";
+                    }
+                }
+                let user_month = parseInt(prompt("Введіть номер місяця (1-12):"));
+                document.write(season(user_month));
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

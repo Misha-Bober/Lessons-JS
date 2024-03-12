@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 5</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №7</h1>
+                <div>
+                    <h2>Задача 10</h2>
+                    <p>
+                        Дано покази температур (довільна кількість). Розробити функцію, яка дозволить
+                        підрахувати кількість від’ємних показів температури.
+                    </p>
+                </div>
+            </div>
+            <script>
+                function countNegativeTemperatures() {
+                    let temperatures = [];
+                    let input;
+                    while (true) {
+                        input = prompt("Введіть температуру або 'stop' для завершення:");
+
+                        if (input.toLowerCase() === "stop") {
+                            break;
+                        }
+
+                        let temperature = parseFloat(input);
+                        if (!isNaN(temperature)) {
+                            temperatures.push(temperature);
+                        } else {
+                            alert("Неправильний формат. Будь ласка, введіть числове значення.");
+                        }
+                    }
+
+                    let count = 0;
+
+                    for (let i = 0; i < temperatures.length; i++) {
+                        if (temperatures[i] < 0) {
+                            count++;
+                        }
+                    }
+
+                    return count;
+                }
+
+                const negativeCount = countNegativeTemperatures();
+                document.write("Кількість від'ємних температурних показників:", negativeCount);
+
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

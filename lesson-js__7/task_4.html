@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 5</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №7</h1>
+                <div>
+                    <h2>Задача 4</h2>
+                    <p>
+                        Створити окремі функції, які для 4 чисел знаходять:
+                    </p>
+                    <p>
+                        1) суму;<br>
+                        2) добуток;<br>
+                        3) середнє арифметичне;<br>
+                        4) мінімальне значення.<br>
+                    </p>
+                </div>
+            </div>
+            <script>
+                function calculateSum(a, b, c, d) {
+                    return a + b + c + d;
+                }
+
+                function calculateProduct(a, b, c, d) {
+                    return a * b * c * d;
+                }
+                function calculateAverage(a, b, c, d) {
+                    return (a + b + c + d) / 4;
+                }
+                function findMinValue(a, b, c, d) {
+                    return Math.min(a, b, c, d);
+                }
+                let num1 = parseFloat(prompt("Введіть перше число:"));
+                let num2 = parseFloat(prompt("Введіть друге число:"));
+                let num3 = parseFloat(prompt("Введіть третє число:"));
+                let num4 = parseFloat(prompt("Введіть четверте число:"));
+
+                document.write("Сума чотирьох чисел: " + calculateSum(num1, num2, num3, num4) + "<br>");
+                document.write("Добуток чотирьох чисел: " + calculateProduct(num1, num2, num3, num4) + "<br>");
+                document.write("Середнє арифметичне чотирьох чисел: " + calculateAverage(num1, num2, num3, num4) + "<br>");
+                document.write("Мінімальне значення серед чотирьох чисел: " + findMinValue(num1, num2, num3, num4));
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

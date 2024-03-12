@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 5</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №7</h1>
+                <div>
+                    <h2>Задача 3</h2>
+                    <p>
+                        Створити функцію, яка за номером дня дозволяє з’ясувати чи є цей день робочим.
+                    </p>
+                </div>
+            </div>
+            <script>
+                function isWorkingDay(day_number) {
+                    if (day_number < 1 || day_number > 7 || isNaN(day_number)) {
+                        return "Невірний номер дня!";
+                    }
+                    const workingDays = [1, 2, 3, 4, 5];
+                    if (workingDays.includes(day_number)) {
+                        return "Цей день є робочим.";
+                    } else {
+                        return "Цей день не є робочим.";
+                    }
+                }
+                let user_day = parseInt(prompt("Введіть номер дня тижня (1-7):"));
+                document.write(isWorkingDay(user_day));
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

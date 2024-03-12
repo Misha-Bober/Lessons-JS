@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 5</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №7</h1>
+                <div>
+                    <h2>Задача 7</h2>
+                    <p>
+                        Створити функцію, яка створює таблицю з вказаною кількістю рядків і стовпців (таблиця
+                        заповнюється заданим фіксованим повідомленням).
+                    </p>
+                </div>
+            </div>
+            <!-- <script>
+                function showTable(numberOfLines, numberOfColumns, enterAmessage) {
+                    document.write('<table border="2px">');
+
+                    for (let row = 0; row < numberOfLines; row++) {
+                        document.write('<tr>');
+                        for (let column = 0; column < numberOfColumns; column++) {
+                            document.write(`<td>${enterAmessage}</td>`);
+                        }
+                        document.write('</tr>');
+                    }
+
+                    document.write('</table>')
+                }
+
+                const numberOfLines = parseInt(prompt("Введіть кількість рядків", "1"));
+                const numberOfColumns = parseInt(prompt("Введіть кількість стовпців", "1"));
+                const enterAmessage = prompt("Введіть повідомлення");
+
+                showTable(numberOfLines, columnNumber, enterAmessage);
+            </script> -->
+            <script>
+                function showTable(numberOfLines, numberOfColumns, enterAmessage) {
+                    document.write('<table border="2px">');
+
+                    for (let row = 0; row < numberOfLines; row++) {
+                        document.write('<tr>');
+                        for (let column = 0; column < numberOfColumns; column++) {
+                            document.write(`<td>${enterAmessage}</td>`);
+                        }
+                        document.write('</tr>');
+                    }
+
+                    document.write('</table>');
+                }
+
+                const numberOfLines = parseInt(prompt("Введіть кількість рядків", "1"));
+                const numberOfColumns = parseInt(prompt("Введіть кількість стовпців", "1"));
+                const enterAmessage = prompt("Введіть повідомлення");
+
+                showTable(numberOfLines, numberOfColumns, enterAmessage);
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

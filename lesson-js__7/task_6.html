@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 5</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №7</h1>
+                <div>
+                    <h2>Задача 6</h2>
+                    <p>
+                        Створити окремі функції, які для 4 чисел знаходять:
+                    </p>
+                    <p>
+                        1) Сантиметри у дюйми;<br>
+                        2) Кілограми у фунти;<br>
+                        3) Кілометри у милі.<br>
+                    </p>
+                </div>
+            </div>
+            <script>
+                function cmToInches(cm) {
+                    return cm / 2.54;
+                }
+                function kgToPounds(kg) {
+                    return kg * 2.20462;
+                }
+                function kmToMiles(km) {
+                    return km / 1.60934;
+                }
+                let cmValue = parseFloat(prompt("Введіть значення в сантиметрах:"));
+                let kgValue = parseFloat(prompt("Введіть значення в кілограмах:"));
+                let kmValue = parseFloat(prompt("Введіть значення в кілометрах:"));
+                let inches = cmToInches(cmValue);
+                let pounds = kgToPounds(kgValue);
+                let miles = kmToMiles(kmValue);
+
+                document.write("Сантиметри у дюйми: " + inches.toFixed(2) + "<br>");
+                document.write("Кілограми у фунти: " + pounds.toFixed(2) + "<br>");
+                document.write("Кілометри у милі: " + miles.toFixed(2));
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>
