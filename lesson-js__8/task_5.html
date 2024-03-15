@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 8</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №8</h1>
+                <div>
+                    <h2>Задача 5</h2>
+                    <p>
+                        Дано послідовність оцінок учня. Підрахувати кількість: <br>
+                        1) двійок <br>
+                        2) кількість хороших оцінок (добре, відмінно);<br>
+                        3) кількість оцінок, які нижче середнього.<br>
+                    </p>
+                </div>
+            </div>
+            <script>
+                // Функція для обчислення кількості двійок
+                function countTwos(grades) {
+                    let twosCount = 0;
+                    for (let i = 0; i < grades.length; i++) {
+                        if (grades[i] === 2) {
+                            twosCount++;
+                        }
+                    }
+                    return twosCount;
+                }
+
+                // Функція для обчислення кількості хороших оцінок (добре, відмінно)
+                function countGoodGrades(grades) {
+                    let goodGradesCount = 0;
+                    for (let i = 0; i < grades.length; i++) {
+                        if (grades[i] >= 4) {
+                            goodGradesCount++;
+                        }
+                    }
+                    return goodGradesCount;
+                }
+
+                // Функція для обчислення кількості оцінок, які нижче середнього
+                function countBelowAverage(grades) {
+                    const averageGrade = calculateAverage(grades);
+                    let belowAverageCount = 0;
+                    for (let i = 0; i < grades.length; i++) {
+                        if (grades[i] < averageGrade) {
+                            belowAverageCount++;
+                        }
+                    }
+                    return belowAverageCount;
+                }
+
+                // Функція для обчислення середньої оцінки
+                function calculateAverage(grades) {
+                    let sum = 0;
+                    for (let i = 0; i < grades.length; i++) {
+                        sum += grades[i];
+                    }
+                    return sum / grades.length;
+                }
+
+                // Отримання послідовності оцінок від користувача
+                const gradesStr = prompt("Введіть послідовність оцінок учня через кому (наприклад, 4,5,3,2):");
+                const grades = gradesStr.split(",").map(Number);
+
+                // Підрахунок кількості двійок
+                const twosCount = countTwos(grades);
+
+                // Підрахунок кількості хороших оцінок (добре, відмінно)
+                const goodGradesCount = countGoodGrades(grades);
+
+                // Підрахунок кількості оцінок, які нижче середнього
+                const belowAverageCount = countBelowAverage(grades);
+
+                // Виведення результату
+                document.write(`Кількість двійок: ${twosCount + "<br>"}`);
+                document.write(`Кількість хороших оцінок: ${goodGradesCount + "<br>"}`);
+                document.write(`Кількість оцінок, які нижче середнього: ${belowAverageCount}`);
+
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

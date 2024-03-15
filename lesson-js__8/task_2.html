@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>ДЗ JS 8</title>
+
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+    </header>
+    <main>
+      <div>
+        <h1>Дз №8</h1>
+        <div>
+          <h2>Задача 2</h2>
+          <p>
+            Дано масив імен учнів. З’ясувати скільки разів зустрічається ім’я «Іван».
+          </p>
+        </div>
+      </div>
+      <script>
+        let names = [];
+
+        for (let i = 0; i < 5; i++) {
+          let name = prompt(`Введіть ім'я (${i + 1} з 5):`);
+          if (name === null || name.trim() === '') {
+            break;
+          }
+          names.push(name);
+        }
+
+        function countOccurrences(array, name) {
+          let count = 0;
+          for (let i = 0; i < array.length; i++) {
+            if (array[i].toLowerCase() === name.toLowerCase()) {
+              count++;
+            }
+          }
+          return count;
+        }
+
+        const ivanCount = countOccurrences(names, "іван");
+
+        console.log(`Ім'я "Іван" зустрічається ${ivanCount} разів.`);
+        document.write(`Ім'я "Іван" зустрічається ${ivanCount} разів.`);
+
+      </script>
+    </main>
+  </div>
+</body>
+
+</html>

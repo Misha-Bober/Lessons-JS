@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 8</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №8</h1>
+                <div>
+                    <h2>Задача 4</h2>
+                    <p>
+                        Морський бій. Користувач вводить кількість клітинок одновимірного масиву та
+                        кількість одиночних кораблів. Комп’ютер довільно розміщує ці одиночні кораблі
+                        у масиві по один у клітинці (якщо у клітинці 0, то клітинка пуста, якщо 1 –
+                        то це означає, що там є корабель). Користувач вводить номер клітинки, куди стріляє.
+                        Гра продовжується до тих пір, поки не будуть потоплені усі кораблі.
+                    </p>
+                </div>
+            </div>
+            <script>
+                function getRandomInt(min, max) {
+                    return Math.floor(Math.random() * (max - min + 1)) + min;
+                }
+
+                function createBoard(size, shipsCount) {
+                    let board = [];
+                    for (let i = 0; i < size; i++) {
+                        board.push(0);
+                    }
+
+                    for (let i = 0; i < shipsCount; i++) {
+                        let position = getRandomInt(0, size - 1);
+                        while (board[position] === 1) {
+                            position = getRandomInt(0, size - 1);
+                        }
+                        board[position] = 1;
+                    }
+                    return board;
+                }
+
+                function getUserShot(board) {
+                    let shot = parseInt(prompt(`Введіть номер клітинки, куди ви хочете стріляти (від 1 до ${board.length}):`));
+                    if (isNaN(shot) || shot < 1 || shot > board.length) {
+                        alert("Некоректний ввід. Введіть ціле число від 1 до розміру поля.");
+                        return getUserShot(board);
+                    }
+                    return shot - 1;
+                }
+
+                function isGameOver(board) {
+                    return !board.includes(1);
+                }
+
+                function playBattleship() {
+                    const size = parseInt(prompt("Введіть розмір поля:"));
+                    const shipsCount = parseInt(prompt("Введіть кількість кораблів:"));
+
+                    let board = createBoard(size, shipsCount);
+
+                    while (!isGameOver(board)) {
+                        const shot = getUserShot(board);
+                        if (board[shot] === 1) {
+                            alert("Ви потопили корабель!");
+                            board[shot] = -1;
+                        } else {
+                            alert("Промах!");
+                        }
+                    }
+
+                    alert("Гра закінчена! Ви потопили усі кораблі.");
+                }
+
+                playBattleship();
+
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

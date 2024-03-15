@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 8</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №8</h1>
+                <div>
+                    <h2>Задача 3</h2>
+                    <p>
+                        Дано одновимірний масив, у якому зберігається певна виграшна сума
+                        (елементи заповнюються випадковим чином значеннями від -500 до 500).
+                        Надаючи користувачу можливість вибирати номери елементів (поки він
+                        не відмовиться). Знаходити сумарний виграш.
+                    </p>
+                </div>
+            </div>
+            <!-- <script>
+                // Функція для генерування випадкового числа в заданому діапазоні
+                function getRandomNumber(min, max) {
+                    return Math.floor(Math.random() * (max - min + 1)) + min;
+                }
+
+                // Створення випадкового масиву з виграшними сумами
+                const arrayLength = 10; // Розмір масиву
+                let winningsArray = [];
+                for (let i = 0; i < arrayLength; i++) {
+                    winningsArray.push(getRandomNumber(-500, 500));
+                }
+
+                // Функція для обчислення сумарного виграшу за обраними номерами елементів
+                function calculateTotalWinnings(chosenIndexes, array) {
+                    let totalWinnings = 0;
+                    for (let i = 0; i < chosenIndexes.length; i++) {
+                        totalWinnings += array[chosenIndexes[i]];
+                    }
+                    return totalWinnings;
+                }
+
+                // Запит номерів елементів у користувача та обчислення сумарного виграшу
+                let chosenIndexes = [];
+                while (true) {
+                    let input = prompt(`Введіть номер елемента (від 0 до ${arrayLength - 1}), або введіть 'stop', щоб завершити вибір:`);
+                    if (input.toLowerCase() === 'stop') {
+                        break;
+                    }
+                    let index = parseInt(input);
+                    if (!isNaN(index) && index >= 0 && index < arrayLength) {
+                        chosenIndexes.push(index);
+                    } else {
+                        alert("Невірний номер елемента!");
+                    }
+                }
+
+                // Обчислення сумарного виграшу за обраними номерами елементів
+                const totalWinnings = calculateTotalWinnings(chosenIndexes, winningsArray);
+
+                // Виведення результату
+                console.log(`Сумарний виграш: ${totalWinnings}`);
+                document.write(`Сумарний виграш: ${totalWinnings}`);
+
+            </script> -->
+            <script>
+                function getRandomSum(from, to) {
+                    const minRandomSum = Math.ceil(from);
+                    const maxRandomSum = Math.floor(to);
+                    const randomSum = Math.floor(Math.random() * (maxRandomSum - minRandomSum + 1) + minRandomSum);
+
+                    return randomSum;
+                }
+
+                function createArrayWithRandomSum(from, to) {
+                    let arrayWithRandomSum = [];
+                    for (let i = 0; i < 10; i++) {
+                        arrayWithRandomSum.push(getRandomSum(from, to));
+                    }
+                    return arrayWithRandomSum;
+                }
+
+                function showFinalWinnings() {
+                    let finalWinning = 0;
+                    let isContinue;
+                    const arrayWithRandomSum = createArrayWithRandomSum(-500, 500);
+
+                    do {
+                        const userNumberElement = parseInt(prompt("Оберіть номер елемента від 1 до 10"));
+
+                        if (userNumberElement < 1 || userNumberElement > 10 || isNaN(userNumberElement)) {
+                            alert("Некоректний номер елемента");
+                            continue;
+                        }
+
+                        finalWinning += arrayWithRandomSum[userNumberElement - 1];
+
+                        isContinue = confirm(
+                            `Ви виграли ${arrayWithRandomSum[userNumberElement - 1]}, загальна сума виграшу становить ${finalWinning}. Продовжити гру?`
+                        );
+
+                    } while (isContinue);
+
+                    document.write(`Загальна сума виграшу становить: ${finalWinning}`);
+                }
+                showFinalWinnings();
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

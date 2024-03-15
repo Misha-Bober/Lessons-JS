@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 8</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №8</h1>
+                <div>
+                    <h2>Задача 1</h2>
+                    <p>
+                        Дано масив, який містить оцінки з К предметів. Знайти середній бал і
+                        з’ясувати до якої категорії він відноситься (відмінник, двійочник
+                        (має хоча би одну двійку), хорошист (оцінки добре і відмінно),
+                        трійочник(є хоча би одна трійка)).
+                    </p>
+                </div>
+            </div>
+            <script>
+
+                function calculateAverage(grades) {
+                    let sum = 0;
+                    for (let i = 0; i < grades.length; i++) {
+                        sum += grades[i];
+                    }
+                    return sum / grades.length;
+                }
+
+                function determineCategory(averageGrade) {
+                    if (averageGrade >= 4.5) {
+                        return "відмінник";
+                    } else if (averageGrade < 4.5 && averageGrade >= 3.5) {
+                        return "добре і відмінно";
+                    } else if (grades.includes(3)) {
+                        return "трійочник";
+                    } else if (grades.includes(2)) {
+                        return "двійочник";
+                    } else {
+                        return "середньо";
+                    }
+                }
+
+                const gradesCount = parseInt(prompt("Введіть кількість предметів: "));
+                let grades = [];
+
+                for (let i = 0; i < gradesCount; i++) {
+                    let grade = parseFloat(prompt(`Введіть оцінку з предмету ${i + 1}: `));
+                    grades.push(grade);
+                }
+
+                const averageGrade = calculateAverage(grades);
+
+                const category = determineCategory(averageGrade);
+
+                document.write(`Середній бал: ${averageGrade.toFixed(2) + "<br>"} `);
+                document.write(`Категорія: ${category}`);
+
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>
