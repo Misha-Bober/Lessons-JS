@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 9</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №9</h1>
+                <div>
+                    <h2>Задача 4</h2>
+                    <p>
+                        Дано масив елементів. Вивести на екран елементи, що більші за 100
+                    </p>
+                </div>
+            </div>
+            <script>
+                let array = [50, 120, 80, 150, 180, 60, 130, 200, 90, 110];
+
+                document.write("Елементи більші за 100: ");
+                for (let i = 0; i < array.length; i++) {
+                    if (array[i] > 100) {
+                        document.write(array[i]);
+                        // Додаємо кому та пробіл, якщо поточний елемент не є останнім, що виводиться
+                        if (i < array.length - 1) {
+                            document.write(", ");
+                        }
+                    }
+                }
+
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

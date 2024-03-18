@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>ДЗ JS 9</title>
+
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+    </header>
+    <main>
+      <div>
+        <h1>Дз №9</h1>
+        <div>
+          <h2>Задача 2</h2>
+          <p>
+            Користувач вводить кількість елементів. Створити масив, у якому перша
+            половина заповнена 1-цями, а друга заповнена 7-ками.
+          </p>
+        </div>
+      </div>
+      <script>
+        let numOfElements = prompt("Введіть кількість елементів:");
+
+        if (numOfElements !== null && !isNaN(numOfElements) && numOfElements !== "") {
+          numOfElements = parseInt(numOfElements);
+
+          let middleIndex = Math.ceil(numOfElements / 2);
+
+          let array = [];
+
+          for (let i = 0; i < middleIndex; i++) {
+            array.push(1);
+          }
+
+          for (let j = middleIndex; j < numOfElements; j++) {
+            array.push(7);
+          }
+          document.write("Масив з 1-цями та 7-ками:", array);
+        } else {
+          document.write("Некоректне введення.");
+        }
+
+      </script>
+    </main>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 9</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №9</h1>
+                <div>
+                    <h2>Задача 6</h2>
+                    <p>
+                        Дано масив елементів. Усі елементи, які більші за перший елемент помножити на 2
+                    </p>
+                </div>
+            </div>
+            <script>
+                let array = [];
+
+                for (let i = 0; i < 5; i++) {
+                    let userInput = prompt("Введіть число:");
+                    let number = parseFloat(userInput);
+                    if (!isNaN(number)) {
+                        array.push(number);
+                    } else {
+                        alert("Введіть правильне число!");
+                        i--;
+                    }
+                }
+
+                if (array.length < 2) {
+                    console.log("Недостатньо елементів у масиві.");
+                } else {
+                    let firstElement = array[0];
+
+                    for (let i = 1; i < array.length; i++) {
+                        if (array[i] > firstElement) {
+                            array[i] *= 2;
+                        }
+                    }
+
+                    document.write("Оновлений масив:", array);
+                }
+
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

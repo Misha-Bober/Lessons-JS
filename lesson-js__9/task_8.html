@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 9</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №9</h1>
+                <div>
+                    <h2>Задача 8</h2>
+                    <p>
+                        Дано масив номерів авто. Сформувати новий масив тих, які починаються на «А»
+                    </p>
+                </div>
+            </div>
+            <script>
+                let carNumbers = ["AB1234", "BC5678", "AC9876", "CD4321", "AE2468"];
+
+                let carNumbersStartingWithA = [];
+
+                for (let i = 0; i < carNumbers.length; i++) {
+                    if (carNumbers[i][0] === "A") {
+                        carNumbersStartingWithA.push(carNumbers[i]);
+                    }
+                }
+
+                document.write("Номери авто, які починаються на 'A':", carNumbersStartingWithA);
+
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

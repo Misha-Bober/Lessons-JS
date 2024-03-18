@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 9</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №9</h1>
+                <div>
+                    <h2>Задача 1</h2>
+                    <p>
+                        Користувач вводить кількість елементів. Створити масив, що складається
+                        з вказаної кількості елементів заповнених нулями.
+                    </p>
+                </div>
+            </div>
+            <script>
+                let numOfElements = prompt("Введіть кількість елементів:");
+                if (numOfElements !== null && !isNaN(numOfElements) && numOfElements !== "") {
+                    numOfElements = parseInt(numOfElements);
+                    let array = new Array(numOfElements).fill(0);
+
+                    document.write("Масив з нулями:", array);
+                } else {
+                    document.write("Некоректне введення.");
+                }
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 9</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №9</h1>
+                <div>
+                    <h2>Задача 3</h2>
+                    <p>
+                        Користувач вводить кількість елементів. Створити масив, у якому перші 5
+                        елементів заповнені 1-цями, а інші до кінця масиву заповнені 7-ками.
+                        ///// ---------- Тут використати цикл for..of -----------
+                    </p>
+                </div>
+            </div>
+            <script>
+                let numOfElements = prompt("Введіть кількість елементів:");
+                if (numOfElements !== null && !isNaN(numOfElements) && numOfElements !== "") {
+                    numOfElements = parseInt(numOfElements);
+                    let array = [];
+
+                    let count = 0;
+                    for (let element of Array(numOfElements)) {
+                        if (count < 5) {
+                            array.push(1);
+                        } else {
+                            array.push(7);
+                        }
+                        count++;
+                    }
+
+                    document.write("Масив з першими 5 елементами 1-цями та рештою 7-ками:", array);
+                } else {
+                    document.write("Некоректне введення.");
+                }
+
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

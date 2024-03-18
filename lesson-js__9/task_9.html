@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 9</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №9</h1>
+                <div>
+                    <h2>Задача 9</h2>
+                    <p>
+                        Дано масив імен. Сформувати масив з перших літер цих імен.
+                    </p>
+                </div>
+            </div>
+            <script>
+                let names = ["Анна", "Борис", "Вікторія", "Григорій"];
+
+                let firstLetters = [];
+
+                for (let i = 0; i < names.length; i++) {
+                    firstLetters.push(names[i][0]);
+                }
+
+                document.write("Перші літери імен:", firstLetters);
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

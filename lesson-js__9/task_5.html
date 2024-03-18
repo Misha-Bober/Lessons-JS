@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 9</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №9</h1>
+                <div>
+                    <h2>Задача 5</h2>
+                    <p>
+                        Дано масив елементів. Знайти добуток додатних елементів
+                    </p>
+                </div>
+            </div>
+            <!-- <script>
+                let array = [2, 4, 5];
+
+                let product = 1;
+
+                for (let element of array) {
+                    if (element > 0) {
+                        product *= element;
+                    }
+                }
+
+                document.write("Добуток додатних елементів:", product);
+            </script> -->
+            <script>
+                let array = [];
+                let product = 1;
+                for (let i = 0; i < 5; i++) {
+                    let userInput = prompt("Введіть число:");
+                    let number = parseInt(userInput);
+                    if (!isNaN(number)) {
+                        array.push(number);
+                    } else {
+                        alert("Введіть правильне число!");
+                        i--;
+                    }
+                }
+
+                for (let element of array) {
+                    if (element > 0) {
+                        product *= element;
+                    }
+                }
+
+                document.write("Добуток додатних елементів: ", product);
+            </script>
+
+        </main>
+    </div>
+</body>
+
+</html>
