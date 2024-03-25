@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 10</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №10</h1>
+                <div>
+                    <h2>Задача 3</h2>
+                    <p>
+                        Сформувати список з тих цін, які більші за попереднє значення
+                    </p>
+                </div>
+            </div>
+            <script>
+                function generateNumbers(count, min, max) {
+                    const numbers = [];
+                    for (let i = 0; i < count; i++) {
+                        numbers.push(Math.floor(Math.random() * (max - min + 1)) + min);
+                    }
+                    return numbers;
+                }
+
+                let securitiesPrices = generateNumbers(15, 1, 10000);
+                document.write('<h4>Вихідний масив:</h4>');
+                document.write('<p>' + securitiesPrices.join(', ') + '</p>');
+
+                let newSecuritiesPrices = securitiesPrices.filter(
+                    (price, index, baseArr) => index === 0 || price > baseArr[index - 1]
+                );
+
+                document.write('<h4>Результат:</h4>');
+                document.write('<p>' + newSecuritiesPrices.join(', ') + '</p>');
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

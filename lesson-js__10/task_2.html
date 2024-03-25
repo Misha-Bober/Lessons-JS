@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>ДЗ JS 10</title>
+
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+    </header>
+    <main>
+      <div>
+        <h1>Дз №10</h1>
+        <div>
+          <h2>Задача 2</h2>
+          <p>
+            Сформувати новий масив, у якому є номери тільки тих, що більші за 1000 грн.
+          </p>
+        </div>
+      </div>
+      <script>
+        function generateNumbers(count, min, max) {
+          const numbers = [];
+          for (let i = 0; i < count; i++) {
+            numbers.push(Math.floor(Math.random() * (max - min + 1)) + min);
+          }
+          return numbers;
+        }
+        let securitiesPrices = generateNumbers(15, 1, 10000);
+        document.write('<h4>Вихідний масив:</h4>');
+        document.write('<p>' + securitiesPrices.join(', ') + '</p>');
+
+        let numbersPricesMoreThanThousand = securitiesPrices.reduce(
+          (prevArr, price, index) => {
+            if (price > 1000) {
+              prevArr.push(index + 1);
+            }
+            return prevArr;
+          },
+          []
+        );
+        document.write('<h4>Результат:</h4>');
+        document.write('<p>' + numbersPricesMoreThanThousand.join(', ') + '</p>');
+      </script>
+    </main>
+  </div>
+</body>
+
+</html>

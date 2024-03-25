@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 10</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №10</h1>
+                <div>
+                    <h2>Задача 6</h2>
+                    <p>
+                        Визначити, чи є ціна, що менше 1000
+                    </p>
+                </div>
+            </div>
+            <script>
+                function generateNumbers(count, min, max) {
+                    const numbers = [];
+                    for (let i = 0; i < count; i++) {
+                        numbers.push(Math.floor(Math.random() * (max - min + 1)) + min);
+                    }
+                    return numbers;
+                }
+
+                let securitiesPrices = generateNumbers(15, 1, 10000);
+                document.write('<h4>Вихідний масив:</h4>');
+                document.write('<p>' + securitiesPrices.join(', ') + '</p>');
+
+                if (securitiesPrices.some((price) => price < 1000)) {
+                    document.write('<p><b>Є ціна</b> менша ніж 1000.</p>');
+                } else {
+                    document.write('<p><b>Без ціни</b> less than 1000.</p>');
+                }
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

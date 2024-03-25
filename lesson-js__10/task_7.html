@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 10</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №10</h1>
+                <div>
+                    <h2>Задача 7</h2>
+                    <p>
+                        Визначати, чи усі ціни більше за 1000
+                    </p>
+                </div>
+            </div>
+            <script>
+                function generateNumbers(count, min, max) {
+                    const numbers = [];
+                    for (let i = 0; i < count; i++) {
+                        numbers.push(Math.floor(Math.random() * (max - min + 1)) + min);
+                    }
+                    return numbers;
+                }
+
+                let securitiesPrices = generateNumbers(15, 1, 10000);
+                document.write('<h4>Вихідні дані:</h4>');
+                document.write('<p>' + securitiesPrices.join(', ') + '</p>');
+
+                if (securitiesPrices.every((price) => price > 1000)) {
+                    document.write('<p><b>Усі значення масиву перевищують 1000.</b></p>');
+                } else {
+                    document.write('<p><b>Не всі значення масиву перевищують 1000.</b></p>');
+                }
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>
