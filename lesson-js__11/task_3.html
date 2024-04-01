@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 11</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №11</h1>
+                <div>
+                    <h2>Задача 3</h2>
+                    <p>
+                        Морський бій. Випадковим чином на двовимірному полі розміром 6*6 розташовується 5 кораблів.
+                        Користувач стріляє вказуючи координати. Гра продовжується поки не потоплено усі кораблі або у
+                        користувача не закінчаться снаряди.
+                    </p>
+                </div>
+            </div>
+            <script>
+                function getRandomPositionShip(from, to) {
+                    return Math.floor(Math.random() * (to - from + 1) + from);
+                }
+
+                function createArrayWithoutShips(arrayLength) {
+                    return new Array(arrayLength).fill(0);
+                }
+
+                function createTableWithoutShips(tableLength, arrayLength) {
+                    return new Array(tableLength).fill(null).map(() => createArrayWithoutShips(arrayLength));
+                }
+
+                function addShipsInTable(array, shipsNumber, from, to) {
+                    while (shipsNumber > 0) {
+                        const randomRowPositionShip = getRandomPositionShip(from, to);
+                        const randomColumnPositionShip = getRandomPositionShip(from, to);
+
+                        if (array[randomRowPositionShip][randomColumnPositionShip] !== 1) {
+                            array[randomRowPositionShip][randomColumnPositionShip] = 1;
+                            shipsNumber--;
+                        }
+                    }
+                    return array;
+                }
+
+                function seaBattle(tableWithShips, shipsNumber, userNumberOfShells, arrayRowsLength, arrayColumnsLength) {
+                    while (shipsNumber > 0 && userNumberOfShells > 0) {
+                        const userRowPositionShip = parseInt(prompt(`Enter the row number for the shot (from 1 to ${arrayRowsLength})`));
+                        const userColumnPositionShip = parseInt(prompt(`Enter the column number for the shot (from 1 to ${arrayColumnsLength})`));
+
+                        if (isNaN(userRowPositionShip) || isNaN(userColumnPositionShip) ||
+                            userRowPositionShip < 1 || userRowPositionShip > arrayRowsLength ||
+                            userColumnPositionShip < 1 || userColumnPositionShip > arrayColumnsLength) {
+                            alert("Invalid cell number! Please enter a valid number.");
+                            continue;
+                        }
+
+                        userNumberOfShells--;
+
+                        if (tableWithShips[userRowPositionShip - 1][userColumnPositionShip - 1] === 1) {
+                            tableWithShips[userRowPositionShip - 1][userColumnPositionShip - 1] = 0;
+                            shipsNumber--;
+                            alert("Hit!");
+                        } else {
+                            alert("Miss!");
+                        }
+                    }
+
+                    if (shipsNumber > 0 && userNumberOfShells === 0) {
+                        alert("Unfortunately, you've run out of shells. Game over!");
+                    } else {
+                        alert("Congratulations! You've sunk all the ships!");
+                    }
+                }
+
+                const arrayRowsLength = parseInt(prompt("Enter the number of rows in the array", "6")) || 6;
+                if (arrayRowsLength < 1) throw new Error("Invalid number of rows in the array");
+
+                const arrayColumnsLength = parseInt(prompt("Enter the number of columns in the array", "6")) || 6;
+                if (arrayColumnsLength < 1) throw new Error("Invalid number of columns in the array");
+
+                const shipsNumber = parseInt(prompt("Enter the number of single ships", "5")) || 5;
+                if (shipsNumber < 1 || shipsNumber > arrayRowsLength * arrayColumnsLength) throw new Error("Invalid number of single ships");
+
+                const userNumberOfShells = parseInt(prompt(`Enter the number of shells (number of ships to sink: ${shipsNumber})`)) || shipsNumber;
+                if (userNumberOfShells < shipsNumber) throw new Error("Invalid number of shells");
+
+                const tableWithoutShips = createTableWithoutShips(arrayRowsLength, arrayColumnsLength);
+                const tableWithShips = addShipsInTable(tableWithoutShips, shipsNumber, 0, tableWithoutShips.length - 1);
+                seaBattle(tableWithShips, shipsNumber, userNumberOfShells, arrayRowsLength, arrayColumnsLength);
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>ДЗ JS 11</title>
+
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+    </header>
+    <main>
+      <div>
+        <h1>Дз №11</h1>
+        <div>
+          <h2>Задача 2</h2>
+          <ul>
+            <li>Загальний прибуток кожного масиву за тиждень;</li>
+            <li>Загальний прибуток усіх магазинів по дням (загальний прибуток усіх магазинів за понеділок, за
+              вівторок, і т.д.);</li>
+            <li>Загальний прибуток за робочі дні</li>
+            <li>Загальний прибуток за вихідні дні</li>
+            <li>Максимальний прибуток за середу</li>
+            <li>Сформувати загальний список (одновимірний масив) зі значенням, які що більші за 200</li>
+            <li>Відсортувати кожен тиждень за зростанням</li>
+            <li>Відсортувати тижні (рядки) за спаданням максимального елементи у цьому тижні (рядку), тобто при
+              порівнянні рядків потрібно порівнювати максимальні елементи у кожному з цих рядків</li>
+            <li>Упорядкувати тижні (рядки) за спаданням суми елементів у рядку (тобто при порівнянні двох рядків
+              треба знайти суму кожного з рядків і порівнювати ці суми, на основі цих сум буде зрозуміло, який
+              з елементів повинен іти раніше).</li>
+          </ul>
+        </div>
+      </div>
+      <script>
+        const profits = [
+          [100, 150, 200, 180, 120, 250, 300],
+          [80, 100, 150, 190, 220, 210, 180],
+          [120, 130, 140, 160, 190, 210, 250],
+          [90, 110, 100, 120, 130, 140, 150],
+          [200, 180, 250, 220, 190, 230, 280]
+        ];
+
+        // Загальний прибуток кожного магазину за тиждень
+        for (let i = 0; i < profits.length; i++) {
+          const totalProfit = profits[i].reduce((acc, profit) => acc + profit, 0);
+          document.write(`<p>Загальний прибуток магазину ${i + 1} за тиждень: ${totalProfit}</p>`);
+        }
+
+        document.write('<hr>');
+
+        // Загальний прибуток усіх магазинів по дням
+        for (let i = 0; i < profits[0].length; i++) {
+          const totalProfit = profits.reduce((acc, store) => acc + store[i], 0);
+          document.write(`<p>Загальний прибуток усіх магазинів за день ${i + 1}: ${totalProfit}</p>`);
+        }
+
+        document.write('<hr>');
+
+        // Загальний прибуток за робочі дні та вихідні дні
+        let profitsForWorkingDays = 0;
+        let profitsForWeekend = 0;
+
+        for (let i = 0; i < profits.length; i++) {
+          profitsForWorkingDays += profits[i].slice(0, 5).reduce((acc, profit) => acc + profit, 0);
+          profitsForWeekend += profits[i].slice(5).reduce((acc, profit) => acc + profit, 0);
+        }
+
+        document.write(`<p>Загальний прибуток за робочі дні: ${profitsForWorkingDays}</p>`);
+        document.write(`<p>Загальний прибуток за вихідні дні: ${profitsForWeekend}</p>`);
+
+        // Максимальний прибуток за середу
+        const profitsForWednesday = profits.map(store => store[2]);
+        const maxProfitForWednesday = Math.max(...profitsForWednesday);
+        document.write(`<p>Максимальний прибуток за середу: ${maxProfitForWednesday}</p>`);
+
+        // Сформувати загальний список (одновимірний масив) зі значеннями, які більші за 200
+        const profitsMoreThan200 = profits.flat().filter(profit => profit > 200);
+        document.write(`<p>Загальний список зі значеннями, які більші за 200: ${profitsMoreThan200}</p>`);
+
+        // Відсортувати кожен тиждень за зростанням
+        const sortedProfits = profits.map(store => store.slice().sort((a, b) => a - b));
+        document.write(`<p>Відсортовані кожен тиждень за зростанням: ${JSON.stringify(sortedProfits)}</p>`);
+
+        // Відсортувати тижні за спаданням максимального елементу
+        const sortedByMaxProfit = profits.slice().sort((a, b) => Math.max(...b) - Math.max(...a));
+        document.write(`<p>Відсортовані тижні за спаданням максимального елементу: ${JSON.stringify(sortedByMaxProfit)}</p>`);
+
+        // Відсортувати тижні за спаданням суми елементів у рядку
+        const sortedByTotalProfit = profits.slice().sort((a, b) => b.reduce((acc, val) => acc + val) - a.reduce((acc, val) => acc + val));
+        document.write(`<p>Відсортовані тижні за спаданням суми елементів у рядку: ${JSON.stringify(sortedByTotalProfit)}</p>`);
+
+      </script>
+    </main>
+  </div>
+</body>
+
+</html>
