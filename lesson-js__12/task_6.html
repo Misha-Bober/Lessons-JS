@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 12</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №12</h1>
+                <div>
+                    <h2>Задача 3</h2>
+                    <p>
+                        Морський бій. Випадковим чином на двовимірному полі розміром 6*6 розташовується 5 кораблів.
+                        Користувач стріляє вказуючи координати. Гра продовжується поки не потоплено усі кораблі або у
+                        користувача не закінчаться снаряди.
+                    </p>
+                </div>
+            </div>
+            <script>
+                const arrayNames = ['Mikhal', 'Tony', 'Charles', 'Bob', 'Olga', 'Noah', 'Liem', 'Benjamin', 'Olivia', 'Charlotte'];
+
+                document.write(`Початковий масив: ${arrayNames} <br>`);
+
+                arrayNames.sort((firstName, secondName) => firstName.length - secondName.length);
+
+                document.write(`Відсортований масив: ${arrayNames} <br>`);
+
+                function findIndexBinarySearch(array, searchElementLength) {
+                    let start = 0;
+                    let end = array.length - 1;
+
+                    while (start <= end) {
+                        const middle = Math.floor((start + end) / 2);
+                        if (array[middle].length === searchElementLength) return middle;
+                        if (array[middle].length < searchElementLength) start = middle + 1;
+                        if (array[middle].length > searchElementLength) end = middle - 1;
+                    }
+                    return -1;
+                }
+
+                const searchElementLength = 5;
+                const searchIndex = findIndexBinarySearch(arrayNames, searchElementLength);
+
+                if (searchIndex !== -1) {
+                    document.write(`Ім'я довжиною ${searchElementLength} символів є в масиві під індексом ${searchIndex}`);
+                } else {
+                    document.write(`Ім'я довжиною ${searchElementLength} символів немає в масиві`);
+                }
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 12</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №12</h1>
+                <div>
+                    <h2>Задача 3</h2>
+                    <p>
+                        Дано масив імен. Застосовуючи відповідне сортування та бінарний пошук
+                        визначити, чи є у масиві ім’я «Olga» і під яким індексом.
+                    </p>
+                </div>
+            </div>
+            <script>
+                const arrayNames = ['Mikhal', 'Tony', 'Charles', 'Bob', 'Olga', 'Noah', 'Liem', 'Benjamin', 'Olivia', 'Charlotte'];
+
+                document.write(`Початковий масив: ${arrayNames} <br>`);
+
+                arrayNames.sort((firstName, secondName) => firstName.localeCompare(secondName));
+
+                document.write(`Відсортований масив: ${arrayNames} <br>`);
+
+                function findIndexBinarySearch(array, searchElement) {
+                    let start = 0;
+                    let end = array.length - 1;
+
+                    while (start <= end) {
+                        const middle = Math.floor((start + end) / 2);
+                        if (array[middle] === searchElement) return middle;
+                        if (array[middle] < searchElement) start = middle + 1;
+                        if (array[middle] > searchElement) end = middle - 1;
+                    }
+                    return -1;
+                }
+
+                const searchElement = 'Olga';
+                const searchIndex = findIndexBinarySearch(arrayNames, searchElement);
+
+                if (searchIndex !== -1) {
+                    document.write(`Ім'я ${searchElement} є в масиві під індексом ${searchIndex}`);
+                } else {
+                    document.write(`Ім'я ${searchElement} немає в масиві`);
+                }
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

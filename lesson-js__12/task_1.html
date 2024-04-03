@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 12</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №12</h1>
+                <div>
+                    <h2>Задача 1</h2>
+                    <p>
+                        Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів та
+                        порівнянь чисел під час сортування бульбашкою
+                    </p>
+                </div>
+            </div>
+            <script>
+                function getRandomNumber(from, to) {
+                    const minRandomNumber = Math.ceil(from);
+                    const maxRandomNumber = Math.floor(to);
+                    const randomNumber = Math.floor(Math.random() * (maxRandomNumber - minRandomNumber + 1) + minRandomNumber);
+
+                    return randomNumber;
+                }
+
+                function createArrayWithRandomNumbers(from, to, countNumbers) {
+                    let arrayWithRandomNumbers = [];
+                    for (let i = 0; i < countNumbers; i++) {
+                        arrayWithRandomNumbers.push(getRandomNumber(from, to));
+                    }
+                    return arrayWithRandomNumbers;
+                }
+
+                const arrayWithRandomNumbers = createArrayWithRandomNumbers(-50, 50, 30);
+
+                document.write(`Початковий масив: ${arrayWithRandomNumbers} <br>`);
+
+                function bubbleSort(array) {
+                    let comparisons = 0;
+                    let exchanges = 0;
+
+                    for (let i = 0; i < array.length - 1; i++) {
+                        for (let j = 0; j < array.length - 1 - i; j++) {
+                            comparisons++;
+                            if (array[j] > array[j + 1]) {
+                                let temp = array[j];
+                                array[j] = array[j + 1];
+                                array[j + 1] = temp;
+                                exchanges++;
+                            }
+                        }
+                    }
+
+                    return [array, comparisons, exchanges];
+                }
+
+                const [sortedArray, numberOfComparisons, numberOfExchanges] = bubbleSort(arrayWithRandomNumbers);
+
+                document.write(`Сортування бульбашкою: ${sortedArray} <br>`);
+                document.write(`Виконано порівнянь: ${numberOfComparisons} <br>`);
+                document.write(`Виконано обмінів: ${numberOfExchanges} <br>`);
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

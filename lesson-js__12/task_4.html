@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 12</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №12</h1>
+                <div>
+                    <h2>Задача 3</h2>
+                    <p>
+                        Для розглянутих методів сортування спробувати вивести етапи сортування шляхом
+                        виведення відповідних таблиць за зразком .
+                    </p>
+                    <img src="img/123.png" alt="Image">
+                    <p>
+                        Тобто кожного разу після обміну елементів вивести поточний стан масиву на екран
+                        (стрілки не потрібні).
+                    </p>
+                </div>
+            </div>
+            <script>
+                const arrayWithNumbers = [3, 5, 1, 4, 2];
+
+                function swap(array, firstIndex, secondIndex) {
+                    let temp = array[firstIndex];
+                    array[firstIndex] = array[secondIndex];
+                    array[secondIndex] = temp;
+                }
+
+                function bubbleSort(array) {
+                    const sortedArray = array.slice();
+                    document.write(`[${sortedArray}] <br>`);
+
+                    let changed;
+
+                    do {
+                        changed = false;
+
+                        for (let i = 1; i < sortedArray.length; i++) {
+
+                            if (sortedArray[i - 1] > sortedArray[i]) {
+                                swap(sortedArray, i - 1, i);
+                                document.write(`[${sortedArray}]<br>`)
+                                changed = true;
+                            }
+                        }
+
+                    } while (changed);
+
+                    return sortedArray;
+                }
+
+                function cocktailSort(array) {
+                    const sortedArray = array.slice();
+                    document.write(`[${sortedArray}] <br>`);
+                    let leftIndex = 0;
+                    let rightIndex = sortedArray.length - 1;
+
+                    while (leftIndex < rightIndex) {
+                        let changed = false;
+
+                        for (let i = leftIndex + 1; i < sortedArray.length; i++) {
+
+                            if (sortedArray[i - 1] > sortedArray[i]) {
+                                swap(sortedArray, i - 1, i);
+                                changed = true;
+                                document.write(`[${sortedArray}]<br>`)
+                            }
+                        }
+
+                        rightIndex--;
+
+                        if (!changed) break;
+
+                        changed = false;
+
+                        for (let i = rightIndex; i > leftIndex; i--) {
+
+                            if (sortedArray[i - 1] > sortedArray[i]) {
+                                swap(sortedArray, i - 1, i);
+                                changed = true;
+                                document.write(`[${sortedArray}]<br>`)
+                            }
+                        }
+                        leftIndex++;
+
+                        if (!changed) break;
+                    }
+
+                    return sortedArray;
+                }
+
+                function insertSort(array) {
+                    const sortedArray = array.slice();
+                    document.write(`[${sortedArray}] <br>`);
+
+                    for (let k = 1; k < sortedArray.length; k++) {
+                        const currentElement = sortedArray[k];
+                        let i = k - 1;
+
+                        while (i >= 0 && sortedArray[i] > currentElement) {
+                            sortedArray[i + 1] = sortedArray[i];
+                            i = i - 1;
+                            document.write(`[${sortedArray}]<br>`)
+                        }
+                        sortedArray[i + 1] = currentElement;
+                        document.write(`[${sortedArray}]<br>`)
+                    }
+
+                    return sortedArray;
+                }
+
+                document.write(`Сортування бульбашкою:<br>`);
+                bubbleSort([...arrayWithNumbers]);
+                document.write(`<hr>`);
+
+                document.write(`Сортування змішуванням:<br>`);
+                cocktailSort([...arrayWithNumbers]);
+                document.write(`<hr>`);
+
+                document.write(`Сортування включеннями:<br>`);
+                insertSort([...arrayWithNumbers]);
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

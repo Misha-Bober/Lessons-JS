@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>ДЗ JS 12</title>
+
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+    </header>
+    <main>
+      <div>
+        <h1>Дз №12</h1>
+        <div>
+          <h2>Задача 2</h2>
+          <p>
+            Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів та
+            порівнянь чисел під час сортування змішуванням.
+          </p>
+        </div>
+      </div>
+      <script>
+        function getRandomNumber(from, to) {
+          const minRandomNumber = Math.ceil(from);
+          const maxRandomNumber = Math.floor(to);
+          const randomNumber = Math.floor(Math.random() * (maxRandomNumber - minRandomNumber + 1) + minRandomNumber);
+
+          return randomNumber;
+        }
+
+        function createArrayWithRandomNumbers(from, to, countNumbers) {
+          let arrayWithRandomNumbers = [];
+          for (let i = 0; i < countNumbers; i++) {
+            arrayWithRandomNumbers.push(getRandomNumber(from, to));
+          }
+          return arrayWithRandomNumbers;
+        }
+
+        const arrayWithRandomNumbers = createArrayWithRandomNumbers(-50, 50, 30);
+
+        document.write(`Початковий масив: ${arrayWithRandomNumbers} <br>`);
+
+        function swap(array, firstIndex, secondIndex) {
+          let temp = array[firstIndex];
+          array[firstIndex] = array[secondIndex];
+          array[secondIndex] = temp;
+        }
+
+        function cocktailSort(array) {
+          let leftIndex = 0;
+          let rightIndex = array.length - 1;
+          let numberOfComparisons = 0;
+          let numberOfExchanges = 0;
+
+          while (leftIndex < rightIndex) {
+            let changed = false;
+
+            for (let i = leftIndex + 1; i <= rightIndex; i++) {
+              numberOfComparisons++;
+
+              if (array[i - 1] > array[i]) {
+                swap(array, i - 1, i);
+                changed = true;
+                numberOfExchanges++;
+              }
+            }
+
+            rightIndex--;
+
+            if (!changed) break;
+
+            changed = false;
+
+            for (let i = rightIndex; i > leftIndex; i--) {
+              numberOfComparisons++;
+
+              if (array[i - 1] > array[i]) {
+                swap(array, i - 1, i);
+
+                changed = true;
+                numberOfExchanges++;
+              }
+            }
+            leftIndex++;
+
+            if (!changed) break;
+          }
+
+          return [array, numberOfComparisons, numberOfExchanges]
+        }
+
+        const [sortedArray, numberOfComparisons, numberOfExchanges] = cocktailSort(arrayWithRandomNumbers);
+
+        document.write(`Сортування змішуванням: ${sortedArray} <br>`);
+        document.write(`Кількість порівнянь: ${numberOfComparisons} <br>`);
+        document.write(`Кількість обмінів: ${numberOfExchanges} <br>`);
+      </script>
+    </main>
+  </div>
+</body>
+
+</html>
