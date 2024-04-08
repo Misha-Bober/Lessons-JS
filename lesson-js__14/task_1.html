@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 14</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №14</h1>
+                <div>
+                    <h2>Задача 1</h2>
+                    <ul>
+                        <li>Описати масив об’єктів – сайтів розроблених компанією з такими властивостями:</li>
+                        <li>назва компанії на час розробки (назву періодично змінюють)</li>
+                        <li>власник компанії</li>
+                        <li>спонсори (масив спонсорів)
+                            <ul>
+                                <li>прізвище спонсора</li>
+                                <li>ім’я спонсора</li>
+                                <li>сума вкладень спонсора</li>
+                            </ul>
+                        </li>
+                        <li>рік випуску</li>
+                        <li>вартість сайту</li>
+                    </ul>
+                    <p>Знайти :</p>
+                    <ul>
+                        <li>загальну вартість усіх сайтів</li>
+                        <li>кількість сайтів, що було зроблено між 2000 та 2009 рр.</li>
+                        <li>кількість сайтів, де сума спонсорських вкладень була більшою за 100000</li>
+                        <li>створити загальний список усіх спонсорів (поки можуть повторюватись, просто зібрати усі у
+                            масив)
+                        </li>
+                        <li>знайти рік, коли прибуток був найбільшим</li>
+                        <li>упорядкувати список за спаданням прибутку</li>
+                        <li>Створити 2 окремих списки з копіями об’єктів, що містять сайти з вартість до 10000 і більше
+                            10000</li>
+                    </ul>
+                </div>
+            </div>
+            <script>
+                const arrayOfSites = [
+                    {
+                        companyNameOfDevelopment: "Sony",
+                        ownerCompany: "Sophia Doe",
+                        sponsors: [
+                            {
+                                lastName: "Smith",
+                                firstName: "Jake",
+                                investmentAmount: 5000
+                            },
+                            {
+                                lastName: "Parker",
+                                firstName: "Piter",
+                                investmentAmount: 10000
+                            }
+                        ],
+                        yearReleased: 2021,
+                        websiteCost: 15000
+                    },
+                    {
+                        companyNameOfDevelopment: "Asus",
+                        ownerCompany: "Lucy Smith",
+                        sponsors: [
+                            {
+                                lastName: "Williams",
+                                firstName: "Peter",
+                                investmentAmount: 8000
+                            }
+                        ],
+                        yearReleased: 2019,
+                        websiteCost: 16000
+                    },
+                    {
+                        companyNameOfDevelopment: "Panasonic",
+                        ownerCompany: "Naomi Johnson",
+                        sponsors: [
+                            {
+                                lastName: "Olivers",
+                                firstName: "Leon",
+                                investmentAmount: 48000
+                            },
+                            {
+                                lastName: "Martinez",
+                                firstName: "David",
+                                investmentAmount: 350000
+                            }
+                        ],
+                        yearReleased: 2005,
+                        websiteCost: 4000000
+                    },
+                    {
+                        companyNameOfDevelopment: "HP",
+                        ownerCompany: "Julie Brown",
+                        sponsors: [
+                            {
+                                lastName: "Swayze",
+                                firstName: "Patrick",
+                                investmentAmount: 9000
+                            },
+                            {
+                                lastName: "Tramp",
+                                firstName: "Adam",
+                                investmentAmount: 2000
+                            }
+                        ],
+                        yearReleased: 2010,
+                        websiteCost: 16000
+                    }
+                ];
+
+                // Загальна вартість усіх сайтів
+                const totalCostOfAllSites = arrayOfSites.reduce((prevTotalCost, site) =>
+                    prevTotalCost + site.websiteCost, 0);
+                document.write(`Загальна вартість усіх сайтів: ${totalCostOfAllSites} <br>`);
+
+                // Кількість сайтів, що було зроблено між 2000 та 2009 рр.
+                const numberOfSitesMadeBetween2000And2009 = arrayOfSites.filter(site =>
+                    site.yearReleased >= 2000 && site.yearReleased <= 2009
+                ).length;
+                document.write(`Кількість сайтів, що було зроблено між 2000 та 2009 рр.: ${numberOfSitesMadeBetween2000And2009} <br>`);
+
+                // Кількість сайтів, де сума спонсорських вкладень була більшою за 100000
+                const numberOfSitesWhereInvestmentAmountMoreThan100000 = arrayOfSites.filter(site =>
+                    site.sponsors.reduce((totalInvestment, sponsor) => totalInvestment + sponsor.investmentAmount, 0) > 100000
+                ).length;
+                document.write(`Кількість сайтів, де сума спонсорських вкладень була більшою за 100000: ${numberOfSitesWhereInvestmentAmountMoreThan100000} <br>`);
+
+                // Створити загальний список усіх спонсорів
+                const allSponsors = arrayOfSites.flatMap(site =>
+                    site.sponsors.map(sponsor => `${sponsor.lastName} ${sponsor.firstName}`)
+                );
+                document.write(`Створити загальний список усіх спонсорів: ${allSponsors} <br>`);
+
+                // Знайти рік, коли прибуток був найбільшим
+                const yearWithHighestProfit = arrayOfSites.reduce((maxYear, site) =>
+                    site.websiteCost > maxYear.maxWebsiteCost ? { year: site.yearReleased, maxWebsiteCost: site.websiteCost } : maxYear,
+                    { year: 0, maxWebsiteCost: -Infinity }
+                ).year;
+                document.write(`Знайти рік, коли прибуток був найбільшим: ${yearWithHighestProfit}<br>`);
+
+                // Упорядкувати список за спаданням прибутку
+                const sitesSortedByProfitDescending = arrayOfSites.slice().sort((a, b) => b.websiteCost - a.websiteCost);
+                console.log('Упорядкувати список за спаданням прибутку:');
+                console.log(sitesSortedByProfitDescending);
+
+                // Створити 2 окремих списки з копіями об’єктів, що містять сайти з вартістю до 10000 і більше 10000
+                const sitesWithCostUpTo10000 = arrayOfSites.filter(site => site.websiteCost <= 10000);
+                console.log('Копія об’єктів, що містять сайти з вартістю до 10000:');
+                console.log(sitesWithCostUpTo10000);
+
+                const sitesWithCostMoreThan10000 = arrayOfSites.filter(site => site.websiteCost > 10000);
+                console.log('Копія об’єктів, що містять сайти з вартістю більше 10000:');
+                console.log(sitesWithCostMoreThan10000);
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

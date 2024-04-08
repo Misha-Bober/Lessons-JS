@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>ДЗ JS 14</title>
+
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+    </header>
+    <main>
+      <div>
+        <h1>Дз №14</h1>
+        <div>
+          <h2>Задача 2</h2>
+          <p>
+            Розробити функцію, у яку передають об’єкт (день, місяць, рік). Визначити, який буде рік через N
+            місяців.
+          </p>
+        </div>
+      </div>
+      <script>
+        function getYearAfterNMonths({ month, year }, nMonths) {
+          const totalMonths = month - 1 + nMonths;
+          const yearAfterNMonths = year + Math.floor(totalMonths / 12);
+          return yearAfterNMonths;
+        }
+
+        const nMonths = parseInt(prompt('Введіть кількість місяців', 0));
+
+        const object = {
+          day: 20,
+          month: 6,
+          year: 2024
+        };
+
+        const yearAfterNMonths = getYearAfterNMonths(object, nMonths);
+
+        document.write(`Зараз ${object.month} місяць ${object.year} рік <br>`);
+        document.write(`Через ${nMonths} місяців буде ${yearAfterNMonths} рік `);
+      </script>
+    </main>
+  </div>
+</body>
+
+</html>
