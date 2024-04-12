@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 13</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №13</h1>
+                <div>
+                    <h2>Задача 7</h2>
+                    <p>
+                        Тренажер додавання. Кожні 10 секунд користувачу задають випадковий приклад
+                        з додавання двох цифр і робиться перевірка.
+                    </p>
+                </div>
+            </div>
+            <script>
+                function getRandomNumber(min, max) {
+                    return Math.floor(Math.random() * (max - min + 1)) + min;
+                }
+
+                function additionTrainer() {
+                    const interval = 10000;
+                    function generateQuestion() {
+                        const num1 = getRandomNumber(0, 9);
+                        const num2 = getRandomNumber(0, 9);
+                        const correctAnswer = num1 + num2;
+                        const userAnswer = prompt(`Скільки буде ${num1} + ${num2}?`);
+
+                        if (userAnswer === null) {
+
+                            return false;
+                        } else {
+                            const parsedUserAnswer = parseInt(userAnswer, 10);
+                            if (!isNaN(parsedUserAnswer) && parsedUserAnswer === correctAnswer) {
+                                alert("Правильно!");
+                            } else {
+                                alert(`Неправильно. Правильна відповідь: ${correctAnswer}`);
+                            }
+                            return true;
+                        }
+                    }
+
+                    const gameInterval = setInterval(function () {
+                        const continueGame = generateQuestion();
+                        if (!continueGame) {
+                            clearInterval(gameInterval);
+                        }
+                    }, interval);
+                }
+
+                additionTrainer();
+
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

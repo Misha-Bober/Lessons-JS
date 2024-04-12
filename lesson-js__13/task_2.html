@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>ДЗ JS 13</title>
+
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+    </header>
+    <main>
+      <div>
+        <h1>Дз №13</h1>
+        <div>
+          <h2>Задача 2</h2>
+          <p>
+            Дано масив імен спортсменів. Розробити програму для виведення усіх можливих результатів
+            змагань (списки імен у відповідності до місць, які вони займуть).
+          </p>
+        </div>
+      </div>
+      <script>
+        const arrayNames = ['Павло', 'Вікторія', 'Михайло'];
+
+        function showSportsmansOfAthletes(array) {
+          array.forEach(sportman => {
+            document.write(`${sportman},`);
+          });
+          document.write('<hr>');
+        }
+
+        function sportmansOfAthletes(arrayNames, position) {
+          if (position === arrayNames.length - 1) {
+            showSportsmansOfAthletes(arrayNames);
+          } else {
+            for (let i = position; i < arrayNames.length; i++) {
+              const temp = arrayNames[position];
+              arrayNames[position] = arrayNames[i];
+              arrayNames[i] = temp;
+
+              sportmansOfAthletes(arrayNames, position + 1);
+
+              arrayNames[i] = arrayNames[position];
+              arrayNames[position] = temp;
+            }
+          }
+        }
+
+        sportmansOfAthletes(arrayNames, 0);
+      </script>
+    </main>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 13</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №13</h1>
+                <div>
+                    <h2>Задача 3</h2>
+                    <p>
+                        Виведіть всі можливі наступні комбінації ходів користувачів у грі“Хрестики-нулики”,
+                        починаючи з деякої заданої ситуації (тобто маємо двовимірний масив з елементами :
+                        0 - нулик, Х - хрестик, пробіл - ще не зайнято, і вам треба самостійно вивести всі
+                        можливі шляхи заповнення ще незаповнених клітинок (де пробіли). Поки можна не
+                        підраховувати чи вже є 3 хрестики чи 3 нулики у рядок.
+                    </p>
+                </div>
+            </div>
+            <script>
+
+                function getRandomPosition(from, to) {
+                    const minPosition = Math.ceil(from);
+                    const maxPosition = Math.floor(to);
+                    const randomPosition = Math.floor(Math.random() * (maxPosition - minPosition + 1) + minPosition);
+                    return randomPosition;
+                }
+
+
+                function createArrayWithoutElements(arrayLength) {
+                    let arrayWithoutElements = new Array(arrayLength);
+                    arrayWithoutElements.fill('*');
+                    return arrayWithoutElements;
+                }
+
+                function createTableWithoutElements(tableLength, arrayLength) {
+                    let tableWithoutElements = new Array(tableLength);
+                    for (let i = 0; i < tableWithoutElements.length; i++) {
+                        tableWithoutElements[i] = createArrayWithoutElements(arrayLength);
+                    }
+                    return tableWithoutElements;
+                }
+
+                function addCrossInTable(array, crossNumber, from, to) {
+                    while (crossNumber > 0) {
+                        let randomRowPositionCross = getRandomPosition(from, to);
+                        let randomColumnPositionCross = getRandomPosition(from, to);
+                        if (array[randomRowPositionCross][randomColumnPositionCross] === '*') {
+                            array[randomRowPositionCross][randomColumnPositionCross] = 'x';
+                            crossNumber--;
+                        }
+                    }
+                    return array;
+                }
+
+                function addZeroInTable(array, zeroNumber, from, to) {
+                    while (zeroNumber > 0) {
+                        let randomRowPositionZero = getRandomPosition(from, to);
+                        let randomColumnPositionZero = getRandomPosition(from, to);
+                        if (array[randomRowPositionZero][randomColumnPositionZero] === '*') {
+                            array[randomRowPositionZero][randomColumnPositionZero] = '0';
+                            zeroNumber--;
+                        }
+                    }
+                    return array;
+                }
+
+                const tableWithoutElements = createTableWithoutElements(2, 2);
+
+                const tableWithCross = addCrossInTable(tableWithoutElements, 1, 0, tableWithoutElements.length - 1);
+                const tableWithCrossAndZero = addZeroInTable(tableWithCross, 1, 0, tableWithoutElements.length - 1);
+
+                const freeItemsLeft = tableWithCrossAndZero.length * tableWithCrossAndZero[0].length - 2;
+
+                document.write(`Початковий масив:`);
+                showTable(tableWithCrossAndZero);
+
+                function showTable(table) {
+                    document.write('<table border="2px">');
+                    table.forEach(array => {
+                        document.write(`<tr>`);
+                        array.forEach(element => {
+                            document.write(`<td>${element}</td>`)
+                        });
+                        document.write(`</tr>`);
+                    });
+                    document.write('</table> <br>');
+                }
+
+                function generate(tableWithCrossAndZero, freeItemsLeft) {
+                    if (freeItemsLeft === 0) {
+                        showTable(tableWithCrossAndZero);
+                    } else {
+                        for (let rowIndex = 0; rowIndex < tableWithCrossAndZero.length; rowIndex++) {
+                            for (let columnIndex = 0; columnIndex < tableWithCrossAndZero[rowIndex].length; columnIndex++) {
+                                if (tableWithCrossAndZero[rowIndex][columnIndex] === '*') {
+                                    let firstCopyTableWithCrossAndZero = JSON.parse(JSON.stringify(tableWithCrossAndZero));
+                                    firstCopyTableWithCrossAndZero[rowIndex][columnIndex] = '0';
+                                    generate(firstCopyTableWithCrossAndZero, freeItemsLeft - 1);
+
+                                    let secondCopyTableWithCrossAndZero = JSON.parse(JSON.stringify(tableWithCrossAndZero));
+                                    secondCopyTableWithCrossAndZero[rowIndex][columnIndex] = 'x';
+                                    generate(secondCopyTableWithCrossAndZero, freeItemsLeft - 1);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                document.write(`Можливі комбінації:`);
+                generate(tableWithCrossAndZero, freeItemsLeft);
+            </script>
+
+        </main>
+    </div>
+</body>
+
+</html>

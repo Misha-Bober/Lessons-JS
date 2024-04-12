@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 13</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №13</h1>
+                <div>
+                    <h2>Задача 4</h2>
+                    <p>
+                        Дано масив хлопців і дівчат вивести всі можливі комбінації для танців з хлопців і дівчат.
+                    </p>
+                </div>
+            </div>
+            <script>
+                const arrayBoysNames = ['Михайло', 'Крістіна'];
+                const arrayGirlsNames = ['Вікторія', 'Олексанлра'];
+
+                function showCombinations(array) {
+                    array.forEach(combination => {
+                        document.write(`${combination} <br>`);
+                    });
+                    document.write('<hr>');
+                }
+
+                function findDanceCombinations(boysNames, girlsNames, resArray) {
+                    if (boysNames.length === 0) {
+                        showCombinations(resArray);
+                    } else {
+                        for (let i = 0; i < girlsNames.length; i++) {
+                            findDanceCombinations(
+                                boysNames.slice(1),
+                                girlsNames.filter((_, index) => index !== i),
+                                [...resArray, `${boysNames[0]} - ${girlsNames[i]} `]
+                            );
+                        }
+                    }
+                }
+
+                if (arrayBoysNames.length !== arrayGirlsNames.length) {
+                    document.write('Кількість хлопців та дівчат повинна бути однаковою')
+                } else {
+                    findDanceCombinations(arrayBoysNames, arrayGirlsNames, []);
+                }
+            </script>
+
+        </main>
+    </div>
+</body>
+
+</html>
