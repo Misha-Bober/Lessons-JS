@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 15</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №15</h1>
+                <div>
+                    <p>
+                        Розробити клас «Керівник танців».
+                    </p>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td rowspan="2">Поля(властивості)</td>
+                                <td>Масив імен хлопців</td>
+                            </tr>
+                            <tr>
+                                <td>Масив імен дівчат</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="4">Методи (дії)</td>
+                                <td>Метод випадкового вибору імені хлопця</td>
+                            </tr>
+                            <tr>
+                                <td>Метод випадкового вибору імені дівчини</td>
+                            </tr>
+                            <tr>
+                                <td>Метод виведення пари для танців</td>
+                            </tr>
+                            <tr>
+                                <td>Метод run, який ініціює через кожні 5 секунд виведення нової пари для танців</td>
+                            </tr>
+                        </tbody>
+                </div>
+            </div>
+            <script>
+                "use strict";
+
+                class HeadOfDances {
+                    constructor(arrayOfBoysNames, arrayOfGirlsNames) {
+                        this.arrayOfBoysNames = arrayOfBoysNames;
+                        this.arrayOfGirlsNames = arrayOfGirlsNames;
+                    }
+
+                    randomChoiceBoyName(minRandomNumber = 0, maxRandomNumber = this.arrayOfBoysNames.length - 1) {
+                        const randomNumber = Math.floor(Math.random() * (maxRandomNumber - minRandomNumber + 1) +
+                            minRandomNumber);
+                        return this.arrayOfBoysNames[randomNumber];
+                    }
+
+                    randomChoiceGirlName(minRandomNumber = 0, maxRandomNumber = this.arrayOfGirlsNames.length - 1) {
+                        const randomNumber = Math.floor(Math.random() * (maxRandomNumber - minRandomNumber + 1) +
+                            minRandomNumber);
+                        return this.arrayOfGirlsNames[randomNumber];
+                    }
+
+                    showPairForDancing() {
+                        alert(`${this.randomChoiceBoyName()} - ${this.randomChoiceGirlName()}`);
+                    }
+
+                    run() {
+                        setInterval(() => {
+                            this.showPairForDancing();
+                        }, 5000);
+                    }
+                }
+
+                const arrayOfBoysNames = ['Михайло', 'Павло', 'Іван'];
+                const arrayOfGirlsNames = ['Іванна', 'Ання', 'Марічка'];
+
+                const dance = new HeadOfDances(arrayOfBoysNames, arrayOfGirlsNames);
+                dance.run();
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

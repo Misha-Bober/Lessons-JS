@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 15</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №15</h1>
+                <div>
+                    <h2>Задача 0</h2>
+                    <p>
+                        Дано два об’єкта. Обидва містять масив цілих чисел. При цьому у одному з них є функція
+                        знаходження
+                        суми, а у іншому – функція для знаходження добутку тих, які знаходяться між заданими мінімальним
+                        і максимальних значенням.
+                        Використати обидва методи стосовно обидвох об’єктів (використати call, apply)
+                    </p>
+                </div>
+            </div>
+            <script>
+                "use strict";
+                const firstObject = {
+                    numbers: [54, 16, 1, 5, 18],
+                    getSum: function () {
+                        return this.numbers.reduce((prevSum, number) => prevSum + number);
+                    },
+                    toString: function () {
+                        return `Числа: ${this.numbers}`;
+                    }
+                };
+
+                const secondObject = {
+                    numbers: [46, 5, 63, 22, 32, 1],
+                    getMultiplicationBetweenMinAndMax: function (min, max) {
+                        return this.numbers.reduce((prevMultiplication, number) =>
+                            number > min && number < max ? prevMultiplication * number : prevMultiplication, 1);
+                    },
+                    toString: function () {
+                        return `Числа: ${this.numbers}`;
+                    }
+                };
+
+                document.write(firstObject.toString());
+                document.write(`<br> Сума: ${firstObject.getSum()} <br>`);
+                document.write(`Добуток: ${secondObject.getMultiplicationBetweenMinAndMax.apply(secondObject, [0, 22])} <br>`);
+                document.write('<hr>');
+
+                document.write(secondObject.toString());
+                document.write(`<br> Сума: ${firstObject.getSum.call(secondObject)} <br>`);
+                document.write(`Добуток: ${secondObject.getMultiplicationBetweenMinAndMax.call(secondObject, 20, 60)} <br>`);
+                document.write('<hr>');
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

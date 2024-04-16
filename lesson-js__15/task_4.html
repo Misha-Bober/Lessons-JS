@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 15</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №15</h1>
+                <div>
+                    <h2>Задача 4</h2>
+                    <p>
+                        Розробити клас Banner.
+                    </p>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>Поля(властивості)</td>
+                                <td>Масив об’єктів (графічних зображень та посилань на сайти)</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">Методи (дії)</td>
+                                <td>Метод випадкового вибору об’єкта (графічного зображення та посилання)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Метод виведення випадкового банера
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <script>
+                "use strict";
+
+                class Banner {
+                    constructor(arrayOfObjects) {
+                        this.arrayOfObjects = arrayOfObjects;
+                    }
+
+                    getRandomObject(minRandomNumber = 0, maxRandomNumber = this.arrayOfObjects.length - 1) {
+                        const randomNumber = Math.floor(Math.random() * (maxRandomNumber - minRandomNumber + 1) +
+                            minRandomNumber);
+                        return this.arrayOfObjects[randomNumber];
+                    }
+
+                    showBanner() {
+                        const banner = this.getRandomObject();
+
+                        document.write(`
+        <div class="banner">
+            <a class="banner__link" href="${banner.link}" target="_blank">
+                <img class="banner__image" src="${banner.img}" alt="alt">
+            </a>
+        </div>`);
+                    }
+                }
+
+                const firstBanner = new Banner([
+                    {
+                        img: 'https://upload.wikimedia.org/wikipedia/commons/6/6e/Shelby_GT500KR_at_NYIAS.jpg',
+                        link: 'https://uk.wikipedia.org/wiki/Shelby_Mustang'
+                    },
+                    {
+                        img: 'https://upload.wikimedia.org/wikipedia/commons/e/e5/%2765_gto.JPG',
+                        link: 'https://uk.wikipedia.org/wiki/Pontiac_GTO'
+                    },
+                    {
+                        img: 'https://upload.wikimedia.org/wikipedia/commons/c/c2/1966_Chevrolet_Chevelle_SS_%2832985111206%29.jpg',
+                        link: 'https://uk.wikipedia.org/wiki/Chevrolet_Chevelle'
+                    },
+                    {
+                        img: 'https://upload.wikimedia.org/wikipedia/commons/0/03/1970_ford_torino_cobra_sportsroof_chiolero.jpg',
+                        link: 'https://uk.wikipedia.org/wiki/Ford_Torino'
+                    },
+                    {
+                        img: 'https://upload.wikimedia.org/wikipedia/commons/9/9c/2017_Chevrolet_Camaro_LT_Coupe%2C_front_left%2C_09-10-2022.jpg',
+                        link: 'https://uk.wikipedia.org/wiki/Chevrolet_Camaro'
+                    },
+                    {
+                        img: 'https://upload.wikimedia.org/wikipedia/commons/6/6a/2018_Dodge_Challenger_RT%2C_Front_Left%2C_09-25-2021.jpg',
+                        link: 'https://uk.wikipedia.org/wiki/Dodge_Challenger'
+                    },
+                    {
+                        img: 'https://upload.wikimedia.org/wikipedia/commons/6/60/N_Conduit_Av_Whitelaw_St_td_04.jpg',
+                        link: 'https://uk.wikipedia.org/wiki/Dodge_Charger'
+                    },
+                ]);
+
+                firstBanner.showBanner();
+
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

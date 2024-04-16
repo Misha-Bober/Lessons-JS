@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 15</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №15</h1>
+                <div>
+                    <h2>Задача 1</h2>
+                    <p>
+                        Створити об’єкт «Тир». У масиві зберігаються 1, якщо у цьому квадраті є заєць і 0 в іншому
+                        випадку.
+                    </p>
+                </div>
+            </div>
+            <script>
+                "use strict";
+
+                const shootingGallery = {
+                    field: [0, 0, 0, 0, 1, 0, 1, 0, 1],
+                    isHit: function (userPosition) {
+                        if (this.field[userPosition - 1] === 1) {
+                            this.field[userPosition - 1] = 0;
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    },
+                    showField: function () {
+                        document.write(`Ігрове поле: [${this.field}] <br>`);
+                    }
+                };
+
+                const lengthField = shootingGallery.field.length;
+
+                const userPosition = parseInt(prompt(`Введіть позицію пострілу від 1 до ${lengthField}`), 10);
+                if (userPosition < 1 || userPosition > lengthField || isNaN(userPosition)) {
+                    throw new Error('Некоректна позиція пострілу');
+                }
+
+                shootingGallery.showField();
+
+                document.write(`Позиція пострілу: ${userPosition}  <br>`);
+
+                if (shootingGallery.isHit(userPosition)) {
+                    document.write('Влучили! <br>');
+                } else {
+                    document.write('Мимо!<br>');
+                }
+
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

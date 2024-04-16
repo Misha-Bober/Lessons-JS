@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 15</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №15</h1>
+                <div>
+                    <h2>Задача 3</h2>
+                    <p>
+                        Розробити клас MultChecker для перевірки таблиці множення.
+                    </p>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td rowspan="3">Поля(властивості)</td>
+                                <td>Число, яке перевіряємо (наприклад, перевірка частини таблиці множення на 7)</td>
+                            </tr>
+                            <tr>
+                                <td>Кількість правильних відповідей</td>
+                            </tr>
+                            <tr>
+                                <td>Кількість неправильних відповідей</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3">Методи (дії)</td>
+                                <td>Генерування прикладу (метод випадковим чином визначає друге число, перше число
+                                    фіксоване)</td>
+                            </tr>
+                            <tr>
+                                <td>Перевірка правильності вказаної відповіді</td>
+                            </tr>
+                            <tr>
+                                <td>Render - виведення інформації про тестування на екран</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <script>
+                "use strict";
+
+                class MultChecker {
+                    constructor(number) {
+                        this.number = number;
+                        this.numberOfCorrectAnswers = 0;
+                        this.numberOfWrongAnswers = 0;
+                    }
+
+                    generationExample(minRandomNumber = 1, maxRandomNumber = 10) {
+                        const randomNumber = Math.floor(Math.random() * (maxRandomNumber - minRandomNumber + 1) +
+                            minRandomNumber);
+
+                        return `${this.number} * ${randomNumber}`;
+                    }
+
+                    checkingAnswer() {
+                        let isContinue = true;
+
+                        do {
+                            const example = this.generationExample();
+                            const userAnswer = parseInt(prompt(`Обчисліть ${example}`, '0'));
+
+                            if (userAnswer === eval(example)) {
+                                this.numberOfCorrectAnswers++;
+                            } else {
+                                this.numberOfWrongAnswers++;
+                            }
+
+                            isContinue = confirm('Продовжити?');
+
+                        } while (isContinue);
+                    }
+
+                    render() {
+                        document.write(`Кількість правильних відповідей: ${this.numberOfCorrectAnswers} <br>`);
+                        document.write(`Кількість неправильних відповідей: ${this.numberOfWrongAnswers} <br>`);
+                    }
+                }
+
+                const firstPlayer = new MultChecker(7);
+
+                firstPlayer.checkingAnswer();
+                firstPlayer.render();
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

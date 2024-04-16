@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>ДЗ JS 15</title>
+
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+    </header>
+    <main>
+      <div>
+        <h1>Дз №15</h1>
+        <div>
+          <h2>Задача 2</h2>
+          <p>
+            Створити об’єкт «Авто».
+          </p>
+          <table>
+            <tbody>
+              <tr>
+                <td>Авто</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td rowspan="5">Поля(властивості)</td>
+                <td>Марка</td>
+              </tr>
+              <tr>
+                <td>Розмір бака</td>
+              </tr>
+              <tr>
+                <td>Кількість наявних літрів</td>
+              </tr>
+              <tr>
+                <td>Кількість місць</td>
+              </tr>
+              <tr>
+                <td>Кількість пасажирів</td>
+              </tr>
+              <tr>
+                <td rowspan="4">Методи (дії)</td>
+                <td>Заправка на вказану кількість літрів</td>
+              </tr>
+              <tr>
+                <td>Виведення кількості пасажирів</td>
+              </tr>
+              <tr>
+                <td>Додавання пасажирів</td>
+              </tr>
+              <tr>
+                <td>Висадка пасажирів</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <script>
+        "use strict";
+
+        const car = {
+          brand: 'Mazda',
+          tankSize: 68,
+          numberOfLitersInTank: 12,
+          numberOfSeats: 10,
+          numberOfPassengers: 5,
+          fillTheTank: function (numberOfLiters) {
+            if (numberOfLiters <= 0) {
+              throw new Error('Некоректна кількість літрів');
+            }
+
+            if (this.tankSize < this.numberOfLitersInTank + numberOfLiters) {
+              throw new Error(`Кількість літрів перевищує допустиму норму`);
+            }
+
+            this.numberOfLitersInTank += numberOfLiters;
+          },
+          showPassengers: function () {
+            document.write(`Кількість пасажирів: ${this.numberOfPassengers}`);
+          },
+          addPassengers: function (numberOfPassengers) {
+            if (numberOfPassengers <= 0) {
+              throw new Error('Некоректна кількість пасажирів');
+            }
+
+            if (this.numberOfSeats < this.numberOfPassengers + numberOfPassengers) {
+              throw new Error(`Кількість пасажирів перевижує кількість вільних місць`);
+            }
+
+            this.numberOfPassengers += numberOfPassengers;
+          },
+          disembarkationOfPassengers: function (numberOfPassengers) {
+            if (numberOfPassengers <= 0) {
+              throw new Error('Некоректна кількість пасажирів');
+            }
+
+            if (this.numberOfPassengers < numberOfPassengers) {
+              throw new Error(`Кількість пасажирів перевищує кількість пасажирів в авто`);
+            }
+            this.numberOfPassengers -= numberOfPassengers;
+          }
+        };
+
+        try {
+          car.fillTheTank(20);
+          car.showPassengers();
+          car.addPassengers(2);
+          car.disembarkationOfPassengers(3);
+        } catch (error) {
+          document.write(`Помилка: ${error.message}`);
+        }
+      </script>
+    </main>
+  </div>
+</body>
+
+</html>
