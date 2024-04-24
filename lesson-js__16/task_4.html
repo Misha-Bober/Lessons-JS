@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 16</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №16</h1>
+                <div>
+                    <h2>Задача 4</h2>
+                    <p>
+                        Створити клас TBankomat, який моделює роботу банкомата. Клас повинен містити поля для зберігання
+                        кількості купюр кожного із номіналів від 5 до 200 гривень. Реалізувати методи знаходження
+                        максимальної та мінімальної сум, які може видати банкомат, та метод зняття деякої суми.
+                    </p>
+                </div>
+            </div>
+            <script>
+                "use strict";
+
+                class Note {
+                    #value;
+                    #number;
+
+                    get Value() {
+                        return this.#value;
+                    }
+
+                    set Value(value) {
+                        if (!this.isCorrectValue(value)) throw new Error('Невірний номінал купюри');
+                        this.#value = value;
+                    }
+
+                    get Number() {
+                        return this.#number;
+                    }
+
+                    set Number(value) {
+                        if (value < 0) throw new Error('Некоректна кількіть купюр');
+                        this.#number = value;
+                    }
+
+                    constructor(noteValue, noteNumber) {
+                        this.Value = noteValue;
+                        this.Number = noteNumber;
+                    }
+
+                    isCorrectValue(value) {
+                        const arrayValue = [5, 10, 20, 50, 100, 200];
+                        return arrayValue.includes(value);
+                    }
+
+                    get totalValue() {
+                        return this.Value * this.Number;
+                    }
+
+                    toString() {
+                        return `${this.Value} : ${this.Number}`;
+                    }
+                }
+
+                class Bankomat {
+                    constructor(notesList) {
+                        this.notesList = notesList;
+                    }
+
+                    get minSum() {
+                        let minNote = this.notesList.reduce(
+                            (prevNoteValue, note) =>
+                                note.Number > 0 && note.Value < prevNoteValue ?
+                                    note.Value :
+                                    prevNoteValue,
+                            Infinity
+                        );
+                        return isFinite(minNote) ? minNote : 0;
+                    }
+
+                    get maxSum() {
+                        let sum = this.notesList.reduce(
+                            (prevSum, note) => prevSum + note.totalValue,
+                            0
+                        );
+                        return sum;
+                    }
+
+                    getPossibleNotesList(userMoney) {
+                        let possibleNotes = [];
+                        for (let i = 0; i < this.notesList.length && userMoney > 0; i++) {
+                            let note = this.notesList[i];
+                            if (userMoney >= note.Value && note.Number > 0) {
+                                let notesNum = Math.floor(userMoney / note.Value);
+                                let notesToGive = Math.min(notesNum, note.Number);
+                                possibleNotes.push({
+                                    note,
+                                    notesToGive,
+                                });
+                                userMoney -= notesToGive * note.Value;
+                            }
+                        }
+                        if (userMoney > 0) return false;
+                        return possibleNotes;
+                    }
+
+                    getMoney(userMoney) {
+                        if (userMoney > this.maxSum) {
+                            document.write('У банкоматі немає такої суми.');
+                            return;
+                        }
+                        let possibleNotes = this.getPossibleNotesList(userMoney);
+                        if (possibleNotes) {
+                            document.write('Заберіть Ваші гроші: <br>');
+                            for (const {
+                                note,
+                                notesToGive
+                            } of possibleNotes) {
+                                document.write(`${note.Value} грн. в кількості ${notesToGive} шт <br> `);
+                                note.Number -= notesToGive;
+                            }
+                        } else {
+                            document.write('Не можна видати таку суму бо немає таких купюр. ');
+                        }
+                    }
+                }
+
+                const notesList = [
+                    new Note(200, 1),
+                    new Note(100, 40),
+                    new Note(50, 12),
+                    new Note(20, 19),
+                    new Note(10, 9),
+                    new Note(5, 0),
+                ];
+
+                const bankomat = new Bankomat(notesList);
+                const money = 5200;
+                document.write(`Мінімальна сума для зняття: ${bankomat.minSum} <br>`);
+                document.write(`Максимальна сума для зняття: ${bankomat.maxSum} <br> <br>`);
+                document.write(`Ви хочете зняти ${money} грн. <br>`);
+
+                bankomat.getMoney(money);
+
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>ДЗ JS 16</title>
+
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+    </header>
+    <main>
+      <div>
+        <h1>Дз №16</h1>
+        <div>
+          <h2>Задача 2</h2>
+          <p>
+            Створити клас TMoney для роботи з грошовими сумами. Сума повинна зберігатися у вигляді доларового
+            еквіваленту. Реалізувати методи додавання/вилучення грошової маси, вказуючи необхідну суму у гривнях, та
+            визначення курсу долара, при якому сума у гривнях збільшиться на 100. Курс долара зберігати в окремому полі.
+          </p>
+        </div>
+      </div>
+      <script>
+        "use strict";
+
+        class TMoney {
+          #dollarExchangeRate;
+
+          get DollarExchangeRate() {
+            return this.#dollarExchangeRate;
+          }
+
+          set DollarExchangeRate(value) {
+            if (value < 0) throw new Error('Курс не може бути від"ємним');
+            this.#dollarExchangeRate = value;
+          }
+
+          #userMoney;
+
+          get UserMoney() {
+            return this.#userMoney;
+          }
+
+          set UserMoney(value) {
+            if (value < 0) throw new Error('Сума не може бути від"ємною');
+            this.#userMoney = value / this.DollarExchangeRate;
+          }
+
+          constructor(userMoney, dollarExchangeRate) {
+            this.DollarExchangeRate = dollarExchangeRate;
+            this.UserMoney = userMoney;
+          }
+
+          get userMoneyInUAH() {
+            return this.UserMoney * this.DollarExchangeRate;
+          }
+
+          addMoney(value) {
+            if (value < 0) throw new Error('Сума не може бути від"ємою');
+            this.UserMoney = this.userMoneyInUAH + value / this.DollarExchangeRate;
+          }
+
+          withdrawMoney(value) {
+            if (value < 0) throw new Error('Сума не може бути від"ємою');
+
+            if (this.userMoneyInUAH - value < 0) throw new Error('Сума зняття перевищує суму на рахунку');
+
+            this.UserMoney = this.userMoneyInUAH - value / this.DollarExchangeRate;
+          }
+
+          dollarExchangeRateWhichUAHIncreaseBy100() {
+            return (this.userMoneyInUAH + 100) * this.DollarExchangeRate / this.userMoneyInUAH;
+          }
+
+          toString() {
+            return `Сума грошей в доларах: ${this.UserMoney.toFixed(2)} <br> 
+        Курс долара: ${this.DollarExchangeRate} <br> 
+        Курс долара, при якому сума у гривнях збільшиться на 100: ${this.dollarExchangeRateWhichUAHIncreaseBy100().toFixed(2)}
+        `;
+          }
+        }
+
+        const firstTMoney = new TMoney(14000, 39.55);
+        firstTMoney.addMoney(56);
+        firstTMoney.withdrawMoney(8000);
+        document.write(firstTMoney);
+
+      </script>
+    </main>
+  </div>
+</body>
+
+</html>

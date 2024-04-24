@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 16</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №16</h1>
+                <div>
+                    <h2>Задача 1</h2>
+                    <p>
+                        Створити клас TDate для роботи із датами у форматі “день.місяць.рік”. Дата представляється
+                        структурою із трьома полями. Реалізувати методи збільшення/зменшення дати на певну кількість
+                        днів, місяців чи років. Введення та виведення дати реалізувати за допомогою методу toString.
+                    </p>
+                </div>
+            </div>
+            <script>
+                "use strict";
+
+                class TDate {
+                    #day;
+                    #month;
+                    #year;
+
+                    get Day() {
+                        return this.#day;
+                    }
+
+                    set Day(value) {
+                        if (value <= 0) throw new Error('Некоректний номер дня');
+                        if (value > this.getDaysInMonth()) throw new Error('Некоректний номер дня в цьому місяці');
+                        this.#day = value;
+                    }
+
+                    get Month() {
+                        return this.#month;
+                    }
+
+                    set Month(value) {
+                        if (value <= 0 || value > 12) throw new Error('Некоректний номер місяця');
+                        this.#month = value;
+                    }
+
+                    get Year() {
+                        return this.#year;
+                    }
+
+                    set Year(value) {
+                        if (value <= 0) throw new Error('Некоректний номер року');
+                        this.#year = value;
+                    }
+
+                    constructor(day, month, year) {
+                        this.Month = month;
+                        this.Year = year;
+                        this.Day = day;
+                    }
+
+                    increaseDays(days) {
+                        if (days <= 0) throw new Error('Некоректна кількість днів');
+
+                        let totalDaysNumber = this.Day + days;
+
+                        while (totalDaysNumber > this.getDaysInMonth()) {
+                            totalDaysNumber -= this.getDaysInMonth();
+                            this.increaseMonths(1);
+                        }
+
+                        this.Day = totalDaysNumber;
+                    }
+
+                    decreaseDays(days) {
+                        if (days <= 0) throw new Error('Некоректна кількість днів');
+
+                        let differenceDaysNumber = this.Day - days;
+
+                        while (differenceDaysNumber <= 0) {
+                            this.decreaseMonths(1);
+                            differenceDaysNumber += this.getDaysInMonth();
+                        }
+
+                        this.Day = differenceDaysNumber;
+                    }
+
+                    increaseMonths(months) {
+                        if (months <= 0) throw new Error('Некоректна кількість місяців');
+
+                        let totalMonthsNumber = months + this.Month;
+
+                        while (totalMonthsNumber > 12) {
+                            totalMonthsNumber -= 12;
+                            this.increaseYears(1);
+                        }
+
+                        this.Month = totalMonthsNumber;
+                    }
+
+                    decreaseMonths(months) {
+                        if (months <= 0) throw new Error('Некоректна кількість місяців');
+
+                        let differenceMonthsNumber = this.Month - months;
+
+                        if (differenceMonthsNumber <= 0) {
+                            while (differenceMonthsNumber <= 0) {
+                                differenceMonthsNumber += 12;
+                                this.decreaseYears(1);
+                            }
+                        }
+
+                        this.Month = differenceMonthsNumber;
+                    }
+
+                    increaseYears(years) {
+                        if (years <= 0) throw new Error('Некоректна кількість років');
+                        this.Year += years;
+                    }
+
+                    decreaseYears(years) {
+                        if (years <= 0) throw new Error('Некоректна кількість років');
+                        this.Year -= years;
+                    }
+
+                    getDaysInMonth() {
+                        let daysInMonth;
+
+                        switch (this.Month) {
+                            case 4:
+                            case 6:
+                            case 9:
+                            case 11:
+                                daysInMonth = 30;
+                                break;
+                            case 2:
+                                daysInMonth = (this.Year % 4 === 0 && (this.Year % 100 !== 0 || this.Year % 400 === 0)) ? 29 : 28;
+                                break;
+                            default:
+                                daysInMonth = 31;
+                                break;
+                        }
+
+                        return daysInMonth;
+                    }
+
+                    toString() {
+                        return `${this.Day}.${this.Month}.${this.Year}`;
+                    }
+                }
+
+                const firstTDate = new TDate(24, 4, 2024);
+                firstTDate.increaseDays(10);
+                firstTDate.decreaseDays(356);
+                firstTDate.increaseMonths(8);
+                firstTDate.decreaseMonths(5);
+                firstTDate.increaseYears(7);
+                firstTDate.decreaseYears(3);
+                document.write(firstTDate);
+
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>
