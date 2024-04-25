@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 18</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №18</h1>
+                <div>
+                    <h2>Задача 4</h2>
+                    <p>
+                        Наперед задано у скрипті масив зі списком бажань. Після завантаження сторінки випадковим чином
+                        вибираються 3 і відображаються у окремих div (їх треба створити і додати на сторінку)
+                    </p>
+                    <div class="wish"></div>
+                </div>
+            </div>
+            <script>
+                "use strict";
+
+                function getRandomNumber(from, to) {
+                    const minNumber = Math.ceil(from);
+                    const maxNumber = Math.floor(to);
+                    const randomNumber = Math.floor(Math.random() * (maxNumber - minNumber + 1) + minNumber);
+
+                    return randomNumber;
+                }
+
+                function showWishList(countOfWish) {
+                    const wishElement = document.querySelector('.wish');
+
+                    const newWishes = [
+                        "Багатство",
+                        "Вдячність",
+                        "Розвиток",
+                        "Відпочинок",
+                        "Повага",
+                        "Креативність",
+                        "Щастя",
+                        "Взаєморозуміння",
+                        "Пригоди",
+                        "Вирішення"
+                    ];
+
+                    for (let i = 0; i < countOfWish; i++) {
+                        const divElement = document.createElement('div');
+                        divElement.innerText = newWishes[getRandomNumber(0, newWishes.length - 1)];
+                        wishElement.append(divElement);
+                    }
+                }
+
+                window.onload = function () {
+                    showWishList(3);
+                };
+
+            </script>
+
+        </main>
+    </div>
+</body>
+
+</html>

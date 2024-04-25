@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 18</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №18</h1>
+                <div>
+                    <h2>Задача 6</h2>
+                    <p>
+                        Користувач задає кількість оцінок і натискає на кнопку «get table». В результаті формується
+                        таблиця з input, куди користувач вводить оцінки. Після цього натискає на кнопку “get sum” і
+                        знаходить середнє значення.
+                    </p>
+                </div>
+                <p>
+                    <label for="numberOfGrades">Кількість оцінок</label>
+                    <input type="number" id="numberOfGrades" placeholder="2">
+                </p>
+                <button type="button" id="table">Створити таблицю</button>
+                <div class="table"></div>
+                <script>
+                    "use strict";
+
+                    function createTable() {
+                        const numberOfGradesValue = parseInt(document.querySelector('#numberOfGrades').value);
+                        const ROWS_NUMBER = 1;
+                        if (isNaN(numberOfGradesValue) || numberOfGradesValue <= 0) {
+                            throw new Error('Некоректне значення');
+                        }
+
+                        const columnsNumber = numberOfGradesValue;
+
+                        const tableElement = document.createElement('table');
+                        const trElement = document.createElement('tr');
+                        for (let columnIndex = 0; columnIndex < columnsNumber; columnIndex++) {
+                            const tdElement = document.createElement('td');
+                            const inputElement = document.createElement('input');
+                            inputElement.setAttribute('type', 'number');
+                            inputElement.setAttribute('placeholder', '10');
+                            inputElement.classList.add('grade'); // Додаємо клас для кращої ідентифікації
+                            tdElement.appendChild(inputElement);
+                            trElement.appendChild(tdElement);
+                        }
+                        tableElement.appendChild(trElement);
+                        return tableElement;
+                    }
+
+                    function createButton(textButton) {
+                        const buttonElement = document.createElement('button');
+                        buttonElement.setAttribute('type', 'button');
+                        buttonElement.setAttribute('id', 'averageValue');
+                        buttonElement.innerText = textButton;
+                        return buttonElement;
+                    }
+
+                    function calculateAverage() {
+                        const gradeInputs = document.querySelectorAll('.grade');
+                        let sum = 0;
+                        for (const gradeInput of gradeInputs) {
+                            const gradeValue = parseInt(gradeInput.value);
+                            if (isNaN(gradeValue) || gradeValue < 0 || gradeValue > 12) {
+                                throw new Error('Некоректне значення');
+                            }
+                            sum += gradeValue;
+                        }
+                        const averageValue = sum / gradeInputs.length;
+                        return averageValue.toFixed(2);
+                    }
+
+                    function showAverageValue() {
+                        const averageValue = calculateAverage();
+                        const pElement = document.createElement('p');
+                        pElement.innerText = `Середнє значення: ${averageValue}`;
+                        document.querySelector('.table').appendChild(pElement);
+                    }
+
+                    function showTable() {
+                        const table = createTable();
+                        const button = createButton('Середнє значення');
+                        document.querySelector(".table").appendChild(table);
+                        document.querySelector(".table").appendChild(button);
+                        button.addEventListener('click', showAverageValue); // Використовуємо addEventListener замість onclick
+                    }
+
+                    window.onload = function () {
+                        document.querySelector('#table').addEventListener('click', showTable); // Використовуємо addEventListener замість onclick
+                    };
+
+                </script>
+        </main>
+    </div>
+</body>
+
+</html>

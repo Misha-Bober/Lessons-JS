@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 18</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №18</h1>
+                <div>
+                    <h2>Задача 5</h2>
+                    <p>
+                        Відобразити таблицю 3*4 з випадковими числами (її треба динамічно створити і вставити на
+                        сторінку)
+                    </p>
+                    <div class="table"></div>
+                </div>
+            </div>
+            <script>
+                "use strict";
+
+                function getRandomNumber(from, to) {
+                    const minNumber = Math.ceil(from);
+                    const maxNumber = Math.floor(to);
+                    const randomNumber = Math.floor(Math.random() * (maxNumber - minNumber + 1) + minNumber);
+
+                    return randomNumber;
+                }
+
+                function createTable(rowsNumber, columnNumber, minValue = 1, maxValue = 100) {
+                    const tableElement = document.createElement('table');
+                    for (let rowIndex = 0; rowIndex < rowsNumber; rowIndex++) {
+                        const trElement = document.createElement('tr');
+                        for (let columnIndex = 0; columnIndex < columnNumber; columnIndex++) {
+                            const tdElement = document.createElement('td');
+                            const randomNumber = getRandomNumber(minValue, maxValue);
+                            tdElement.textContent = randomNumber;
+                            trElement.appendChild(tdElement);
+                        }
+                        tableElement.appendChild(trElement);
+                    }
+                    return tableElement;
+                }
+
+                window.onload = function () {
+                    const table = createTable(3, 4);
+                    document.querySelector(".table").appendChild(table);
+                };
+
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

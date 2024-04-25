@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 18</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №18</h1>
+                <div>
+                    <h2>Задача 7</h2>
+                    <p>
+                        Подорож складається з 3 етапів. На кожному етапі користувач може вибрати один з видів транспорту
+                        (авто, автобус, літак - випадаючий список), харчування (сніданок, обід, вечеря – checkbоx) та
+                        одного з 3-х
+                    </p>
+                </div>
+                <div class="trip">
+                    <fieldset>
+                        <legend>Вибрати вид транспорту:</legend>
+                        <select id="typesOfTransport">
+                            <option value="1500">Автобус</option>
+                            <option value="2500">Авто</option>
+                            <option value="4000">Літак</option>
+                        </select>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Вибрати харчування:</legend>
+
+                        <div class="flex">
+                            <input type="checkbox" id="breakfast" value="2000" checked="">
+                            <label for="breakfast">Сніданок</label>
+                        </div>
+
+                        <div class="flex">
+                            <input type="checkbox" id="lunch" value="1500">
+                            <label for="lunch">Обід</label>
+                        </div>
+                        <div class="flex">
+                            <input type="checkbox" id="вечеря" value="900">
+                            <label for="вечеря">Вечеря</label>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Вибрати гіда:</legend>
+                        <div class="flex">
+                            <input type="radio" id="firstGuide" value="1200" name="guide" checked="">
+                            <label for="firstGuide">Гід №1</label>
+                        </div>
+                        <div class="flex">
+                            <input type="radio" id="secondGuide" value="1000" name="guide">
+                            <label for="secondGuide">Гід №2</label>
+                        </div>
+                        <div class="flex">
+                            <input type="radio" id="thirdGuide" value="1700" name="guide">
+                            <label for="thirdGuide">Гід №3</label>
+                        </div>
+                    </fieldset>
+
+                    <button type="button" id="totalCost">Загальна вартість</button>
+                </div>
+            </div>
+            <script>
+                "use strict";
+
+                function calculateTotalCost() {
+                    const typesOfTransportValue = parseFloat(document.querySelector('#typesOfTransport').value);
+
+                    const checkboxList = document.querySelectorAll('input[type="checkbox"]');
+                    let sumCheckboxValue = 0;
+                    for (const checkbox of checkboxList) {
+                        if (checkbox.checked) {
+                            sumCheckboxValue += parseFloat(checkbox.value);
+                        }
+                    }
+
+                    const radioList = document.querySelectorAll('input[type="radio"]');
+                    let sumRadioValue = 0;
+                    for (const radio of radioList) {
+                        if (radio.checked) {
+                            sumRadioValue += parseFloat(radio.value);
+                        }
+                    }
+
+                    return typesOfTransportValue + sumCheckboxValue + sumRadioValue;
+                }
+
+                function showTotalCost() {
+                    const totalPrice = calculateTotalCost();
+                    const pElement = document.createElement('p');
+                    pElement.innerText = `Загальна вартість: ${totalPrice}`;
+                    document.querySelector('.trip').appendChild(pElement);
+                }
+
+                window.onload = function () {
+                    document.querySelector('#totalCost').addEventListener('click', showTotalCost);
+                };
+
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

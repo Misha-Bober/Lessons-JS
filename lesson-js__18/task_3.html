@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 18</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №18</h1>
+                <div>
+                    <h2>Задача 3</h2>
+                    <p>
+                        Користувач задає рік народження. Визначити кількість років користувача.
+                    </p>
+                </div>
+                <label for="year">Рік народження</label>
+                <input type="number" id="year" placeholder="2020">
+                <p>
+                    <button type="button" id="result">Дізнатись скільки років</button>
+                </p>
+                <label for="numberOfYears">Кількість років</label>
+                <input type="number" id="numberOfYears" placeholder="4">
+            </div>
+            <script>
+                "use strict";
+
+                function calculateAge() {
+                    const currentYear = new Date().getFullYear();
+                    const yearOfBirth = parseInt(document.querySelector('#year').value);
+
+                    if (isNaN(yearOfBirth) || yearOfBirth <= 0 || yearOfBirth > currentYear) {
+                        throw new Error('Некоректне значення');
+                    }
+
+                    const age = currentYear - yearOfBirth;
+                    document.querySelector('#numberOfYears').value = age;
+                }
+
+                window.onload = function () {
+                    document.querySelector('#result').addEventListener('click', function () {
+                        try {
+                            calculateAge();
+                        } catch (error) {
+                            console.error(error.message);
+                        }
+                    });
+                };
+
+            </script>
+
+        </main>
+    </div>
+</body>
+
+</html>

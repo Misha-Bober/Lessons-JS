@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>ДЗ JS 18</title>
+
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+    </header>
+    <main>
+      <div>
+        <h1>Дз №18</h1>
+        <div>
+          <h2>Задача 2</h2>
+          <p>
+            Зробити конвертер валют (курси валют – константи у скрипті)
+          </p>
+        </div>
+        <label for="uah">Сума в гривнях</label>
+        <input type="number" id="uah" placeholder="0">
+        <p>
+          <button type="button" id="convert">Конвертувати</button>
+        </p>
+
+        <label for="eur">Сума в євро</label>
+        <input type="number" id="eur" placeholder="0">
+
+
+        <label for="usd">Сума в доларах</label>
+        <input type="number" id="usd" placeholder="0">
+      </div>
+      <script>
+        "use strict";
+
+        function convertCurrency(amount, exchangeRate) {
+          if (isNaN(amount) || amount <= 0) {
+            throw new Error('Некоректне значення');
+          }
+          return (amount / exchangeRate).toFixed(2);
+        }
+
+        function currencyConverter() {
+          const EXCHANGE_RATE_EUR = 42.70;
+          const EXCHANGE_RATE_USD = 39.65;
+
+          const amountInUAHValue = parseFloat(document.querySelector('#uah').value);
+
+          try {
+            const amountInEUR = convertCurrency(amountInUAHValue, EXCHANGE_RATE_EUR);
+            const amountInUSD = convertCurrency(amountInUAHValue, EXCHANGE_RATE_USD);
+
+            document.querySelector('#eur').value = amountInEUR;
+            document.querySelector('#usd').value = amountInUSD;
+          } catch (error) {
+            console.error(error.message);
+          }
+        }
+
+        window.onload = function () {
+          document.querySelector('#convert').onclick = currencyConverter;
+        };
+
+      </script>
+    </main>
+  </div>
+</body>
+
+</html>
