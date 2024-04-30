@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 17</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №17</h1>
+                <div>
+                    <h2>Задача 4</h2>
+                    <p>
+                        Склад. База товарів, які зберігаються на складі: назва товару, одиниця виміру, кількість,
+                        фірма виробник (назва, реєстраційний номер). Організувати реєстрацію/відвантаження товарів,
+                        фільтрація за назвою товару, фільтрація за назвою фірми
+                    </p>
+                </div>
+            </div>
+            <script>
+                "use strict";
+
+                class ManufacturerCompany {
+                    #nameOfManufacturerCompany
+
+                    get NameOfManufacturerCompany() {
+                        return this.#nameOfManufacturerCompany;
+                    }
+
+                    set NameOfManufacturerCompany(value) {
+                        if (value.length === 0) throw new Error('Укажіть назву фірми виробника');
+                        this.#nameOfManufacturerCompany = value;
+                    }
+
+                    #registrationNumberOfManufacturerCompany
+
+                    get RegistrationNumberOfManufacturerCompany() {
+                        return this.#registrationNumberOfManufacturerCompany;
+                    }
+
+                    set RegistrationNumberOfManufacturerCompany(value) {
+                        if (value.length === 0) throw new Error('Укажіть реєстраційний номер фірми виробника');
+                        this.#registrationNumberOfManufacturerCompany = value;
+                    }
+
+                    constructor(
+                        nameOfManufacturerCompany,
+                        registrationNumberOfManufacturerCompany
+                    ) {
+                        this.NameOfManufacturerCompany = nameOfManufacturerCompany;
+                        this.RegistrationNumberOfManufacturerCompany = registrationNumberOfManufacturerCompany;
+                    }
+
+                    toString() {
+                        return `Назва фірми: ${this.NameOfManufacturerCompany} <br>
+                        Реєстраційний номер: ${this.RegistrationNumberOfManufacturerCompany}<br>
+                        `
+                    }
+                }
+
+                class Product {
+
+                    #nameOfProduct;
+
+                    get NameOfProduct() {
+                        return this.#nameOfProduct;
+                    }
+
+                    set NameOfProduct(value) {
+                        if (value.length === 0) throw new Error('Укажіть назву товару');
+                        this.#nameOfProduct = value;
+                    }
+
+                    #unitOfProduct
+
+                    get UnitOfProduct() {
+                        return this.#unitOfProduct;
+                    }
+                    set UnitOfProduct(value) {
+                        if (value.length === 0) throw new Error('Укажіть одиницю виміру');
+                        this.#unitOfProduct = value;
+                    }
+
+                    #quantityOfProduct
+
+                    get QuantityOfProduct() {
+                        return this.#quantityOfProduct;
+                    }
+
+                    set QuantityOfProduct(value) {
+                        if (value < 0) throw new Error('Кількість не може бути від"ємною');
+                        this.#quantityOfProduct = value;
+                    }
+
+                    constructor(nameOfProduct, unitOfProduct, quantityOfProduct, nameOfManufacturerCompany,
+                        registrationNumberOfManufacturerCompany) {
+                        this.NameOfProduct = nameOfProduct;
+                        this.UnitOfProduct = unitOfProduct;
+                        this.QuantityOfProduct = quantityOfProduct;
+                        this.manufacturerCompany = new ManufacturerCompany(nameOfManufacturerCompany,
+                            registrationNumberOfManufacturerCompany);
+                    }
+                    toString() {
+                        return `Назва товару: ${this.NameOfProduct} <br>
+                                Одиниця виміру:  ${this.UnitOfProduct}<br>
+                                Кількість: ${this.QuantityOfProduct} <br>
+                                ${this.manufacturerCompany} <br>`
+                    }
+                }
+
+                class Storage {
+                    constructor() {
+                        this.products = [];
+                    }
+
+                    addProduct(newProduct) {
+                        this.products.push(newProduct);
+                    }
+
+                    removeProduct(productNameToRemove) {
+                        this.products = this.products.filter(product => product.NameOfProduct !== productNameToRemove);
+                    }
+
+                    getFilterProductsByNameOfProduct(nameOfProduct) {
+                        return this.products.filter(product => product.NameOfProduct === nameOfProduct);
+                    }
+
+                    getFilterProductsByNameOfManufacturerCompany(nameOfManufacturerCompany) {
+                        return this.products.filter(product => product.manufacturerCompany.NameOfManufacturerCompany === nameOfManufacturerCompany);
+                    }
+                }
+
+                const firstProduct = new Product('Продукт 1', 'шт', 10, 'Фірма 1', '641695');
+                const secondroduct = new Product('Продукт 2', 'кг', 2, 'Фірма 2', '484472');
+                const thirdProduct = new Product('Продукт 3', 'шт', 8, 'Фірма 3', '641846');
+
+                const firstStorage = new Storage();
+                firstStorage.addProduct(firstProduct);
+                firstStorage.addProduct(secondroduct);
+                firstStorage.addProduct(thirdProduct);
+
+                firstStorage.removeProduct('Продукт 1');
+
+                const filterProductsByNameOfProduct = firstStorage.getFilterProductsByNameOfProduct('Продукт 2');
+
+                if (filterProductsByNameOfProduct.length) {
+                    document.write(filterProductsByNameOfProduct)
+                } else {
+                    document.write('Даного товару немає на складі');
+                }
+
+                const filterProductsByNameOfManufacturerCompany = firstStorage.getFilterProductsByNameOfManufacturerCompany('Фірма 2');
+
+                if (filterProductsByNameOfManufacturerCompany.length) {
+                    document.write(filterProductsByNameOfManufacturerCompany)
+                } else {
+                    document.write('Товарів цієї фірми немає на складі');
+                }
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

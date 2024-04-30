@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 17</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №17</h1>
+                <div>
+                    <h2>Задача 6</h2>
+                    <p>
+                        Дано два класи MultChecker (клас для перевірки таблиці множення - рандомно генеруються числа,
+                        які
+                        треба перемножати), AddChecker (клас для перевірки додавання - рандомно генеруються числа у
+                        заданому
+                        діапазоні, які треба додавати). Обидва класи надсилають результати тестування об'єкту класу
+                        Hystory,
+                        який зберігає історію тестування у масиві у вигляді об'єктів
+                        Приклад.
+                        testsList= [
+                        {firstNum:1, secondNum:5,opration:’*’, userAnswer:7, correctAnswer:5},
+                        {firstNum:3, secondNum:4,opration:’+’, userAnswer:7, correctAnswer:7},
+                        ]
+                        Можна створити окремий клас TestData, який описує один такий тест і у якому будуть ці поля.
+                        Розробити клас TestManager, який використовуючи ці класи за допомогою таймера періодично генерує
+                        якісь N задач (рандомно вибираємо, що опитувати: додавання чи множення) і проводить опитування.
+                        Результати тестування додаються в об’єкт History. Зробити так, щоб об'єкт такого класу можна
+                        було
+                        створити тільки один. Коли зроблено ці N задач вивести усю історію на екран.
+                    </p>
+                </div>
+            </div>
+            <script>
+                "use strict";
+
+                class TestData {
+                    constructor(firstNumber, secondNumber, operation, userAnswer, correctAnswer) {
+                        this.firstNumber = firstNumber;
+                        this.secondNumber = secondNumber;
+                        this.operation = operation;
+                        this.userAnswer = userAnswer;
+                        this.correctAnswer = correctAnswer;
+                    }
+                }
+
+                class AddChecker {
+                    static operation = '+'
+
+                    static generateNumber(minNumber, maxNumber) {
+                        return Math.floor(Math.random() * (maxNumber - minNumber + 1) + minNumber);
+                    }
+
+                    static checkExample(minNumber, maxNumber) {
+                        const firstNumber = this.generateNumber(minNumber, maxNumber);
+                        const secondNumber = this.generateNumber(minNumber, maxNumber);
+
+                        const correctAnswer = firstNumber + secondNumber;
+                        const userAnswer = parseInt(prompt(
+                            `Compute the following: ${firstNumber}${AddChecker.operation}${secondNumber}`, '1'));
+
+                        return new TestData(firstNumber, secondNumber, AddChecker.operation, userAnswer, correctAnswer)
+                    }
+                }
+
+                class MultChecker {
+                    static minNumber = 1;
+                    static maxNumber = 10;
+                    static operation = '*'
+
+                    static checkExample() {
+                        const firstNumber = Math.floor(Math.random() * (MultChecker.maxNumber - MultChecker.minNumber + 1) +
+                            MultChecker
+                                .minNumber);
+                        const secondNumber = Math.floor(Math.random() * (MultChecker.maxNumber - MultChecker.minNumber + 1) +
+                            MultChecker
+                                .minNumber);
+
+                        const correctAnswer = firstNumber * secondNumber;
+                        const userAnswer = parseInt(prompt(
+                            `Compute the following: ${firstNumber}${MultChecker.operation}${secondNumber}`, '1'));
+
+                        return new TestData(firstNumber, secondNumber, MultChecker.operation, userAnswer, correctAnswer)
+                    }
+
+                }
+
+                class History {
+                    constructor() {
+                        this.history = [];
+                    }
+                    addExampleToHistory(example) {
+                        this.history.push(example);
+                    }
+                    toString() {
+                        let resultString = '';
+                        for (const history of this.history) {
+                            resultString +=
+                                `FirstNumber: ${history.firstNumber} 
+                            SecondNumber: ${history.secondNumber} 
+                                 Operation: ${history.operation} 
+                               UserAnswer:  ${history.userAnswer} 
+                                 CorrectAnswer: ${history.correctAnswer} \n
+                            `
+                        }
+                        return resultString;
+                    }
+                }
+
+                class TestManager {
+                    static numberOfTasks;
+
+                    constructor(countOfExamples, addCheckerClass, multCheckerClass, minNumber, maxNumber) {
+                        if (TestManager.numberOfTasks) return TestManager.numberOfTasks;
+
+                        this.countOfExamples = countOfExamples;
+                        this.history = new History();
+                        this.addCheckerClass = addCheckerClass;
+                        this.multCheckerClass = multCheckerClass;
+                        this.minNumber = minNumber;
+                        this.maxNumber = maxNumber;
+                        TestManager.numberOfTasks = this;
+                    }
+
+                    initTest() {
+                        const arrayOfOperation = [this.addCheckerClass.operation, this.multCheckerClass.operation];
+
+                        const minNumberOperation = 0;
+                        const maxNumberOperation = arrayOfOperation.length - 1;
+                        const operation = Math.floor(Math.random() * (maxNumberOperation - minNumberOperation + 1) +
+                            minNumberOperation);
+                        if (arrayOfOperation[operation] === this.addCheckerClass.operation) {
+                            this.generateNExamples(this.countOfExamples, this.addCheckerClass);
+                        } else {
+                            this.generateNExamples(this.countOfExamples, this.multCheckerClass);
+                        }
+                    }
+                    generateNExamples(countOfExamples, operationClass) {
+
+                        setTimeout(function timer() {
+                            const testData = operationClass.checkExample(this.minNumber, this.maxNumber);
+
+                            this.history.addExampleToHistory(testData);
+                            countOfExamples--;
+                            if (countOfExamples === 0) {
+                                const divElement = document.createElement('div');
+                                divElement.innerText = this.history;
+                                document.body.append(divElement);
+
+                            } else {
+                                setTimeout(timer.bind(this), 1000)
+                            }
+                        }.bind(this), 1000);
+                    }
+                }
+                const history = new History();
+                const firstTest = new TestManager(3, AddChecker, MultChecker, 1, 50);
+                const secondTest = new TestManager(2, AddChecker, MultChecker, 1, 5);
+                secondTest.initTest();
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>ДЗ JS 17</title>
+
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+    </header>
+    <main>
+      <div>
+        <h1>Дз №17</h1>
+        <div>
+          <h2>Задача 2</h2>
+          <p>
+            Створити службове авто (водій, марка, номер). Створити клас таким чином, щоб можна було створити
+            тільки один екземпляр цього класу.
+          </p>
+        </div>
+      </div>
+      <script>
+        "use strict";
+
+        class CompanyCar {
+          static companyCarReference;
+
+
+          constructor(carDriver, carBrand, carNumber) {
+            if (CompanyCar.companyCarReference) return CompanyCar.companyCarReference;
+
+            this.carDriver = carDriver;
+            this.carBrand = carBrand;
+            this.carNumber = carNumber;
+            CompanyCar.companyCarReference = this;
+          }
+
+          toString() {
+            return `
+                    Водій: ${this.carDriver} <br>
+                    Марка: ${this.carBrand} <br>
+                    Номер: ${this.carNumber} <br>
+                `;
+          }
+        }
+        const firstCompanyCar = new CompanyCar('Mykhal', 'BMW', 'AO 1990 AO');
+        const secondCompanyCar = new CompanyCar('Kristian', 'Ford', 'AB 9119 BH');
+        const thirdCompanyCar = new CompanyCar('Bella', 'Pontiac', 'BH 1111 OO');
+        document.write(firstCompanyCar);
+        document.write('<hr>')
+        document.write(secondCompanyCar);
+      </script>
+    </main>
+  </div>
+</body>
+
+</html>

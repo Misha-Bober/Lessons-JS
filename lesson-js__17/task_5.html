@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 17</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №17</h1>
+                <div>
+                    <h2>Задача 5</h2>
+                    <p>
+                        Особиста бібліотека. Картотека домашньої бібліотеки: дані книги (автори (піб, рік народження,
+                        короткий опис),назва книги, жанр, видавництво (назва, реєстраційний номер, рік засування)).
+                        Реалізувати розділи бібліотеки (спеціальна література, хобі, домашнє господарство і т.д.),
+                        походження книги і
+                        наявність на даний час. Організувати додавання/вилучення книг та вибір книг за назвою, за ПІБ
+                        автора, за
+                        видавництвом.
+                    </p>
+                    </p>
+                </div>
+            </div>
+            <script>
+                "use strict";
+
+                class Author {
+                    #name;
+                    #yearOfBirth;
+                    #description;
+
+                    get Name() {
+                        return this.#name;
+                    }
+
+                    set Name(value) {
+                        if (value.length === 0) throw new Error('Введіть імя');
+                        this.#name = value;
+                    }
+
+                    get YearOfBirth() {
+                        return this.#yearOfBirth;
+                    }
+
+                    set YearOfBirth(value) {
+                        if (value <= 0 || value > new Date().getFullYear()) throw new Error('Некоректний рік народження');
+                        this.#yearOfBirth = value;
+                    }
+
+                    get Description() {
+                        return this.#description;
+                    }
+
+                    set Description(value) {
+                        if (value.length === 0) throw new Error('Введіть короткий опис');
+                        this.#description = value;
+                    }
+
+                    constructor(name, yearOfBirth, description) {
+                        this.Name = name;
+                        this.YearOfBirth = yearOfBirth;
+                        this.Description = description;
+                    }
+
+                    toString() {
+                        return `ПІБ автора: ${this.Name} <br>
+                                Рік народження: ${this.YearOfBirth} <br>
+                                Короткий опис: ${this.Description} <br>`;
+                    }
+                }
+
+                class PublishingHouse {
+                    #nameOfPublisher;
+                    #registrationNumber;
+                    #yearOfFoundation;
+
+                    get NameOfPublisher() {
+                        return this.#nameOfPublisher;
+                    }
+
+                    set NameOfPublisher(value) {
+                        if (value.length === 0) throw new Error('Введіть назву видавництва');
+                        this.#nameOfPublisher = value;
+                    }
+
+                    get RegistrationNumber() {
+                        return this.#registrationNumber;
+                    }
+
+                    set RegistrationNumber(value) {
+                        if (value.length === 0) throw new Error('Введіть номер реєстрації');
+                        this.#registrationNumber = value;
+                    }
+
+                    get YearOfFoundation() {
+                        return this.#yearOfFoundation;
+                    }
+
+                    set YearOfFoundation(value) {
+                        if (value <= 0 || value > new Date().getFullYear()) throw new Error('Некоректний рік написання');
+                        this.#yearOfFoundation = value;
+                    }
+
+                    constructor(nameOfPublisher, registrationNumber, yearOfFoundation) {
+                        this.NameOfPublisher = nameOfPublisher;
+                        this.RegistrationNumber = registrationNumber;
+                        this.YearOfFoundation = yearOfFoundation;
+                    }
+
+                    toString() {
+                        return `Назва: ${this.NameOfPublisher} <br>
+                                Реєстраційний номер: ${this.RegistrationNumber} <br>
+                                Рік написання: ${this.YearOfFoundation} <br>`;
+                    }
+                }
+
+                class Book {
+                    #authors;
+                    #title;
+                    #genres;
+                    #publishingHouse;
+                    #originOfBook;
+                    #availability;
+
+                    get Authors() {
+                        return this.#authors;
+                    }
+
+                    set Authors(value) {
+                        if (!Array.isArray(value)) throw new Error('Введіть авторів');
+                        this.#authors = value;
+                    }
+
+                    get Title() {
+                        return this.#title;
+                    }
+
+                    set Title(value) {
+                        if (value.length === 0) throw new Error('Введіть назву ');
+                        this.#title = value;
+                    }
+
+                    get Genres() {
+                        return this.#genres;
+                    }
+
+                    set Genres(value) {
+                        if (!Array.isArray(value)) throw new Error('Введіть жанр');
+                        this.#genres = value;
+                    }
+
+                    get PublishingHouse() {
+                        return this.#publishingHouse;
+                    }
+
+                    set PublishingHouse(value) {
+                        if (!(value instanceof PublishingHouse)) throw new Error('Потрібно передати об\'єкт видавництва');
+                        this.#publishingHouse = value;
+                    }
+
+                    get OriginOfBook() {
+                        return this.#originOfBook;
+                    }
+
+                    set OriginOfBook(value) {
+                        if (value.length === 0) throw new Error('Походження книги');
+                        this.#originOfBook = value;
+                    }
+
+                    get Availability() {
+                        return this.#availability;
+                    }
+
+                    set Availability(value) {
+                        if (typeof (value) !== 'boolean') throw new Error('Значення типу Boolean');
+                        this.#availability = value;
+                    }
+
+                    constructor(authors, title, genres, publishingHouse, originOfBook, availability) {
+                        this.Authors = authors;
+                        this.Title = title;
+                        this.Genres = genres;
+                        this.PublishingHouse = publishingHouse;
+                        this.OriginOfBook = originOfBook;
+                        this.Availability = availability;
+                    }
+
+                    toString() {
+                        return `Автор: ${this.Authors.map(author => author.Name).join(', ')} <br>
+                                Назва : ${this.Title} <br>
+                                Жанр: ${this.Genres.join(', ')} <br>
+                                Видавництво: ${this.PublishingHouse.NameOfPublisher} <br>
+                                Походження : ${this.OriginOfBook} <br>
+                                Наявність : ${this.Availability}<br>`;
+                    }
+                }
+
+                class LibrarySection {
+                    #name;
+                    #books;
+
+                    get Name() {
+                        return this.#name;
+                    }
+
+                    set Name(value) {
+                        if (value.length === 0) throw new Error('Назва бібліотеки');
+                        this.#name = value;
+                    }
+
+                    constructor(name) {
+                        this.Name = name;
+                        this.#books = [];
+                    }
+
+                    get Books() {
+                        return this.#books;
+                    }
+
+                    addBook(book) {
+                        this.#books.push(book);
+                    }
+
+                    removeBook(bookTitleToRemove) {
+                        this.#books = this.#books.filter(book => book.Title !== bookTitleToRemove);
+                    }
+
+                    toString() {
+                        return `Розділ бібліотеки: ${this.Name} <br>
+                                Кількість : ${this.#books.length} <br>`;
+                    }
+                }
+
+                class Library {
+                    constructor(librarySections) {
+                        this.librarySections = librarySections;
+                    }
+
+                    changeAvailabilityOfBook(titleOfBook, availabilityValue) {
+                        this.librarySections.forEach(librarySection => {
+                            librarySection.Books.forEach(book => {
+                                if (book.Title === titleOfBook) {
+                                    book.Availability = availabilityValue;
+                                }
+                            });
+                        });
+                    }
+
+                    addBook(book, sectionIndex) {
+                        if (sectionIndex < 0 || sectionIndex >= this.librarySections.length) {
+                            throw new Error('Некоректний індекс розділу бібліотеки');
+                        }
+                        this.librarySections[sectionIndex].addBook(book);
+                    }
+
+                    removeBook(bookTitleToRemove) {
+                        this.librarySections.forEach(librarySection => {
+                            librarySection.removeBook(bookTitleToRemove);
+                        });
+                    }
+
+                    getFilterBooksByTitleOfBook(titleOfBook) {
+                        let filterBooksByTitleOfBook = [];
+                        this.librarySections.forEach(librarySection => {
+                            filterBooksByTitleOfBook.push(...librarySection.Books.filter(book => book.Title === titleOfBook && book.Availability));
+                        });
+                        return filterBooksByTitleOfBook;
+                    }
+
+                    getFilterBooksByNameOfAuthor(nameOfAuthor) {
+                        let filterBooksByNameOfAuthor = [];
+                        this.librarySections.forEach(librarySection => {
+                            filterBooksByNameOfAuthor.push(...librarySection.Books.filter(book => book.Authors.some(author => author.Name === nameOfAuthor) && book.Availability));
+                        });
+                        return filterBooksByNameOfAuthor;
+                    }
+
+                    getFilterBooksByNameOfPublisher(nameOfPublisher) {
+                        let filterBooksByNameOfPublisher = [];
+                        this.librarySections.forEach(librarySection => {
+                            filterBooksByNameOfPublisher.push(...librarySection.Books.filter(book => book.PublishingHouse.NameOfPublisher === nameOfPublisher && book.Availability));
+                        });
+                        return filterBooksByNameOfPublisher;
+                    }
+                }
+
+                const firstAuthor = new Author('Марґарет Манерлін Мітчелл', 1949,
+                    'Маргарет Манерлін Мітчелл - американська письменниця і журналістка, автор роману «Віднесені вітром»');
+                const secondAuthor = new Author('Стефані Морган Маєр', 1973, 'Стефані Морган Майєр — американська письменниця, що здобула популярність завдяки серії романів «Сутінки». У всьому світі кількість проданих книг серії «Сутінки» - 85 мільйонів екземплярів');
+                const thirdAuthor = new Author('Пауло Коельйо', 1947, 'Бразильський письменник, романи якого перекладено багатьма мовами світу.');
+
+                const firstPublishingHouse = new PublishingHouse('Bloomsbury Publishing', '797125', 1986);
+                const secondPublishingHouse = new PublishingHouse('Клуб колекціонерів', '667494', 1992);
+                const thirdPublishingHouse = new PublishingHouse('Клуб читачів', '798', 2015);
+
+                const firstBook = new Book([firstAuthor], 'Звіяні вітром', ['Роман'],
+                    firstPublishingHouse, 'Куплена', true);
+                const secondBook = new Book([secondAuthor], 'Сумерки', ['Роман'], secondPublishingHouse, 'Куплена', true);
+                const thirdBook = new Book([thirdAuthor], 'Алхі́мік', ['Роман'], thirdPublishingHouse, 'Подарована', true);
+
+                const fantasy = new LibrarySection('роман');
+                const ukrainianClassics = new LibrarySection('Українська класика');
+
+                const library = new Library([fantasy, ukrainianClassics]);
+
+                library.addBook(firstBook, 0);
+                library.addBook(secondBook, 1);
+                library.addBook(thirdBook, 0);
+                library.removeBook(firstBook.Title);
+
+                const filterBooksByTitleOfBook = library.getFilterBooksByTitleOfBook(thirdBook.Title);
+                document.write(`<strong>Ви шукали книгу "${thirdBook.Title}"</strong> <br> <br>`)
+                if (filterBooksByTitleOfBook.length) {
+                    filterBooksByTitleOfBook.forEach(book => {
+                        document.write(`${book.toString()} <br>`);
+                    });
+                } else {
+                    document.write(`Книги "${thirdBook.Title}" немає в бібліотеці <br>`);
+                }
+
+                const filterBooksByNameOfAuthor = library.getFilterBooksByNameOfAuthor(secondAuthor.Name);
+                document.write(`<strong>Ви шукали книги автора ${secondAuthor.Name}</strong> <br> <br>`)
+                if (filterBooksByNameOfAuthor.length) {
+                    filterBooksByNameOfAuthor.forEach(book => {
+                        document.write(`${book.toString()} <br>`);
+                    });
+                } else {
+                    document.write(`Книг автора ${secondAuthor.Name} немає в бібліотеці <br>`);
+                }
+
+                const filterBooksByNameOfPublisher = library.getFilterBooksByNameOfPublisher(firstPublishingHouse.NameOfPublisher);
+                document.write(`<strong> Ви шукали книги видавництва "${firstPublishingHouse.NameOfPublisher}"</strong> <br> <br>`)
+                if (filterBooksByNameOfPublisher.length) {
+                    filterBooksByNameOfPublisher.forEach(book => {
+                        document.write(`${book.toString()} <br>`);
+                    });
+                } else {
+                    document.write(`Книг видавництва "${firstPublishingHouse.NameOfPublisher}" немає в бібліотеці <br>`);
+                }
+
+                library.changeAvailabilityOfBook(secondBook.Title, false);
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>
