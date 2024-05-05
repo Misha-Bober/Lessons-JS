@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 19</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №19</h1>
+                <div>
+                    <h2>Задача 3</h2>
+                    <p>
+                        Дано 5 випадковим чином згенерованих нумерованих списків з рандомними числами (кількість
+                        елементів у списку випадкова від 1 до 10, елементи випадкові – від 1 до 100). При натисненні на
+                        кнопку нумеровані списки з парною кількістю елементів зафарбувати у зелений колір, інші у
+                        червоний.
+                    </p>
+                </div>
+                <div class="tasks__body">
+                    <div class="tasks__list-area list-area">
+                        <ul class="list-area__list">
+                            <li class="list-area__item">1</li>
+                            <li class="list-area__item">52</li>
+                            <li class="list-area__item">54</li>
+                            <li class="list-area__item">63</li>
+                            <li class="list-area__item">21</li>
+                            <li class="list-area__item">50</li>
+                            <li class="list-area__item">22</li>
+                        </ul>
+                        <ul class="list-area__list">
+                            <li class="list-area__item">35</li>
+                            <li class="list-area__item">16</li>
+                            <li class="list-area__item">11</li>
+                        </ul>
+                        <ul class="list-area__list">
+                            <li class="list-area__item">23</li>
+                            <li class="list-area__item">98</li>
+                            <li class="list-area__item">68</li>
+                            <li class="list-area__item">45</li>
+                            <li class="list-area__item">41</li>
+                        </ul>
+                        <ul class="list-area__list">
+                            <li class="list-area__item">93</li>
+                            <li class="list-area__item">35</li>
+                            <li class="list-area__item">87</li>
+                            <li class="list-area__item">73</li>
+                            <li class="list-area__item">79</li>
+                            <li class="list-area__item">4</li>
+                            <li class="list-area__item">91</li>
+                        </ul>
+                        <ul class="list-area__list">
+                            <li class="list-area__item">26</li>
+                            <li class="list-area__item">73</li>
+                            <li class="list-area__item">90</li>
+                            <li class="list-area__item">47</li>
+                            <li class="list-area__item">62</li>
+                            <li class="list-area__item">21</li>
+                        </ul>
+                    </div>
+                    <button class="tasks__button-action">Check</button>
+                </div>
+            </div>
+            <script>
+                "use strict";
+
+                const listWrapper = document.querySelector(".list-area");
+
+                if (listWrapper) {
+                    for (let i = 0; i < 5; i++) {
+                        const randomListLength = 1 + Math.floor(Math.random() * 10);
+                        const ul = document.createElement("ul");
+                        ul.className = "list-area__list";
+
+                        for (let j = 0; j < randomListLength; j++) {
+                            const randomNumber = 1 + Math.floor(Math.random() * 100);
+                            const li = document.createElement("li");
+                            li.className = "list-area__item";
+                            li.textContent = randomNumber;
+                            ul.appendChild(li);
+                        }
+
+                        listWrapper.appendChild(ul);
+                    }
+                }
+
+                function fillColor() {
+                    const listCollection = document.querySelectorAll(".list-area__list");
+                    listCollection.forEach(elem => {
+                        if (elem.children.length % 2 === 0) {
+                            elem.style.border = "1px solid yellow";
+                        }
+                    });
+                }
+
+                const listButton = document.querySelector(".tasks__button-action");
+
+                if (listButton) {
+                    listButton.addEventListener("click", fillColor);
+                }
+
+            </script>
+
+        </main>
+    </div>
+</body>
+
+</html>

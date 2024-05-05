@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 19</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №19</h1>
+                <div>
+                    <h2>Задача 4</h2>
+                    <p>
+                        Дано 3 таблиці розмірності 3*3 з випадковими числами. Якщо відбувається клік на якійсь із
+                        клітинок, то до відповідної таблиці додається червона рамка (спробуйте додати можливість
+                        відображення кількості кліків біля назви таблиці з використанням відповідно доданого для цього
+                        атрибута).
+                    </p>
+                    <div>
+                        <div class="tasks__tables tables">
+                            <table class="tables__table">
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                            <table class="tables__table">
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                            <table class="tables__table">
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                "use strict";
+                const tablesWrapper = document.querySelector(".tasks__tables");
+                if (tablesWrapper) {
+                    for (let j = 0; j < 3; j++) {
+                        const table = document.createElement("table");
+                        table.className = "tables__table";
+
+                        for (let l = 0; l < 3; l++) {
+                            const tr = document.createElement("tr");
+
+                            for (let o = 0; o < 3; o++) {
+                                const td = document.createElement("td");
+                                tr.appendChild(td);
+                            }
+
+                            table.appendChild(tr);
+                        }
+
+                        tablesWrapper.appendChild(table);
+                    }
+
+                    const clickCount = document.querySelector("#clickCount");
+                    const tablesIn = document.querySelectorAll(".tables__table");
+
+                    function clearBorder(list) {
+                        if (list) {
+                            list.forEach(elem => (elem.style.border = "none"));
+                        }
+                    }
+
+                    function reactOnTd(e) {
+                        clearBorder(tablesIn);
+                        const targetElem = e.target;
+
+                        if (targetElem.tagName === "TD") {
+                            const thisTd = targetElem;
+                            const thisTable = thisTd.closest(".tables__table");
+                            thisTable.style.border = "2px solid green";
+                            countClick++;
+                            clickCount.textContent = countClick;
+                        }
+                    }
+
+                    let countClick = 0;
+                    tablesWrapper.addEventListener("click", reactOnTd);
+                }
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

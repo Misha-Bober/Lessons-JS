@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 19</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №19</h1>
+                <div>
+                    <h2>Задача 5</h2>
+                    <p>
+                        Відображаємо картки товарів, які користувач може вибирати. Вибраний товар має зелену рамку (при
+                        кліку робити toogle з класом вибраного елемента)
+                    </p>
+                    <div class="table"></div>
+                </div>
+                <div class="tasks__body">
+                    <div class="tasks__prod prod">
+                        <div class="prod__block-img">
+                            <img class="block-img" src="img/asus-vivobook.jpg" alt="Image">
+                        </div>
+                        <div class="prod__block-img">
+                            <img class="block-img" src="img/iphone.jpg" alt="Image">
+                        </div>
+                        <div class="prod__block-img">
+                            <img class="block-img" src="img/samsung.webp" alt="Image">
+                        </div>
+                        <div class="prod__block-img">
+                            <img class="block-img" src="img/Xiaomi-13.webp" alt="Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                "use strict";
+
+                const productWrapper = document.querySelector(".prod");
+
+                function getBorder(e) {
+                    const targetElem = e.target;
+                    if (targetElem.closest(".prod__block-img")) {
+                        const currentBlock = targetElem.closest(".prod__block-img");
+                        currentBlock.classList.toggle("active");
+                    }
+                }
+
+                if (productWrapper) {
+                    productWrapper.addEventListener("click", getBorder);
+                }
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

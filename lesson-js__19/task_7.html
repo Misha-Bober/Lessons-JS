@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 19</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №19</h1>
+                <div>
+                    <h2>Задача 7</h2>
+                    <p>
+                        Відобразити падаючий сніг. Сніжинка з’являється у верхній частині екрану (top =0) і з випадковою
+                        швидкістю рухається вниз (у setInterval викликати метод, у якому додавати крок до top). Як
+                        тільки сніжинка досягає нижньої частини екрану (top>maxTop) вона знову повинна з’явитись у
+                        верхній частині екрану (top=0).
+                    </p>
+                </div>
+                <div class="tasks__body">
+                    <div class="tasks__fall fall">
+                        <img src="img/snow.png" alt="snow" id="fallSnow" class="fall__snow" style="top: 319px;">
+                    </div>
+                </div>
+            </div>
+            <script>
+                "use strict";
+                const fallElem = document.querySelector("#fallSnow");
+
+                if (fallElem) {
+                    const windowHeight = window.innerHeight;
+                    let topPosition = -30;
+
+                    setInterval(() => {
+                        if (topPosition <= windowHeight) {
+                            topPosition++;
+                        } else {
+                            topPosition = -30;
+                        }
+                        fallElem.style.top = topPosition + "px";
+                    }, 10);
+                }
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

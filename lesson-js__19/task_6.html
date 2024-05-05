@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 19</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №19</h1>
+                <div>
+                    <h2>Задача 6</h2>
+                    <p>
+                        Дано список спортсменів. Потрібно сформувати список тих, які будуть брати участь у змаганні. При
+                        цьому є два стовпці. В одному відображені всі спортсмени, в іншому – список тих, хто був
+                        вибраний. При натисканні на зелену стрілку спортсмен переміщається у список для змагань. При
+                        натисканні на червону стрілку спортсмен переміщається у загальний список.
+                    </p>
+                    <div class="tasks__sportsman sportsman">
+                        <fieldset id="alllist" class="sportsman__block">
+                            <legend>Загальний список</legend>
+                            <div class="sportsman__item">
+                                Май Тайсон
+                                <button class="sportsman__button"><img src="img/arrow.svg" alt="arrow"
+                                        class="sportsman__icon"></button>
+                            </div>
+                            <div class="sportsman__item">
+                                Роналду
+                                <button class="sportsman__button"><img src="img/arrow.svg" alt="arrow"
+                                        class="sportsman__icon"></button>
+                            </div>
+                            <div class="sportsman__item">
+                                Мессі
+                                <button class="sportsman__button"><img src="img/arrow.svg" alt="arrow"
+                                        class="sportsman__icon"></button>
+                            </div>
+                        </fieldset>
+                        <fieldset id="chosenList" class="sportsman__block">
+                            <legend>Список вибраних</legend>
+                            <div class="sportsman__item chosen">
+                                Фюррі
+                                <button class="sportsman__button"><img src="img/arrow.svg" alt="arrow"
+                                        class="sportsman__icon"></button>
+                            </div>
+                            <div class="sportsman__item chosen">
+                                Ален Делон
+                                <button class="sportsman__button"><img src="img/arrow.svg" alt="arrow"
+                                        class="sportsman__icon"></button>
+                            </div>
+                            <div class="sportsman__item chosen">
+                                Барбара Стрейзен
+                                <button class="sportsman__button"><img src="img/arrow.svg" alt="arrow"
+                                        class="sportsman__icon"></button>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <script>
+                    "use strict";
+
+                    function chooseSportsman(e) {
+                        const target = e.target;
+                        if (target.closest(".sportsman__item")) {
+                            const thisSportsman = target.closest(".sportsman__item");
+                            thisSportsman.remove();
+                            const chosenSportsmanList = document.querySelector("#chosenList");
+                            chosenSportsmanList.appendChild(thisSportsman);
+                            thisSportsman.classList.add("chosen");
+                        }
+                    }
+
+                    function casyOutSportsman(e) {
+                        const target = e.target;
+                        if (target.closest(".sportsman__item")) {
+                            const thisSportsman = target.closest(".sportsman__item");
+                            thisSportsman.remove();
+                            const allSportmansList = document.querySelector("#alllist");
+                            thisSportsman.classList.remove("chosen");
+                            allSportmansList.appendChild(thisSportsman);
+                        }
+                    }
+
+                    const allSportmansWrapper = document.querySelector("#alllist");
+
+                    if (allSportmansWrapper) {
+                        allSportmansWrapper.addEventListener("click", chooseSportsman);
+                    }
+
+                    const chosenList = document.querySelector("#chosenList");
+
+                    if (chosenList) {
+                        chosenList.addEventListener("click", casyOutSportsman);
+                    }
+
+                </script>
+        </main>
+    </div>
+</body>
+
+</html>

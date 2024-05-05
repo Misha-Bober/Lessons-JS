@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 19</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h2>Задача 19</h2>
+                <p>
+                    Дано 10 рядків тексту «Hello!» у окремих div. При кліку на якийсь із них усі наступні повинні бути
+                    зафарбовані у червоний колір.
+                </p>
+                <img src="img/dz19_img1.png" alt="Image">
+            </div>
+            <div class="tasks__body">
+                <div class="tasks__collection collection">
+                    <div class="collection__item">Hello!</div>
+                    <div class="collection__item">Hello!</div>
+                    <div class="collection__item">Hello!</div>
+                    <div class="collection__item">Hello!</div>
+                    <div class="collection__item">Hello!</div>
+                    <div class="collection__item">Hello!</div>
+                    <div class="collection__item">Hello!</div>
+                    <div class="collection__item">Hello!</div>
+                    <div class="collection__item">Hello!</div>
+                    <div class="collection__item">Hello!</div>
+                </div>
+            </div>
+            <script>
+                "use strict";
+
+                const collectionWrapper = document.querySelector(".collection");
+
+                function nextCollectionRed(e) {
+                    const target = e.target;
+                    if (target.closest(".collection__item")) {
+                        const currentElement = target.closest(".collection__item");
+                        let item = currentElement;
+                        while (item !== null) {
+                            item.style.backgroundColor = "red";
+                            item = item.nextElementSibling;
+                        }
+                    }
+                }
+
+                if (collectionWrapper) {
+                    collectionWrapper.addEventListener("click", nextCollectionRed);
+                }
+
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>
