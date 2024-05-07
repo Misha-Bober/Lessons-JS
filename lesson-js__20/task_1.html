@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 20</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №20</h1>
+                <div>
+                    <h2>Задача 1</h2>
+                    <p>
+                        Дано список автомобілів (марка, рік випуску, ціна). Сформувати елементи для фільтрування з
+                        використанням випадаючого списку (контент цих випадаючих списків сформувати у залежності від
+                        переданого списку).
+                    </p>
+                    <img src="img/dz20_img1.png" alt="Image">
+                </div>
+                <div id="home_task" class="wrapper_block">
+                    <div class="filter-block">
+                        <h2>Марка</h2>
+                        <select id="brandFilter" type="brand">
+                            <option></option>
+                            <option>Mustang</option>
+                            <option>BMW</option>
+                            <option>Toyota</option>
+                            <option>Volvo</option>
+                            <option>Tesla</option>
+                            <option>Mercedes-Benz</option>
+                        </select>
+                    </div>
+                    <div class="filter-block">
+                        <h2>Рік випуску</h2>
+                        <select id="yearFilter" type="yearOfIssue">
+                            <option></option>
+                            <option>1986</option>
+                            <option>1966</option>
+                            <option>2008</option>
+                            <option>2020</option>
+                            <option>2021</option>
+                            <option>2024</option>
+                        </select>
+                    </div>
+                    <button id="searchButton">Шукати</button>
+                    <h2>Результат пошуку</h2>
+                    <div class="result-block"></div>
+                </div>
+            </div>
+            <script>
+                const autoList = [
+                    {
+                        brand: "Mustang",
+                        yearOfIssue: 1986,
+                        price: 30000
+                    },
+                    {
+                        brand: "Volvo",
+                        yearOfIssue: 2020,
+                        price: 56000
+                    },
+                    {
+                        brand: "BMW",
+                        yearOfIssue: 2021,
+                        price: 34000
+                    },
+                    {
+                        brand: "Mercedes-Benz",
+                        yearOfIssue: 2024,
+                        price: 45000
+                    },
+                    {
+                        brand: "Volvo",
+                        yearOfIssue: 2020,
+                        price: 30000
+                    },
+                    {
+                        brand: "Toyota",
+                        yearOfIssue: 2008,
+                        price: 12000
+                    },
+                    {
+                        brand: "Ford",
+                        yearOfIssue: 2024,
+                        price: 26000
+                    },
+                    {
+                        brand: "Mustang",
+                        yearOfIssue: 1966,
+                        price: 50000
+                    },
+                    {
+                        brand: "Mercedes-Benz",
+                        yearOfIssue: 2020,
+                        price: 58000
+                    },
+                    {
+                        brand: "Tesla",
+                        yearOfIssue: 2024,
+                        price: 71000
+                    }
+                ];
+
+                autoList.sort((el1, el2) => {
+                    return el1.yearOfIssue - el2.yearOfIssue;
+                });
+
+                class FilterGenerator {
+                    constructor(autoList, parentElement) {
+                        this.autoList = autoList;
+                        this.parentElement = parentElement;
+                        this.brandSelect = parentElement.querySelector('#brandFilter');
+                        this.yearSelect = parentElement.querySelector('#yearFilter');
+                        this.result = parentElement.querySelector('.result-block');
+                        this.searchButton = parentElement.querySelector('#searchButton');
+                        this.searchButton.addEventListener('click', this.showResult.bind(this));
+                    }
+
+                    showResult() {
+                        const brandValue = this.brandSelect.value;
+                        const yearValue = this.yearSelect.value;
+
+                        let selected = this.autoList.filter(auto => {
+                            if ((brandValue === "" || auto.brand === brandValue) &&
+                                (yearValue === "" || auto.yearOfIssue.toString() === yearValue)) {
+                                return true;
+                            }
+                            return false;
+                        });
+
+                        let resultValue = "";
+                        if (selected.length === 0) {
+                            resultValue = "Немає результату, що задовольняє такі параметри";
+                        } else {
+                            selected.forEach(auto => {
+                                resultValue += `${auto.brand} - ${auto.yearOfIssue} - ${auto.price}$\n`;
+                            });
+                        }
+                        this.result.innerText = resultValue;
+                    }
+                }
+
+                const container = document.getElementById("home_task");
+                const test = new FilterGenerator(autoList, container);
+            </script>
+
+        </main>
+    </div>
+</body>
+
+</html>
