@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 22</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №22</h1>
+                <div>
+                    <h2>Задача 3</h2>
+                    <p>
+                        Визначити скільки залишилось до кінця робочого дня (до 17.00)
+                    </p>
+                    <div>
+                        <h1>Час до кінця робочого дня</h1>
+                        <p id="timeLeft"></p>
+                    </div>
+                </div>
+            </div>
+            <script>
+                function timeUntilEndOfDay() {
+                    const now = new Date();
+                    const endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 17, 0, 0);
+                    const timeLeft = endOfDay - now;
+
+                    if (timeLeft <= 0) {
+                        return "Робочий день закінчився";
+                    }
+
+                    const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                    return `${hours} годин, ${minutes} хвилин, ${seconds} секунд`;
+                }
+
+                function updateTimeLeft() {
+                    const timeLeft = timeUntilEndOfDay();
+                    document.getElementById("timeLeft").textContent = `Залишилось до кінця робочого дня: ${timeLeft}`;
+                }
+
+                updateTimeLeft();
+                setInterval(updateTimeLeft, 1000);
+            </script>
+
+        </main>
+    </div>
+</body>
+
+</html>

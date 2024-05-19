@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 22</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header></header>
+        <main>
+            <div>
+                <h1>Дз №22</h1>
+                <div>
+                    <h2>Задача 4</h2>
+                    <p>
+                        Створити функцію, яка дозволяє визначити, чи знаходиться вказана дата і час у межах поточного
+                        тижня (від понеділка 0 год, 0хв, до неділі 23год.59хв)
+                    </p>
+                </div>
+            </div>
+            <script>
+                function isWithinCurrentWeek(date) {
+                    const now = new Date();
+                    const dayOfWeek = now.getDay(); // Get the current day of the week (0 - Sunday, 6 - Saturday)
+
+                    // Adjust the dayOfWeek to consider Monday as the first day of the week
+                    const adjustedDayOfWeek = (dayOfWeek === 0) ? 6 : dayOfWeek - 1;
+
+                    // Calculate the start of the week (Monday)
+                    const startOfWeek = new Date(now);
+                    startOfWeek.setDate(now.getDate() - adjustedDayOfWeek);
+                    startOfWeek.setHours(0, 0, 0, 0);
+
+                    // Calculate the end of the week (Sunday)
+                    const endOfWeek = new Date(now);
+                    endOfWeek.setDate(now.getDate() + (6 - adjustedDayOfWeek));
+                    endOfWeek.setHours(23, 59, 59, 999);
+
+                    return date >= startOfWeek && date <= endOfWeek;
+                }
+
+                const dateToCheck1 = new Date(123456);
+                const dateToCheck2 = new Date();
+
+                console.log(isWithinCurrentWeek(dateToCheck1)); // Output: depends on the current date and the dateToCheck1 value
+                console.log(isWithinCurrentWeek(dateToCheck2)); // Output: true (because dateToCheck2 is the current date)
+            </script>
+
+        </main>
+    </div>
+</body>
+
+</html>

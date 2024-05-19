@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>ДЗ JS 22</title>
+
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+    </header>
+    <main>
+      <div>
+        <h1>Дз №22</h1>
+        <div>
+          <h2>Задача 2</h2>
+          <p>
+            Вводимо час початку процедури (процедура триває 30хв). Визначити, чи процедура ще триває.
+          </p>
+          <div class="procedure__block">
+            <div class="procedure__body">
+              <h4 class="procedure__sub-title">Час початку процедури</h4>
+              <label class="procedure__label">
+                Години:
+                <input id="startHours" type="number" class="procedure__input">
+              </label>
+              <label class="procedure__label">
+                Хвилини:
+                <input id="startMinutes" type="number" class="procedure__input">
+              </label>
+              <button id="checkProcedureStatus" class="procedure__button">Дізнатись</button>
+              <div class="procedure__result" id="procedureStatusResult"></div>
+            </div>
+          </div>
+        </div>
+        <script>
+          const startHours = document.getElementById("startHours");
+          const startMinutes = document.getElementById("startMinutes");
+
+          const checkProcedureStatusButton = document.getElementById("checkProcedureStatus");
+          const procedureStatusResult = document.getElementById("procedureStatusResult");
+
+          checkProcedureStatusButton.addEventListener("click", () => {
+            const currentTime = new Date();
+
+            const userStartTime = new Date(
+              currentTime.getFullYear(),
+              currentTime.getMonth(),
+              currentTime.getDate(),
+              parseInt(startHours.value),
+              parseInt(startMinutes.value),
+              0
+            );
+
+            let diff = currentTime - userStartTime;
+            if (diff < 0 || userStartTime.getTime() > currentTime.getTime()) {
+              procedureStatusResult.textContent = "Некоректний час";
+            } else {
+              let remainingTime = Math.floor(diff / 60000);
+              remainingTime = 30 - remainingTime;
+              let answer;
+              if (remainingTime <= 30 && remainingTime > 0) {
+                answer = `Ще потрібно зачекати ${remainingTime} хвилин`;
+              } else {
+                answer = "Процедура завершена";
+              }
+
+              procedureStatusResult.textContent = answer;
+            }
+          });
+        </script>
+    </main>
+  </div>
+</body>
+
+</html>

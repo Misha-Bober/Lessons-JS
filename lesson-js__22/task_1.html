@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 22</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №22</h1>
+                <div>
+                    <h2>Задача 1</h2>
+                    <p>
+                        Виводити на екран скільки хвилин користувач вже на сайті
+                    </p>
+                    <div>
+                        <button id="getTimeOnSite">Дізнатись</button>
+                        <div id="timeOnSite"></div>
+                        <div id="timeOnSiteSecond">00 : 06 : 07</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+        const getTimeOnSiteButton = document.getElementById("getTimeOnSite");
+        const startTime = Date.now();
+
+        getTimeOnSiteButton.addEventListener("click", () => {
+            const timeOnSiteElement = document.getElementById("timeOnSite");
+            const currentTime = Date.now();
+            const elapsedTime = new Date(currentTime - startTime);
+
+            const hours = String(elapsedTime.getUTCHours()).padStart(2, '0');
+            const minutes = String(elapsedTime.getUTCMinutes()).padStart(2, '0');
+            const seconds = String(elapsedTime.getUTCSeconds()).padStart(2, '0');
+
+            const result = `${hours}:${minutes}:${seconds}`;
+            timeOnSiteElement.textContent = result;
+        });
+
+        const timeOnSiteSecond = document.getElementById("timeOnSiteSecond");
+
+        setInterval(() => {
+            const currentTime = Date.now();
+            const elapsedTime = new Date(currentTime - startTime);
+
+            const hours = String(elapsedTime.getUTCHours()).padStart(2, '0');
+            const minutes = String(elapsedTime.getUTCMinutes()).padStart(2, '0');
+            const seconds = String(elapsedTime.getUTCSeconds()).padStart(2, '0');
+
+            const result = `${hours}:${minutes}:${seconds}`;
+            timeOnSiteSecond.textContent = result;
+        }, 1000);
+    </script>
+
+</body>
+
+</html>
