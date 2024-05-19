@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 21</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №21</h1>
+                <div>
+                    <h2>Задача 3</h2>
+                    <p>
+                        Розробити Класи
+                    </p>
+                </div>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>House</th>
+                            <th>Dog</th>
+                            <th>Bird</th>
+                        </tr>
+                        <tr>
+                            <td><span>---властивості---</span>
+                                <ul>
+                                    <li>Координата Х</li>
+                                    <li>Координата У</li>
+                                    <li>Шлях до зображення</li>
+                                    <li>Інтервал оновлення</li>
+                                </ul>
+                                <span>---методи---</span>
+                                <ul>
+                                    <li>Генерування елемента розмітки</li>
+                                    <li>Оновлення через вказаний інтервал (збільшення або зменшення масштабу (об'єкт не
+                                        рухається))</li>
+                                </ul>
+                            </td>
+                            <td><span>---властивості---</span>
+                                <ul>
+                                    <li>Координата Х</li>
+                                    <li>Координата У</li>
+                                    <li>Шлях до зображення</li>
+                                    <li>Інтервал оновлення</li>
+                                </ul>
+                                <span>---методи---</span>
+                                <ul>
+                                    <li>Генерування елемента розмітки</li>
+                                    <li>Оновлення через вказаний інтервал (випадкове зміщення по горизонталі (зміна
+                                        координати Х))</li>
+                                </ul>
+                            </td>
+                            <td><span>---властивості---</span>
+                                <ul>
+                                    <li>Координата Х</li>
+                                    <li>Координата У</li>
+                                    <li>Шлях до зображення</li>
+                                    <li>Інтервал оновлення</li>
+                                </ul>
+                                <span>---методи---</span>
+                                <ul>
+                                    <li>Генерування елемента розмітки</li>
+                                    <li>Оновлення через вказаний інтервал (випадкове переміщення у довільному порядку)
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="flex">
+                    <div class="container cnt3">
+                    </div>
+                    <div class="container cnt2">
+                    </div>
+                    <div class="container cnt1">
+                    </div>
+
+                </div>
+            </div>
+            <script>
+                class Image {
+                    constructor(left, top, imgSrc, interval, operation) {
+                        this.left = left;
+                        this.top = top;
+                        this.imgSrc = imgSrc;
+                        this.interval = interval;
+                        this.el = this.render();
+                        this.refreshImg(operation);
+                    }
+
+                    render() {
+                        const img = document.createElement('img');
+                        img.setAttribute('src', this.imgSrc);
+                        img.style.left = `${this.left}px`;
+                        img.style.top = `${this.top}px`;
+                        img.style.width = '100px';
+                        img.style.height = '100px';
+                        return img;
+                    }
+
+                    scaleImg() {
+                        const step = 30;
+                        let elWidth = parseInt(this.el.style.width);
+                        let newWidth;
+                        if (elWidth <= 100) {
+                            newWidth = elWidth + step;
+                        } else {
+                            newWidth = elWidth - step;
+                        }
+                        let newHeight = newWidth;
+                        this.el.style.width = `${newWidth}px`;
+                        this.el.style.height = `${newHeight}px`;
+                    }
+
+                    getRandom(min, max) {
+                        return min + Math.floor(Math.random() * (max - min + 1));
+                    }
+
+                    moveImgToX() {
+                        let randomLeft = this.getRandom(0, 300);
+                        this.el.style.left = `${randomLeft}px`;
+                    }
+
+                    moveImgToRandPos() {
+                        let randomLeft = this.getRandom(0, 300);
+                        let randomTop = this.getRandom(0, 90);
+                        this.el.style.left = `${randomLeft}px`;
+                        this.el.style.top = `${randomTop}px`;
+                    }
+
+                    refreshImg(operation) {
+                        if (operation === 1) setInterval(() => this.scaleImg(), this.interval);
+                        if (operation === 2) setInterval(() => this.moveImgToX(), this.interval);
+                        if (operation === 3) setInterval(() => this.moveImgToRandPos(), this.interval);
+                    }
+                }
+
+                class House extends Image {
+                    constructor(left, top, imgSrc, interval, operation) {
+                        super(left, top, imgSrc, interval, operation);
+                    }
+                }
+
+                class Dog extends Image {
+                    constructor(left, top, imgSrc, interval, operation) {
+                        super(left, top, imgSrc, interval, operation);
+                    }
+                }
+
+                class Bird extends Image {
+                    constructor(left, top, imgSrc, interval, operation) {
+                        super(left, top, imgSrc, interval, operation);
+                    }
+                }
+
+                const houseImg = new House(20, 10, '/img/pngegg_62.png', 1500, 1);
+                document.querySelector('.cnt1').append(houseImg.el);
+
+                const dogImg = new Dog(100, 50, '/img/pngegg_65.png', 1000, 2);
+                document.querySelector('.cnt2').append(dogImg.el);
+
+                const birdImg = new Bird(200, 30, '/img/pngegg_66.png', 2000, 3);
+                document.querySelector('.cnt3').append(birdImg.el);
+            </script>
+
+        </main>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,230 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 21</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №21</h1>
+                <div>
+                    <h2>Задача 4</h2>
+                    <p>
+                        Користувач задає місяць навчання учня (перевіряти чи є числом, чи від 1 до 12, чи не канікули)
+                        та оцінку (перевіряти чи є числом, чи від 1 до 100). Вивести чи зможе він виправити оцінку (якщо
+                        оцінка погана і це не останній місяць у семестрі) . Обробку усіх помилок зробити з використанням
+                        відповідних класів.
+                    </p>
+                </div>
+                <div class="task">
+                    <h4>Чи можна виправити оцінку</h4>
+                    <label>Введіть місяць навчання (від 1 до 12): <input name="month" class="month" type="text"></label>
+                    <label>Введіть оцінку (від 1 до 12): <input name="grade" class="grade" type="text"></label>
+                    <button>Результат</button>
+                    <span class="result"></span>
+                </div>
+            </div>
+            <script>
+                const result = document.querySelector('.result');
+                const calcBtn = document.querySelector('button');
+                calcBtn.onclick = () => {
+                    let monthValue = parseFloat(document.querySelector('.month').value);
+                    let scoreValue = parseFloat(document.querySelector('.score').value);
+                    isDataValid(monthValue, scoreValue);
+                };
+
+                class InvalidInputError extends Error {
+                    constructor(message) {
+                        super(message);
+                        this.name = 'InvalidInputError';
+                    }
+                }
+
+                class OutOfRangeError extends Error {
+                    constructor(message) {
+                        super(message);
+                        this.name = 'OutOfRangeError';
+                    }
+                }
+
+                class VacationPeriodError extends Error {
+                    constructor(message) {
+                        super(message);
+                        this.name = 'VacationPeriodError';
+                    }
+                }
+
+                function isDataValid(month, score) {
+                    let isMonthValid = validateMonth(month);
+                    let isScoreValid = validateScore(score);
+
+                    if (isMonthValid && isScoreValid) {
+                        if (score <= 5) {
+                            if (month === 5 || month === 12) {
+                                result.style.color = 'red';
+                                result.innerText = 'Оцінку вже не можна змінити. Останній місяць семестру';
+                            } else {
+                                result.style.color = 'green';
+                                result.innerText = 'Оцінку можна змінити';
+                            }
+                        } else {
+                            result.style.color = 'blue';
+                            result.innerText = 'У вас гарна оцінка';
+                        }
+                    }
+                }
+
+                function validateMonth(value) {
+                    try {
+                        if (isNaN(value)) throw new InvalidInputError('Некоректний ввід даних. Це не число.');
+                        if (value < 1 || value > 12) throw new OutOfRangeError('Некоректний ввід даних. За межами допустимих значень.');
+                        if (value === 1 || (value >= 6 && value <= 8)) throw new VacationPeriodError('Коледж закритий на канікули.');
+                    } catch (err) {
+                        result.innerText = err.message;
+                        result.style.color = 'red';
+                        return false;
+                    }
+                    return true;
+                }
+
+                function validateScore(value) {
+                    try {
+                        if (isNaN(value)) throw new InvalidInputError('Некоректний ввід даних. Це не число.');
+                        if (value < 1 || value > 10) throw new OutOfRangeError('Некоректний ввід даних. За межами допустимих значень.');
+                    } catch (err) {
+                        result.innerText = err.message;
+                        result.style.color = 'red';
+                        return false;
+                    }
+                    return true;
+                }
+            </script>
+
+        </main>
+    </div>
+</body>
+
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 21</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header></header>
+        <main>
+            <div>
+                <h1>Дз №21</h1>
+                <div>
+                    <h2>Задача 4</h2>
+                    <p>
+                        Користувач задає місяць навчання учня (перевіряти чи є числом, чи від 1 до 12, чи не канікули)
+                        та оцінку (перевіряти чи є числом, чи від 1 до 12). Вивести чи зможе він виправити оцінку (якщо
+                        оцінка погана і це не останній місяць у семестрі) . Обробку усіх помилок зробити з використанням
+                        відповідних класів.
+                    </p>
+                </div>
+                <div class="task">
+                    <h4>Чи можна виправити оцінку</h4>
+                    <label>Введіть місяць навчання (від 1 до 12): <input name="month" class="month" type="text"></label>
+                    <label>Введіть оцінку (від 1 до 12): <input name="score" class="score" type="text"></label>
+                    <button>Результат</button>
+                    <span class="result"></span>
+                </div>
+            </div>
+            <script>
+                const result = document.querySelector('.result');
+                const calcBtn = document.querySelector('button');
+                calcBtn.onclick = () => {
+                    let monthValue = parseFloat(document.querySelector('.month').value);
+                    let scoreValue = parseFloat(document.querySelector('.score').value);
+                    isDataValid(monthValue, scoreValue);
+                };
+
+                class InvalidInputError extends Error {
+                    constructor(message) {
+                        super(message);
+                        this.name = 'InvalidInputError';
+                    }
+                }
+
+                class OutOfRangeError extends Error {
+                    constructor(message) {
+                        super(message);
+                        this.name = 'OutOfRangeError';
+                    }
+                }
+
+                class VacationPeriodError extends Error {
+                    constructor(message) {
+                        super(message);
+                        this.name = 'VacationPeriodError';
+                    }
+                }
+
+                function isDataValid(month, score) {
+                    let isMonthValid = validateMonth(month);
+                    let isScoreValid = validateScore(score);
+
+                    if (isMonthValid && isScoreValid) {
+                        if (score <= 5) {
+                            if (month === 5 || month === 12) {
+                                result.style.color = 'red';
+                                result.innerText = 'Оцінку вже не можна змінити. Останній місяць семестру';
+                            } else {
+                                result.style.color = 'green';
+                                result.innerText = 'Оцінку можна змінити';
+                            }
+                        } else {
+                            result.style.color = 'blue';
+                            result.innerText = 'У вас гарна оцінка';
+                        }
+                    }
+                }
+
+                function validateMonth(value) {
+                    try {
+                        if (isNaN(value)) throw new InvalidInputError('Некоректний ввід даних. Це не число.');
+                        if (value < 1 || value > 12) throw new OutOfRangeError('Некоректний ввід даних. За межами допустимих значень.');
+                        if (value === 1 || (value >= 6 && value <= 8)) throw new VacationPeriodError('Коледж закритий на канікули.');
+                    } catch (err) {
+                        result.innerText = err.message;
+                        result.style.color = 'red';
+                        return false;
+                    }
+                    return true;
+                }
+
+                function validateScore(value) {
+                    try {
+                        if (isNaN(value)) throw new InvalidInputError('Некоректний ввід даних. Це не число.');
+                        if (value < 1 || value > 12) throw new OutOfRangeError('Некоректний ввід даних. За межами допустимих значень.');
+                    } catch (err) {
+                        result.innerText = err.message;
+                        result.style.color = 'red';
+                        return false;
+                    }
+                    return true;
+                }
+            </script>
+
+        </main>
+    </div>
+</body>
+
+</html>

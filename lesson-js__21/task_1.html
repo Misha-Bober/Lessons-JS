@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 21</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №21</h1>
+                <div>
+                    <h2>Задача 1</h2>
+                    <p>
+                        Створити клас Client
+                    </p>
+                    <div>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>Властивості</th>
+                                    <td>
+                                        <p>ID</p>
+                                        <p>ПІБ</p>
+                                        <p>Кількість грошей на рахунку</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Методи</th>
+                                    <td>
+                                        <p>Додавання грошей</p>
+                                        <p>Зняття грошей</p>
+                                        <p>ToString</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>
+                            На основі цього класу створити клас GoldenClient
+                        </p>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>Властивості</th>
+                                    <td>
+                                        <p>ID</p>
+                                        <p>ПІБ</p>
+                                        <p>Кількість грошей на рахунку</p>
+                                        <p>Ліміт кредитних коштів</p>
+                                        <p>Відсоток за використання кредитних коштів</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Методи</th>
+                                    <td>
+                                        <p>Додавання грошей</p>
+                                        <p>Зняття грошей</p>
+                                        <p>Визначення пені за використання кредитних коштів</p>
+                                        <p>ToString</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="output"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+        class Client {
+            constructor(id, fullName, totalMoney) {
+                this.id = id;
+                this.fullName = fullName;
+                this.totalMoney = totalMoney;
+            }
+            addMoney(value) {
+                this.totalMoney += value;
+            }
+
+            withdrawMoney(value) {
+                if (value > this.totalMoney) throw new Error('Не вистачає коштів');
+                this.totalMoney -= value;
+            }
+
+            toString() {
+                return `${this.fullName} (#${this.id}): ${this.totalMoney}$`;
+            }
+        }
+
+        class GoldenClient extends Client {
+            constructor(id, fullName, totalMoney, creditLimit, percentForUsingCredit) {
+                super(id, fullName, totalMoney);
+                this.creditLimit = creditLimit;
+                this.percentForUsingCredit = percentForUsingCredit;
+                this.creditLeft = creditLimit;
+            }
+
+            withdrawMoney(value) {
+                if (value > this.totalMoney) {
+                    if (value > this.totalMoney + this.creditLimit) throw new Error('Недостатньо коштів');
+                    this.creditLeft = this.creditLimit - value + this.totalMoney;
+                    this.totalMoney = 0;
+                } else {
+                    this.totalMoney -= value;
+                }
+            }
+
+            addMoney(value) {
+                if (this.totalMoney === 0) {
+                    let creditInUse = this.creditLimit - this.creditLeft;
+                    if (value >= creditInUse) {
+                        this.totalMoney = value - creditInUse;
+                        this.creditLeft = this.creditLimit;
+                    } else {
+                        this.creditLeft += value;
+                    }
+                } else {
+                    this.totalMoney += value;
+                }
+            }
+
+            getYearPenalty() {
+                return (this.creditLimit - this.creditLeft) * this.percentForUsingCredit / 100;
+            }
+
+            getMonthPenalty() {
+                return this.getYearPenalty() / 12;
+            }
+
+            toString() {
+                return `${super.toString()} / credit - ${this.creditLeft}$ (${this.percentForUsingCredit}%)`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const output = document.getElementById('output');
+
+            const client = new Client('123456', 'Ivan Zlatce', 2000);
+            output.innerHTML += `${client}<br>`;
+            output.innerHTML += 'Додамо 1000: ';
+            client.addMoney(1000);
+            output.innerHTML += `${client}<br>`;
+            output.innerHTML += 'Знімемо 2500: ';
+            try {
+                client.withdrawMoney(2500);
+                output.innerHTML += `${client}<br>`;
+            } catch (e) {
+                output.innerHTML += `${e.message}<br>`;
+            }
+
+            const goldenClient = new GoldenClient('1234567', 'Jony Depp', 70000, 45000, 16);
+            output.innerHTML += `${goldenClient}<br>`;
+            output.innerHTML += 'Додамо 10000: ';
+            goldenClient.addMoney(10000);
+            output.innerHTML += `${goldenClient}<br>`;
+            output.innerHTML += 'Знімемо 65000: ';
+            try {
+                goldenClient.withdrawMoney(65000);
+                output.innerHTML += `${goldenClient}<br>`;
+            } catch (e) {
+                output.innerHTML += `${e.message}<br>`;
+            }
+            output.innerHTML += `Пеня на використані кредитні кошти складе: за рік - ${goldenClient.getYearPenalty()}$, за місяць - ${goldenClient.getMonthPenalty()}$`;
+        });
+    </script>
+</body>
+
+</html>

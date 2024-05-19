@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>ДЗ JS 21</title>
+
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+    </header>
+    <main>
+      <div>
+        <h1>Дз №21</h1>
+        <div>
+          <h2>Задача 2</h2>
+          <p>
+            Створити клас Bank, у якому зберігається масив клієнтів. Виконати такі операції<br>
+            ● Вивести всіх простих клієнтів;<br>
+            ● Вивести всіх клієнтів GoldenClient;<br>
+            ● Знайти сумарну кількість грошей на рахунку;
+          </p>
+        </div>
+        <div id="output"></div>
+        <script>
+          class Client {
+            constructor(id, fullName, totalMoney) {
+              this.id = id;
+              this.fullName = fullName;
+              this.totalMoney = totalMoney;
+            }
+            addMoney(value) {
+              this.totalMoney += value;
+            }
+            withdrawMoney(value) {
+              if (value > this.totalMoney) throw new Error('Не вистачає коштів');
+              this.totalMoney -= value;
+            }
+            toString() {
+              return `${this.fullName} (#${this.id}): ${this.totalMoney}$`;
+            }
+          }
+
+          class GoldenClient extends Client {
+            constructor(id, fullName, totalMoney, creditLimit, percentForUsingCredit) {
+              super(id, fullName, totalMoney);
+              this.creditLimit = creditLimit;
+              this.percentForUsingCredit = percentForUsingCredit;
+              this.creditLeft = creditLimit;
+            }
+            withdrawMoney(value) {
+              if (value > this.totalMoney) {
+                if (value > this.totalMoney + this.creditLimit) throw new Error('Недостатньо коштів');
+                this.creditLeft = this.creditLimit - value + this.totalMoney;
+                this.totalMoney = 0;
+              } else {
+                this.totalMoney -= value;
+              }
+            }
+            addMoney(value) {
+              if (this.totalMoney === 0) {
+                let creditInUse = this.creditLimit - this.creditLeft;
+                if (value >= creditInUse) {
+                  this.totalMoney = value - creditInUse;
+                  this.creditLeft = this.creditLimit;
+                } else {
+                  this.creditLeft += value;
+                }
+              } else {
+                this.totalMoney += value;
+              }
+            }
+            getYearPenalty() {
+              return (this.creditLimit - this.creditLeft) * this.percentForUsingCredit / 100;
+            }
+            getMonthPenalty() {
+              return this.getYearPenalty() / 12;
+            }
+            toString() {
+              return `${super.toString()} / credit - ${this.creditLeft}$ (${this.percentForUsingCredit}%)`;
+            }
+          }
+
+          const clientList = [
+            new Client('00001', 'Alex Johnson', 500),
+            new Client('00002', 'Emily Davis', 1500),
+            new Client('00003', 'Michael Brown', 2500),
+            new GoldenClient('00004', 'Lionel Messi', 2000000, 15000000, 10),
+            new GoldenClient('00005', 'Neymar Jr', 2500000, 12000000, 11),
+            new GoldenClient('00006', 'Luka Modric', 1800000, 8000000, 9)
+          ];
+
+          class Bank {
+            constructor(clientList) {
+              this.clientList = clientList;
+            }
+            getListOfSimpleClients() {
+              return this.clientList.filter(client => !(client instanceof GoldenClient));
+            }
+            getListOfGoldenClients() {
+              return this.clientList.filter(client => client instanceof GoldenClient);
+            }
+            getTotalMoney() {
+              return this.clientList.reduce((prevSum, client) => prevSum + client.totalMoney, 0);
+            }
+          }
+
+          const bank = new Bank(clientList);
+
+          document.addEventListener('DOMContentLoaded', () => {
+            const output = document.getElementById('output');
+            output.innerHTML += `<h3>Прості клієнти</h3>`;
+            bank.getListOfSimpleClients().forEach(client => {
+              output.innerHTML += `${client}<br>`;
+            });
+
+            output.innerHTML += `<h3>Золоті клієнти</h3>`;
+            bank.getListOfGoldenClients().forEach(client => {
+              output.innerHTML += `${client}<br>`;
+            });
+
+            output.innerHTML += `<h3>Загальна сума грошей на рахунках у банку</h3>`;
+            output.innerHTML += `Загальна сума грошей на рахунках у банку: ${bank.getTotalMoney()}$`;
+          });
+        </script>
+    </main>
+  </div>
+</body>
+
+</html>
