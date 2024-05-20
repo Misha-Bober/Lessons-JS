@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 22</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <h3>Дано масив рядків. Вивести ті, у яких є цифри (використати метод test та регулярні вирази).</h3>
+            <p>Example1</p>
+            <p>Sample 123</p>
+            <p>Test string with number 789</p>
+            <h3>Дано масив рядків. Вивести ті, у яких немає цифр.</h3>
+            <p>No numbers here</p>
+            <p>Just text</p>
+            <p>Another string</p>
+            <h3>Дано масив рядків. Вивести ті, у яких є голосні літери.</h3>
+            <p>Example1</p>
+            <p>Sample 123</p>
+            <p>Test string with number 789</p>
+            <p>No numbers here</p>
+            <p>Just text</p>
+            <h3>Дано масив рядків. Вивести ті, у яких немає голосних літер.</h3>
+            <p>Another string</p>
+            <h3>Дано масив рядків. Вивести ті, у яких є або цифра 1 або цифра 3</h3>
+            <p>Example1</p>
+            <p>Sample 123</p>
+            <h3>Дано рядок тексту. Знайти усі знаки пунктуації, які були використано.</h3>
+            <h3>Дано рядок тексту, вивести усі числа, які є у тексті.</h3>
+            <p>, , , , , ? , ,</p>
+            <h3>Дано рядок тексту. Вивести усі складові, які розділені розділовими знаками.</h3>
+            <p>
+            <p>Example</p>
+            <p> Sample text</p>
+            <p> 1234</p>
+            <p> This is</p>
+            <p> a string with numbers 2024 2023 inside</p>
+            <p> </p>
+            <p>No numbers here</p>
+            <p> Another example</p>
+            <p> 11-11-2025</p>
+            <p> 1234-5678-9101-1121</p>
+            </p>
+            <h3> Дано рядок тексту. Перевірити, чи містить він дату у форматі dd.mm.yyyy (dd- день, mm- місяць, yyyy-
+                рік).</h3>
+            <p>11-11-2025</p>
+            <h3>Дано рядок тексту. Підрахувати кількість двоцифрових чисел у рядку.</h3>
+            <p>22,33,44,55,66,77,88,99,10,20</p>
+            <h3> Визначити чи може бути рядок тексту номером банківської картки (приклад: «4142-3433-2323-3434»).
+                Знайти усі такі номери.</h3>
+            <p>1234-5678-9101-1121</p>
+            <h3> Дано адресу сайту. Визначити, чи є він урядовим (містить домен “gov”)</h3>
+            <p>https://example.gov.site</p>
+            <h3>Вибрати усі роки після 2021 року з отриманого повідомлення</h3>
+            <p>2022</p>
+            <h3>Дано номер телефону. Перевірити, чи є цей телефон телефоном з України (починаєтсья на «+38»)</h3>
+            <p>true</p>
+            <h3>Користувач вводить прізвище та ім’я в одному рядку через пробіл. Замінити пробіл на дефіс.</h3>
+        </main>
+        <script>
+            const container = document.body;
+            container.classList.add("lesson23");
+
+            let textArray = [
+                "No numbers here",
+                "Example1",
+                "Sample 123",
+                "Test string with number 789",
+                "Just text",
+                "Another string"
+            ];
+
+            let textRow = `Example, Sample text, 1234, This is, a string with numbers 2024 2023 inside, 
+            No numbers here? Another example, 11-11-2025, 1234-5678-9101-1121`;
+
+            // Task 1
+            const task1 = document.createElement("h3");
+            task1.innerText = "Дано масив рядків. Вивести ті, у яких є цифри (використати метод test та регулярні вирази).";
+            container.append(task1);
+            textArray.forEach((item) => {
+                if (/\d/.test(item)) {
+                    const result = document.createElement("p");
+                    result.innerText = item;
+                    container.append(result);
+                }
+            });
+
+            // Task 2
+            const task2 = document.createElement("h3");
+            container.append(task2);
+            task2.innerText = "Дано масив рядків. Вивести ті, у яких немає цифр.";
+            textArray.forEach((item) => {
+                if (!/\d/.test(item)) {
+                    const result = document.createElement("p");
+                    result.innerText = item;
+                    container.append(result);
+                }
+            });
+
+            // Task 3
+            const task3 = document.createElement("h3");
+            container.append(task3);
+            task3.innerText = "Дано масив рядків. Вивести ті, у яких є голосні літери.";
+            textArray.forEach((item) => {
+                if (/[aeiouy]/i.test(item)) {
+                    const result = document.createElement("p");
+                    result.innerText = item;
+                    container.append(result);
+                }
+            });
+
+            // Task 4
+            const task4 = document.createElement("h3");
+            container.append(task4);
+            task4.innerText = "Дано масив рядків. Вивести ті, у яких немає голосних літер.";
+            textArray.forEach((item) => {
+                if (!/[aeiouy]/i.test(item)) {
+                    const result = document.createElement("p");
+                    result.innerText = item;
+                    container.append(result);
+                }
+            });
+
+            // Task 5
+            const task5 = document.createElement("h3");
+            container.append(task5);
+            task5.innerText = "Дано масив рядків. Вивести ті, у яких є або цифра 1 або цифра 3";
+            textArray.forEach((item) => {
+                if (/[13]/.test(item)) {
+                    const result = document.createElement("p");
+                    result.innerText = item;
+                    container.append(result);
+                }
+            });
+
+            // Task 6
+            const task6 = document.createElement("h3");
+            container.append(task6);
+            task6.innerText = "Дано рядок тексту, вивести усі числа, які є у тексті.";
+            let numbers = textRow.match(/\d+/g);
+            const result6 = document.createElement("p");
+            result6.innerText = numbers.join(", ");
+            container.append(task6, result6);
+
+            // Task 7
+            const task7 = document.createElement("h3");
+            container.append(task7);
+            task7.innerText = "Дано рядок тексту. Знайти усі знаки пунктуації, які були використано.";
+            let punctuation = textRow.match(/[.,?!]/g);
+            const result7 = document.createElement("p");
+            result7.innerText = punctuation.join(" ");
+            container.append(task7, result7);
+
+            // Task 8
+            const task8 = document.createElement("h3");
+            container.append(task8);
+            task8.innerText = "Дано рядок тексту. Вивести усі складові, які розділені розділовими знаками.";
+            let components = textRow.split(/[.,?!]/).filter(Boolean);
+            const result8 = document.createElement("p");
+            components.forEach((elem) => {
+                const item = document.createElement("p");
+                item.innerText = elem.trim();
+                result8.append(item);
+            });
+            container.append(task8, result8);
+
+            // Task 9
+            const task9 = document.createElement("h3");
+            task9.innerText = "Дано рядок тексту. Перевірити, чи містить він дату у форматі dd.mm.yyyy (dd- день, mm- місяць, yyyy- рік).";
+            let dateMatch = textRow.match(/\b\d{2}-\d{2}-\d{4}\b/);
+            const result9 = document.createElement("p");
+            result9.innerText = dateMatch ? dateMatch[0] : "No date found";
+            container.append(task9, result9);
+
+            // Task 10
+            const task10 = document.createElement("h3");
+            container.append(task10);
+            task10.innerText = "Дано рядок тексту. Підрахувати кількість двоцифрових чисел у рядку.";
+            let twoDigitNumbers = textRow.match(/\b\d{2}\b/g);
+            const result10 = document.createElement("p");
+            result10.innerText = twoDigitNumbers ? twoDigitNumbers.length : 0;
+            container.append(task10, result10);
+
+            // Task 11
+            const task11 = document.createElement("h3");
+            container.append(task11);
+            task11.innerText = "Визначити чи може бути рядок тексту номером банківської картки (приклад: «4142-3433-2323-3434»). Знайти усі такі номери.";
+            let cardNumbers = textRow.match(/\b\d{4}-\d{4}-\d{4}-\d{4}\b/g);
+            const result11 = document.createElement("p");
+            result11.innerText = cardNumbers ? cardNumbers.join(", ") : "No card numbers found";
+            container.append(task11, result11);
+
+            // Task 12
+            const task12 = document.createElement("h3");
+            container.append(task12);
+            task12.innerText = "Дано адресу сайту. Визначити, чи є він урядовим (містить домен “gov”)";
+            let url = "https://example.gov.site";
+            const result12 = document.createElement("p");
+            result12.innerText = /\.gov\b/.test(url) ? "Government website" : "Not a government website";
+            container.append(task12, result12);
+
+            // Task 13
+            const task13 = document.createElement("h3");
+            container.append(task13);
+            task13.innerText = "Вибрати усі роки після 2021 року з отриманого повідомлення";
+            let years = textRow.match(/\b2[2-9]\d{2}\b/g);
+            const result13 = document.createElement("p");
+            result13.innerText = years ? years.join(", ") : "No years found";
+            container.append(task13, result13);
+
+            // Task 14
+            const task14 = document.createElement("h3");
+            container.append(task14);
+            task14.innerText = "Дано номер телефону. Перевірити, чи є цей телефон телефоном з України (починаєтсья на «+38»)";
+            let phoneNumber = "+380935656555";
+            const result14 = document.createElement("p");
+            result14.innerText = /^\+38\d{10}$/.test(phoneNumber) ? "Ukrainian phone number" : "Not a Ukrainian phone number";
+            container.append(task14, result14);
+
+            // Task 15
+            let fullName = prompt("Your name and surname");
+            const task15 = document.createElement("h3");
+            container.append(task15);
+            task15.innerText = "Користувач вводить прізвище та ім’я в одному рядку через пробіл. Замінити пробіл на дефіс.";
+            const newFullName = fullName.replace(/ /g, "-");
+            const result15 = document.createElement("p");
+            result15.innerText = newFullName;
+            container.append(task15, result15);
+
+            // Task 16
+            let inputDate = prompt("Enter date in format 'day.month.year'");
+            const task16 = document.createElement("h3");
+            container.append(task16);
+            task16.innerText = "Користувач вводить дату у форматі «день.місяць.рік». Отримати рядкове представлення дати у форматі «день/місяць/рік»";
+            const formattedDate = inputDate.replace(/\./g, "/");
+            const result16 = document.createElement("p");
+            result16.innerText = formattedDate;
+            container.append(task16, result16);
+
+            // Task 17
+            let inputDay = prompt("Enter day (number 0-6 or 'sun,mon,tue,wed,thu,fri,sat')");
+            const task17 = document.createElement("h3");
+            container.append(task17);
+            task17.innerText = "Користувач вводить день (номер дня (0-6) або «sun,mon,tue,wed,thu,fri,sat»). Визначити, чи є це день вихідним";
+            const isWeekend = /^(sun|sat|0|6)$/i.test(inputDay);
+            const result17 = document.createElement("p");
+            result17.innerText = isWeekend ? "День є вихідним" : "День не є вихідним";
+            container.append(task17, result17);
+        </script>
+    </div>
+</body>
+
+</html>
