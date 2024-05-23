@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>ДЗ JS 24</title>
+
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+    </header>
+    <main>
+      <div>
+        <h1>Дз №24</h1>
+        <h2>Задача 2</h2>
+        <p>
+          Дано масив книг (назва, рік видання, автор, ціна). Підрахувати загальну вартість книг для кожного із
+          авторів.
+        </p>
+      </div>
+      <script>
+        const products = [
+          {
+            name: "Laptop",
+            year: 2022,
+            brand: "Brand A",
+            price: 1200
+          },
+          {
+            name: "Smartphone",
+            year: 2021,
+            brand: "Brand B",
+            price: 800
+          },
+          {
+            name: "Tablet",
+            year: 2020,
+            brand: "Brand C",
+            price: 600
+          },
+          {
+            name: "Smartwatch",
+            year: 2019,
+            brand: "Brand A",
+            price: 200
+          },
+          {
+            name: "Headphones",
+            year: 2021,
+            brand: "Brand B",
+            price: 150
+          },
+          {
+            name: "Smartphone",
+            year: 2021,
+            brand: "Brand B",
+            price: 800
+          },
+          {
+            name: "Laptop",
+            year: 2022,
+            brand: "Brand A",
+            price: 1200
+          },
+          {
+            name: "E-reader",
+            year: 2018,
+            brand: "Brand C",
+            price: 100
+          },
+          {
+            name: "Monitor",
+            year: 2020,
+            brand: "Brand A",
+            price: 300
+          },
+          {
+            name: "Keyboard",
+            year: 2019,
+            brand: "Brand B",
+            price: 50
+          }
+        ];
+
+        let brandTotalPriceMap = new Map();
+        for (let product of products) {
+          let totalPrice = brandTotalPriceMap.get(product.brand) ?? 0;
+          brandTotalPriceMap.set(product.brand, totalPrice + product.price);
+        }
+
+        brandTotalPriceMap.forEach((value, key) => document.write(`${key} = ${value}$ <br>`));
+      </script>
+    </main>
+  </div>
+</body>
+
+</html>

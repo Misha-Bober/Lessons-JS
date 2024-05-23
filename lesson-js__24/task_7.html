@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 24</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №24</h1>
+                <div>
+                    <h2>Задача 7</h2>
+                    <p>
+                        Зберігати у пам’яті список справ, які користувачу треба виконати (зберігати у localStorage).
+                        Періодично випадковим чином вибирати якусь з справ і виводити користувачу (з використанням
+                        confirm).
+                        Якщо користувач натискає на «Ок», то видаляти цю задачу.
+                    </p>
+                </div>
+            </div>
+            <script>
+                const tasks = [
+                    "Закінчити звіт",
+                    "Зателефонувати клієнту",
+                    "Підготувати презентацію",
+                    "Організувати зустріч",
+                    "Надіслати електронну пошту",
+                    "Оновити веб-сайт"
+                ];
+
+                class TaskManager {
+                    constructor(tasks = []) {
+                        this.tasks = tasks;
+                        this.setTaskList();
+                        this.initiate();
+                    }
+
+                    setTaskList() {
+                        localStorage.clear();
+                        localStorage.setItem("task", JSON.stringify(this.tasks));
+                        console.log();
+                    }
+
+                    showRandomTask() {
+                        if (this.tasks.length > 0) {
+                            let randomNumber = Math.floor(Math.random() * this.tasks.length);
+
+                            let randomTask = JSON.parse(localStorage.getItem("task"))[randomNumber];
+                            if (confirm(randomTask)) {
+                                this.tasks.splice(randomNumber, 1);
+                                console.log(this.tasks);
+                                this.setTaskList();
+                            }
+                        } else clearInterval(this.initiation);
+                    }
+
+                    initiate() {
+                        this.initiation = setInterval(this.showRandomTask.bind(this), 3000);
+                    }
+                }
+
+                let taskManager = new TaskManager(tasks);
+            </script>
+
+        </main>
+    </div>
+</body>
+
+</html>

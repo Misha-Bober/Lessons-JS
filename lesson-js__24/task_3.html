@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 24</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №24</h1>
+                <div>
+                    <h2>Задача 3</h2>
+                    <p>
+                        Дано інформацію про відвідувачів деякого сайту (для кожного відвідувача зберігається логін).
+                        Підрахувати для кожного клієнта кількість відвідувань.
+                    </p>
+                </div>
+            </div>
+            <script>
+                const shoppers = [
+                    "customer001",
+                    "customer002",
+                    "customer003",
+                    "customer001",
+                    "customer003",
+                    "customer002",
+                    "customer003",
+                    "customer001",
+                    "customer002",
+                    "customer003",
+                    "customer004",
+                    "customer002",
+                    "customer004",
+                    "customer005",
+                    "customer002"
+                ];
+
+                let shopperVisitMap = new Map();
+                for (let shopper of shoppers) {
+                    let visitCount = shopperVisitMap.get(shopper) ?? 0;
+                    shopperVisitMap.set(shopper, ++visitCount);
+                }
+
+                shopperVisitMap.forEach((value, key) =>
+                    document.write(`${key} = ${value} відвідувань <br>`)
+                );
+            </script>
+
+
+        </main>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 24</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №24</h1>
+                <div>
+                    <h2>Задача 4</h2>
+                    <p>
+                        Дано масив студентів (піб, курс, факультет). Підрахувати кількість різних факультетів, та
+                        кількість
+                        студентів кожного з курсів.
+                    </p>
+                </div>
+            </div>
+            <script>
+                const employees = [
+                    { fullName: "Олексієнко Петро Миколайович", department: "Продажі", experience: 5 },
+                    { fullName: "Іваненко Марина Іванівна", department: "Маркетинг", experience: 2 },
+                    { fullName: "Петренко Олег Олександрович", department: "ІТ", experience: 10 },
+                    { fullName: "Коваленко Антон Сергійович", department: "Продажі", experience: 1 },
+                    { fullName: "Бондаренко Оксана Василівна", department: "Маркетинг", experience: 3 },
+                    { fullName: "Григоренко Олександр Дмитрович", department: "ІТ", experience: 7 },
+                    { fullName: "Мельник Інна Петрівна", department: "Продажі", experience: 2 },
+                    { fullName: "Семенченко Юрій Олександрович", department: "Маркетинг", experience: 4 },
+                    { fullName: "Петренко Андрій Васильович", department: "ІТ", experience: 8 },
+                    { fullName: "Шевченко Галина Миколаївна", department: "Продажі", experience: 5 },
+                    { fullName: "Іванова Оксана Сергіївна", department: "Маркетинг", experience: 1 },
+                    { fullName: "Коваленко Іван Петрович", department: "ІТ", experience: 6 },
+                    { fullName: "Сидоренко Сергій Іванович", department: "Продажі", experience: 3 },
+                    { fullName: "Петренко Наталія Олександрівна", department: "Маркетинг", experience: 2 },
+                    { fullName: "Іванов Петро Сергійович", department: "ІТ", experience: 9 }
+                ];
+
+                let experienceMap = new Map();
+                for (let employee of employees) {
+                    let experienceCount = experienceMap.get(employee.experience) ?? 0;
+                    experienceMap.set(employee.experience, ++experienceCount);
+                }
+
+                experienceMap.forEach((value, key) =>
+                    document.write(`${key} курс: ${value} студентів <br>`)
+                );
+
+                let departments = employees.map((el) => el.department);
+
+                let departmentSet = new Set(departments);
+                console.log(departmentSet);
+                document.write(`Кількість різних факультетів: ${departmentSet.size}`);
+            </script>
+
+        </main>
+    </div>
+</body>
+
+</html>

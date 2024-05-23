@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 24</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №24</h1>
+                <h2>Задача 1</h2>
+                <p>
+                    Дано список URL адрес. Підрахувати кількість адрес, що відносяться до кожного із доменів (edu, com,
+                    org,...).
+                </p>
+            </div>
+            <script>
+                const urls = [
+                    "https://www.siteone.com",
+                    "https://www.sitetwo.org",
+                    "https://www.sitethree.edu",
+                    "https://www.sitefour.com",
+                    "https://www.sitefive.org",
+                    "https://www.sitesix.edu",
+                    "https://www.siteseven.com",
+                    "https://www.siteeight.org",
+                    "https://www.sitenine.edu",
+                    "https://www.sitelast.com"
+                ];
+
+                let domainCountMap = new Map();
+                let domainPattern = /\.\w+$/;
+
+                for (let url of urls) {
+                    let domainMatch = domainPattern.exec(url);
+                    let domain = domainMatch ? domainMatch[0] : '';
+                    let count = domainCountMap.get(domain) ?? 0;
+                    domainCountMap.set(domain, ++count);
+                }
+
+                console.log(domainCountMap);
+                domainCountMap.forEach((value, key) => document.write(`${key} = ${value} <br>`));
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>
