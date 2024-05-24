@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 25</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №25</h1>
+                <div>
+                    <h2>Задача 4</h2>
+                    <p>
+                        Використовуючи один з АРІ
+                        https://github.com/public-apis/public-apis#animals
+                        та функцію fetch організувати завантаження та відображення даних
+                    </p>
+                    <div id="loading">Loading...</div>
+                    <img id="foxImage" style="display:none;" alt="Random Fox Image">
+                </div>
+            </div>
+            <script>
+                fetch("https://randomfox.ca/floof/")
+                    .then((response) => {
+                        console.log(response);
+                        return response.json();
+                    })
+                    .then((data) => {
+                        console.log(data);
+                        foxImage.src = data.image;
+                    })
+                    .finally(() => {
+                        document.getElementById("loading").style.display = "none";
+                        document.getElementById("foxImage").style.display = "block";
+                    });
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

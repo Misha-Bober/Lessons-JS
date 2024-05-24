@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 25</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №25</h1>
+                <h2>Задача 1</h2>
+                <p>
+                    Дано клас PhoneNumber. Створити функцію перетворення до string, при якому на основі номера
+                    виводиться оператор (050….  MTC, 096…  Kyivstar, ….)
+                </p>
+            </div>
+            <script>
+                class PhoneNumber {
+                    constructor(phoneNumber) {
+                        this.phoneNumber = phoneNumber;
+                    }
+                    getMobileOperator() {
+                        let pattern = /(?<=^\+38)0\d{2}(?=\d{7}$)/;
+                        let operatorCode = pattern.exec(this.phoneNumber);
+                        if (operatorCode) {
+                            switch (operatorCode[0]) {
+                                case "050":
+                                case "066":
+                                case "095":
+                                case "099":
+                                    return "Vodafone";
+                                case "067":
+                                case "068":
+                                case "096":
+                                case "097":
+                                case "098":
+                                    return "Київстар";
+                                case "063":
+                                case "073":
+                                case "093":
+                                    return "Lifecell";
+                                default:
+                                    return "Невідомий номер";
+                            }
+                        } else return "Невірно введений номер";
+                    }
+                    [Symbol.toPrimitive](hint) {
+                        switch (hint) {
+                            case "string":
+                                return `<br> ${this.phoneNumber} - ${this.getMobileOperator()} <br>`;
+                        }
+                    }
+                }
+
+                let phoneNumber1 = new PhoneNumber("+380503456789");
+                let phoneNumber2 = new PhoneNumber("+380670123456");
+                let phoneNumber3 = new PhoneNumber("+380931234567");
+                let phoneNumber4 = new PhoneNumber("+380991112233");
+
+                document.write(phoneNumber1);
+                document.write(phoneNumber2);
+                document.write(phoneNumber3);
+                document.write(phoneNumber4);
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

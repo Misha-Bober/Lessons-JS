@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>ДЗ JS 25</title>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+        </header>
+        <main>
+            <div>
+                <h1>Дз №25</h1>
+                <div>
+                    <h2>Задача 3</h2>
+                    <p>
+                        Створити генератор, який би випадковим чином поступово генерував вказану кількість парних чисел.
+                    </p>
+                </div>
+            </div>
+            <script>
+                function* oddNumbersGenerator(count, min, max) {
+                    for (let i = 0; i < count; i++) {
+                        let randomNum;
+                        do {
+                            randomNum = min + Math.floor(Math.random() * (max - min + 1));
+                        } while (randomNum % 2 === 0);
+                        yield randomNum;
+                    }
+                }
+
+                let generatedNumbers = [...oddNumbersGenerator(15, 10, 50)];
+                document.write(generatedNumbers.join(", "));
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

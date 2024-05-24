@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>ДЗ JS 25</title>
+
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+    </header>
+    <main>
+      <div>
+        <h1>Дз №25</h1>
+        <h2>Задача 2</h2>
+        <p>
+          Дано Shop -- клас, що містить список товарів (масив об’єктів класу Product (назва, ціна, кількість
+          одиниць). Додати можливість ітератора до класу Shop, щоб при ітеруванні для кожного елемента
+          виводився рядок «товар-загальна вартість»
+        </p>
+      </div>
+      <script>
+        class Item {
+          constructor(name, cost, quantity) {
+            this.name = name;
+            this.cost = cost;
+            this.quantity = quantity;
+          }
+        }
+
+        class Store {
+          constructor(itemList) {
+            this.itemList = itemList;
+          }
+          [Symbol.iterator]() {
+            this.currentIndex = 0;
+            return this;
+          }
+          next() {
+            if (this.currentIndex < this.itemList.length) {
+              return {
+                done: false,
+                value: `${this.itemList[this.currentIndex].name} - ${this.itemList[this.currentIndex].cost *
+                  this.itemList[this.currentIndex++].quantity
+                  }`
+              };
+            } else {
+              return { done: true };
+            }
+          }
+        }
+
+        let itemList = new Store([
+          new Item("product 1", 50, 2),
+          new Item("product 2", 100, 1),
+          new Item("product 3", 200, 3),
+          new Item("product 4", 150, 4),
+          new Item("product 5", 300, 5),
+          new Item("product 6", 250, 6),
+          new Item("product 7", 75, 7),
+          new Item("product 8", 60, 11),
+          new Item("product 9", 80, 15),
+          new Item("product 10", 40, 24)
+        ]);
+
+        for (let item of itemList) {
+          document.write(`${item} <br>`);
+        }
+      </script>
+    </main>
+  </div>
+</body>
+
+</html>
